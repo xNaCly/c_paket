@@ -1,4 +1,3 @@
-name: exampl_app
-version: v0.0.1
-main: test.c
-deps: xnacly/pgme 
+name=example_app
+version=v0.0.1
+deps=xnacly/pgme xnacly/xc

@@ -4,8 +4,8 @@
 typedef struct project_config {
   char *name;
   char *version;
-  char *main;
   char *cwd;
+  char **deps;
 } Project_config;
 
 Project_config *project_conf_get_config(char *path);

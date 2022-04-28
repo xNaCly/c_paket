@@ -2,25 +2,26 @@
 #include "c_p_util.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 Project_config *project_conf_get_config(char *path) {
   Project_config *pc;
   pc = malloc(sizeof *pc);
+  pc->name = malloc(sizeof(char) * 255);
+  pc->version = malloc(sizeof(char) * 255);
+  pc->cwd = malloc(sizeof(path));
+  pc->cwd = path;
+  pc->deps = malloc(sizeof(char *) * 15);
+  char *raw_temps = malloc(sizeof(char) * 510);
   FILE *file = fopen(path, "r");
-  char name[255];
 
   if (file == NULL)
     throw_error("cant read or cant find config");
 
-  fscanf(file, "name:%s\n", name);
-  printf("test\n");
-  fclose(file);
+  fscanf(file, "name=%s\nversion=%s\ndeps=%[^\n]", pc->name, pc->version,
+         raw_temps);
 
-  pc->name = name;
-  pc->cwd = path;
-  pc->main = "main.c";
-  pc->version = "v0.1";
-  //  pc->deps = malloc(sizeof(char) * 5555 * 5555);
-  // pc->deps[0] = "xnacly/pgme";
+  fclose(file);
+  free(raw_temps);
   return pc;
 }
