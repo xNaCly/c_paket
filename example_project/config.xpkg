@@ -1,7 +1,0 @@
-name: example app
-version: v0.0.1
-main: test.c
-deps: xnacly/pgme 
-scripts: 
-    run: make run
-    build: make build

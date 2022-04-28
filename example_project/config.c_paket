@@ -1,0 +1,4 @@
+name: exampl_app
+version: v0.0.1
+main: test.c
+deps: xnacly/pgme 
