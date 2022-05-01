@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "project_config.h"
-#include "c_p_util.h"
+#include "cpak_utils.h"
+#include "cpak_project_config.h"
 
 Project_config *project_conf_get_config(char *path) {
   Project_config *pc;
@@ -22,15 +22,15 @@ Project_config *project_conf_get_config(char *path) {
   fscanf(file, "name=%s\nversion=%s\ndeps=%[^\n]", pc->name, pc->version,
          raw_temps);
 
-  if(s_is_empty(pc->name) || pc->name[0] == ';'){
+  if (s_is_empty(pc->name) || pc->name[0] == ';') {
     throw_warning("Project name is undefined!", P_MISSING_NAME);
   }
 
-  pc->name[strlen(pc->name)-1] = '\0';
-  pc->version[strlen(pc->version)-1] = '\0';
-  raw_temps[strlen(raw_temps)-1] = '\0';
+  pc->name[strlen(pc->name) - 1] = '\0';
+  pc->version[strlen(pc->version) - 1] = '\0';
+  raw_temps[strlen(raw_temps) - 1] = '\0';
 
-  if(s_is_empty(pc->version) || pc->name[0] == ';'){
+  if (s_is_empty(pc->version) || pc->name[0] == ';') {
     throw_warning("Project version is undefined!", P_MISSING_VERSION);
   }
 

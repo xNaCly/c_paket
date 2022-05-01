@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "c_p_util.h"
+#include "cpak_utils.h"
 
 // TODO: implement this in the global config as a keyword
 int color = 1;
