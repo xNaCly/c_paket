@@ -20,10 +20,9 @@ CORE_FILES := $(shell find $(SRC_DIR)/core -name "*.c")
 COMPILE := $(FLAGS) $(FILES) -lm -o 
 default: help
 
-## This help screen
 help:
 			@printf "Available targets:\n\n"
-			@awk '/^[a-zA-Z\-\_0-9%:\\]+/ { \
+			@awk '/^[a-zA-Z\-_0-9%:\\]+/ { \
 				helpMessage = match(lastLine, /^## (.*)/); \
 				if (helpMessage) { \
 					helpCommand = $$1; \
@@ -35,7 +34,6 @@ help:
 			} \
 			{ lastLine = $$0 }' $(MAKEFILE_LIST) | sort -u
 			@printf "\n"
-
 
 ## Build dev and run  
 all: build
@@ -53,19 +51,15 @@ run/debug: build/debug
 run/prod: build/prod
 	$(PROD_DIR)/$(OUT_NAME)
 
-## Build dev
 build: pre
 	gcc $(COMPILE) $(BUILD_DIR)/$(OUT_NAME).dev
 
-## Build tests
 build/utest: pre
 	gcc $(FLAGS) ./tests/test.c $(CORE_FILES) -lm -o $(BUILD_DIR)/test.dev
 
-## Build debug
 build/debug: pre/debug
 	gcc -g3 $(COMPILE) $(DEBUG_DIR)/$(OUT_NAME).debug
 
-## Build production
 build/prod: pre/prod
 	gcc -O3 $(COMPILE) $(PROD_DIR)/$(OUT_NAME)
 
@@ -77,18 +71,6 @@ pre/debug:
 
 pre/prod:
 	mkdir -p $(PROD_DIR)
-
-#install: build/prod
-#	cp ./xc.1 ./xc.1_copy
-#	gzip ./xc.1_copy
-#	mv ./xc.1_copy.gz ./xc.1.gz
-#	sudo mkdir -p /usr/local/share/man/man1
-#	sudo mv xc.1.gz /usr/local/share/man/man1/xc.1.gz
-#	sudo mv $(BUILD_DIR)/xc.out /usr/local/bin/xc
-#
-#uninstall:
-#	sudo rm /usr/local/man/man1/xc.1.gz
-#	sudo rm /usr/local/bin/xc
 
 ## Clean dir up
 clean:
