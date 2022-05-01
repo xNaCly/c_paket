@@ -8,7 +8,8 @@ typedef enum Errors {
 } Errors; 
 
 void throw_error(const char *text, enum Errors error);
-void throw_warning(const char *text);
+void throw_warning(const char *text, enum Errors error);
+int s_is_equal(const char *str1, const char *str2);
 
 
 #endif
