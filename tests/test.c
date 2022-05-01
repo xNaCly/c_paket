@@ -8,7 +8,7 @@
 
 void t_project_config(){
   cpak_log("running t_project_config", 0);
-  char example_config_path[] = "example_project/config.c_paket";
+  char example_config_path[] = "example_project/config.cpak";
   Project_config *pc = project_conf_get_config(example_config_path);
 
   assert(s_is_equal(pc->name, "example_app") &&
