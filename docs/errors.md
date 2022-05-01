@@ -5,7 +5,7 @@
 ```
 warning: Project name is undefined!, err: 1444
 warning: Project version is undefined!, err: 1445
-error: cant read or cant find config, err: 1443
+error: Can't read or can't find config, err: 1443
 ```
 
 ## Specific Errorcodes and their meaning:
