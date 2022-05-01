@@ -28,6 +28,7 @@ Project_config *project_conf_get_config(char *path) {
 
   pc->name[strlen(pc->name)-1] = '\0';
   pc->version[strlen(pc->version)-1] = '\0';
+  raw_temps[strlen(raw_temps)-1] = '\0';
 
   if(s_is_empty(pc->version) || pc->name[0] == ';'){
     throw_warning("Project version is undefined!", P_MISSING_VERSION);

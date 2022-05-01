@@ -1,3 +1,3 @@
 name=example_app;
 version=v0.0.1;
-deps=xnacly/pgme xnacly/xc
+deps=xnacly/pgme xnacly/xc;
