@@ -9,7 +9,7 @@ fast and efficient package manager for the c programming language
 ## Links:
 - [Documentation](./docs/index.md)
 - [Commandline argument documentation](./docs/usage.md)
-- [Templating and project bootstrap documentation](./docs/project.md)
+- [Templating and project bootstrap documentation](./docs/templating.md)
 
 ## Getting started:
 

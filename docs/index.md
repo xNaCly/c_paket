@@ -1,5 +1,7 @@
 # Documentation
 - [Usage](./usage.md)
+- [Errors](./errors.md)
+- [Templating and project bootstrap documentation](./templating.md)
 
 ## Indepth feature description:
 ### How cpak handles modules:
