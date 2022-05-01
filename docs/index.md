@@ -1,2 +1,2 @@
 # Documentation
-- [Usage](/usage.md)
+- [Usage](./usage.md)
