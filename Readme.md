@@ -2,9 +2,9 @@
 fast and efficient package manager for the c programming language
 
 ## Features:
-- install and remove modules from projects
-- linked dependencies from `$XDG_CONTENT_DIR/c_paket`, thus no duplicate modules
-- bootstraping projects with configurations stored in `$XDG_CONFIG_HOME/c_paket` (Makefiles, .gitignores)
+- manage modules
+- global/linked dependencies 
+- bootstraping projects with templates 
 
 ## Links:
 - [Documentation](./docs/index.md)
