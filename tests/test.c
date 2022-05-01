@@ -17,7 +17,7 @@ void t_project_config(){
 
   assert(s_is_equal(pc->version, "v0.0.1")  &&
          "reading project version failed");
-  cpak_log("name correct!", SUCCESS);
+  cpak_log("version correct!", SUCCESS);
 
   assert(s_is_equal(pc->deps[0], "xnacly/pgme")  &&
          "reading project deps failed");

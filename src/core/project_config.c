@@ -17,7 +17,7 @@ Project_config *project_conf_get_config(char *path) {
   FILE *file = fopen(path, "r");
 
   if (file == NULL)
-    throw_error("cant read or cant find config", P_MISSING_CONFIG);
+    throw_error("Can't read or find config", P_MISSING_CONFIG);
 
   fscanf(file, "name=%s\nversion=%s\ndeps=%[^\n]", pc->name, pc->version,
          raw_temps);
