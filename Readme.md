@@ -12,7 +12,6 @@ fast and efficient package manager for the c programming language
 - [Templating and project bootstrap documentation](./docs/project.md)
 
 ## Getting started:
-- [Documentation](./docs/getting_started.md)
 
 ```sh
 git clone https://github.com/xnacly/c_paket
