@@ -21,15 +21,15 @@ Project_config *project_conf_get_config(char *path) {
   fscanf(file, "name=%s\nversion=%s\ndeps=%[^\n]", pc->name, pc->version,
          raw_temps);
 
-  //char *ptr = strtok(raw_temps, " ");
-  //int i = 0;
-
-  //while (ptr != NULL) {
-  //  pc->deps[i] = (char *)malloc(sizeof(ptr));
-  //  pc->deps[i] = ptr;
-  //  i++;
-  //  ptr = strtok(NULL, " ");
-  //}
+  char *ptr = strtok(raw_temps, " ");
+  int i = 0;
+  while (ptr != NULL) {
+    pc->deps[i] = (char *)malloc(sizeof(ptr));
+    strcpy(pc->deps[i], ptr);
+    i++;
+    ptr = strtok(NULL, " ");
+  }
+  pc->amount_deps = i;
 
   fclose(file);
   free(raw_temps);

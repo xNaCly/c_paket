@@ -6,6 +6,7 @@ typedef struct project_config {
   char *version;
   char *cwd;
   char **deps;
+  int amount_deps;
 } Project_config;
 
 Project_config *project_conf_get_config(char *path);
