@@ -1,5 +1,5 @@
-#include "src/core/project_config.h"
-#include "src/core/c_p_util.h"
+#include "../src/core/project_config.h"
+#include "../src/core/c_p_util.h"
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
