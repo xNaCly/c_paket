@@ -18,28 +18,54 @@ OUT_NAME := cpak
 FILES := $(shell find $(SRC_DIR) -name "*.c") 
 CORE_FILES := $(shell find $(SRC_DIR)/core -name "*.c") 
 COMPILE := $(FLAGS) $(FILES) -lm -o 
+default: help
 
-run: build
+## This help screen
+help:
+			@printf "Available targets:\n\n"
+			@awk '/^[a-zA-Z\-\_0-9%:\\]+/ { \
+				helpMessage = match(lastLine, /^## (.*)/); \
+				if (helpMessage) { \
+					helpCommand = $$1; \
+					helpMessage = substr(lastLine, RSTART + 3, RLENGTH); \
+		gsub("\\\\", "", helpCommand); \
+		gsub(":+$$", "", helpCommand); \
+					printf "  \x1b[32;01m%-35s\x1b[0m %s\n", helpCommand, helpMessage; \
+				} \
+			} \
+			{ lastLine = $$0 }' $(MAKEFILE_LIST) | sort -u
+			@printf "\n"
+
+
+## Build dev and run  
+all: build
 	$(BUILD_DIR)/$(OUT_NAME).dev
 
+## Build and run tests
 run/utest: build/utest 
 	$(BUILD_DIR)/test.dev
 
+## Build debug build and run using gdb
 run/debug: build/debug
 	gdb $(DEBUG_DIR)/$(OUT_NAME).debug
 
+## Build optimised and run
 run/prod: build/prod
 	$(PROD_DIR)/$(OUT_NAME)
 
+## Build dev
 build: pre
 	gcc $(COMPILE) $(BUILD_DIR)/$(OUT_NAME).dev
 
+## Build tests
 build/utest: pre
 	gcc $(FLAGS) ./tests/test.c $(CORE_FILES) -lm -o $(BUILD_DIR)/test.dev
 
+## Build debug
 build/debug: pre/debug
 	gcc -g3 $(COMPILE) $(DEBUG_DIR)/$(OUT_NAME).debug
 
+## Build production
 build/prod: pre/prod
 	gcc -O3 $(COMPILE) $(PROD_DIR)/$(OUT_NAME)
 
@@ -64,5 +90,6 @@ pre/prod:
 #	sudo rm /usr/local/man/man1/xc.1.gz
 #	sudo rm /usr/local/bin/xc
 
+## Clean dir up
 clean:
 	rm -r $(BUILD_DIR)
