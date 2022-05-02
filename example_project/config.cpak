@@ -1,3 +1,9 @@
-name=example_app;
-version=v0.0.1;
-deps=xnacly/pgme xnacly/xc;
+# vim:syntax=conf:
+# cpak config file
+
+# name of the project
+name=example_app
+# version of the project 
+version=v0.0.1
+# dependencies, seperated by whitespace 
+deps=xnacly/pgme xnacly/xc

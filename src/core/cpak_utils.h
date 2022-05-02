@@ -25,6 +25,7 @@ void throw_error(const char *text, enum Errors error);
 void throw_warning(const char *text, enum Errors error);
 int s_is_equal(const char *str1, const char *str2);
 int s_is_empty(const char *str);
+int s_starts_with(const char *str, const char *str1);
 void cpak_log(const char *str, int log_level);
 
 #endif

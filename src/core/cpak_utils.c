@@ -61,4 +61,8 @@ int s_is_equal(const char *str1, const char *str2) {
   return strcmp(str1, str2) == 0;
 }
 
+int s_starts_with(const char *str, const char *str1){
+  return strncmp(str1, str, strlen(str1)) == 0;
+}
+
 int s_is_empty(const char *str) { return str[0] == '\0'; }
