@@ -3,9 +3,8 @@ name: unittests
 on:
   push:
     branches: [ master ]
-    paths: 
-      - 'tests/*'
-      - 'src/*'
+    paths:
+      - 'src/'
   pull_request:
     branches: [ master ]
 
