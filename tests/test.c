@@ -1,4 +1,5 @@
 #include "../src/core/cpak_project_config.h"
+#include "../src/core/cpak_config.h"
 #include "../src/core/cpak_utils.h"
 
 #include <assert.h>
@@ -6,6 +7,19 @@
 #include <stdlib.h>
 #include <string.h>
 
+void t_config(){
+  cpak_log("running t_config", 0);
+  char example_config_path[] = "./tests/example_config/cpak.conf";
+  Config *c = get_config(example_config_path);
+
+  assert(c->colors == 1 && "reading config key colors failed");
+  cpak_log("colors value correct!", SUCCESS);
+
+  assert(c->storeModulesGlobal == 1 && "reading config key storeModulesGlobal failed");
+  cpak_log("storeModulesGlobal correct!", SUCCESS);
+
+  cpak_log("ran t_config", 0);
+}
 
 void t_project_config(){
   cpak_log("running t_project_config", 0);
@@ -35,10 +49,12 @@ void t_project_config(){
   free(pc->deps);
   free(pc);
 
-  cpak_log("t_project_config ran successfully!", SUCCESS);
+  cpak_log("ran t_project_config", 0);
 }
 
 int main() {
+  t_config();
+  printf("\n");
   t_project_config();
   return EXIT_SUCCESS;
 }

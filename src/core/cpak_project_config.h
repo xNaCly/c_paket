@@ -1,7 +1,7 @@
 #ifndef PROJECT_CONFIG_H
 #define PROJECT_CONFIG_H
 
-typedef struct project_config {
+typedef struct {
   char *name;
   char *version;
   char *cwd;

@@ -9,9 +9,12 @@
 #define ANSI_RESET "\x1b[0m"
 
 typedef enum Errors {
+  CONF_MISSING_CONFIG=1440,
+  CONF_UNKNOWN_KEY=1441,
+  CONF_UNKNOWN_VALUE=1442,
   P_MISSING_CONFIG = 1443,
   P_MISSING_NAME = 1444,
-  P_MISSING_VERSION = 1445
+  P_MISSING_VERSION = 1445,
 } Errors;
 
 typedef enum Log_status {

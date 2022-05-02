@@ -17,8 +17,10 @@ Project_config *project_conf_get_config(char *path) {
 
   // TODO: needs check if file has correct file ending (.conf)
 
-  if (file == NULL)
-    throw_error("Can't read or find config", P_MISSING_CONFIG);
+  if (file == NULL){
+    fclose(file);
+    throw_error("Can't read or find project config", P_MISSING_CONFIG);
+  }
 
   char cur_line[255]; 
   
