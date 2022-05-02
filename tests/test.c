@@ -9,7 +9,7 @@
 
 void t_project_config(){
   cpak_log("running t_project_config", 0);
-  char example_config_path[] = "example_project/config.cpak";
+  char example_config_path[] = "example_project/cpak_project.conf";
   Project_config *pc = project_conf_get_config(example_config_path);
 
   assert(s_is_equal(pc->name, "example_app") &&
@@ -24,7 +24,7 @@ void t_project_config(){
          "reading project deps failed");
   assert(s_is_equal(pc->deps[1], "xnacly/xc")  &&
          "reading project deps failed");
-  cpak_log("dependencies correct!",SUCCESS);
+  cpak_log("all dependencies correct!",SUCCESS);
 
   assert(pc->amount_deps == 2 && "dependency amount incorrect");
   cpak_log("dependency amount correct!", SUCCESS);

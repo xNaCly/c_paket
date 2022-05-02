@@ -15,6 +15,8 @@ Project_config *project_conf_get_config(char *path) {
   pc->deps = (char **)malloc(sizeof(char *) * 15);
   FILE *file = fopen(path, "r");
 
+  // TODO: needs check if file has correct file ending (.conf)
+
   if (file == NULL)
     throw_error("Can't read or find config", P_MISSING_CONFIG);
 
