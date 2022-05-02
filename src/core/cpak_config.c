@@ -11,7 +11,7 @@ Config *get_config(char *path){
   FILE *file = fopen(path, "r");
 
   if (file == NULL)
-    throw_error("Can't read or find project config", CONF_MISSING_CONFIG);
+    throw_error("Can't read or find cpak config", CONF_MISSING_CONFIG);
   
   char cur_line[255]; 
 
