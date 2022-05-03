@@ -9,26 +9,67 @@
 #define ANSI_RESET "\x1b[0m"
 
 typedef enum Errors {
-  CONF_MISSING_CONFIG=1440,
-  CONF_UNKNOWN_KEY=1441,
-  CONF_UNKNOWN_VALUE=1442,
-  P_MISSING_CONFIG = 1443,
-  P_MISSING_NAME = 1444,
-  P_MISSING_VERSION = 1445,
+    TEMPLATE_MISSING = 1439,
+    CONF_MISSING_CONFIG = 1440,
+    CONF_UNKNOWN_KEY = 1441,
+    CONF_UNKNOWN_VALUE = 1442,
+    P_MISSING_CONFIG = 1443,
+    P_MISSING_NAME = 1444,
+    P_MISSING_VERSION = 1445,
 } Errors;
 
 typedef enum Log_status {
-  INFO = 0,
-  SUCCESS,
-  WARN,
-  ERROR,
+    INFO = 0,
+    SUCCESS,
+    WARN,
+    ERROR,
 } Log_level;
 
+/**
+ * throws error and exits the program
+ * @param text
+ * @param error
+ * @returns EXIT_FAILURE
+ */
 void throw_error(const char *text, enum Errors error);
+
+/**
+ * throws warning
+ * @param text
+ * @param error
+ * @returns void
+ */
 void throw_warning(const char *text, enum Errors error);
+
+/**
+ * checks if string str1 is equal to str2
+ * @param str1
+ * @param str2
+ * @return boolean as integer
+ */
 int s_is_equal(const char *str1, const char *str2);
+
+/**
+ * checks if string str is empty
+ * @param str
+ * @return boolean as integer
+ */
 int s_is_empty(const char *str);
+
+/**
+ * checks if string str starts with string str1
+ * @param str
+ * @param str1
+ * @return boolean as integer
+ */
 int s_starts_with(const char *str, const char *str1);
+
+/**
+ * logging utility
+ * @param str
+ * @param log_level
+ * @return void
+ */
 void cpak_log(const char *str, int log_level);
 
 #endif
