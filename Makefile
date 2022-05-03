@@ -40,7 +40,8 @@ all: build
 	$(BUILD_DIR)/$(OUT_NAME).dev
 
 ## Build and run tests
-run/utest: build/utest 
+run/utest: build/utest
+	cp -r ./tests/example_config ~/.config/cpak
 	$(BUILD_DIR)/test.dev
 
 ## Build debug build and run using gdb
