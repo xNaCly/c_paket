@@ -4,7 +4,7 @@
 
 ### `init`
 This command initalises a new cpak project, creates a `cpak_project.conf` file
-### `bootstrap <template>`
+### `boot <template>`
 copies all the files specified in the `$XDG_CONFIG_HOME/cpak/templates/<template>` directory into the current dir.
 ### `install <module>`
 installs the specifed module and links to its source in `$PWD/cpak_modules`
