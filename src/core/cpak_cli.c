@@ -15,6 +15,7 @@ int bootstrap(char *template, char *outdir) {
     sprintf(template_path, "%s/cpak/templates/%s", CONFIG_HOME, template);
 
     struct stat st;
+    // check if directory exists
     if (stat(template_path, &st) != 0) {
         printf("%s - ", template_path);
         throw_error("Can't read template", TEMPLATE_MISSING);
