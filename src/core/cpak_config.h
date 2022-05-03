@@ -2,8 +2,8 @@
 #define CPAK_CONFIG_H
 
 typedef struct {
-  int colors;
-  int storeModulesGlobal;
+    int colors;
+    int storeModulesGlobal;
 } Config;
 
 Config *get_config(char *path);
