@@ -5,7 +5,7 @@
 #include <string.h>
 #include <sys/stat.h>
 
-int bootstrap(char *template, char *outdir) {
+int bootstrap(char *template_name, char *outdir) {
     char *CONFIG_HOME = malloc(sizeof(char) * 255);
     char *HOME_DIR = malloc(sizeof(char) * 255);
     char *template_path = malloc(sizeof(char) * 510);
@@ -27,7 +27,7 @@ int bootstrap(char *template, char *outdir) {
         //free(path);
     }
 
-    sprintf(template_path, "%s/cpak/templates/%s", CONFIG_HOME, template);
+    sprintf(template_path, "%s/cpak/templates/%s", CONFIG_HOME, template_name);
     free(CONFIG_HOME);
 
     struct stat st;
