@@ -5,6 +5,16 @@
 #include "cpak_utils.h"
 #include "cpak_project_config.h"
 
+void project_conf_free(Project_config *conf){
+    free(conf->name);
+    free(conf->version);
+    for(int i = 0; i < conf->amount_deps; i++){
+        free(conf->deps[i]);
+    }
+    free(conf);
+    conf = NULL;
+}
+
 Project_config *project_conf_get_config(char *path) {
     Project_config *pc;
     pc = malloc(sizeof *pc);
@@ -12,12 +22,14 @@ Project_config *project_conf_get_config(char *path) {
     pc->version = malloc(sizeof(char) * 255);
     pc->cwd = malloc(sizeof(path));
     pc->cwd = path;
+    cpak_log(pc->cwd, DEBUG);
     pc->deps = (char **) malloc(sizeof(char *) * 15);
     FILE *file = fopen(path, "r");
 
     // TODO: needs check if file has correct file ending (.conf)
 
     if (file == NULL) {
+        project_conf_free(pc);
         fclose(file);
         throw_error("Can't read or find project config", P_MISSING_CONFIG);
     }

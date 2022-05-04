@@ -10,5 +10,6 @@ typedef struct {
 } Project_config;
 
 Project_config *project_conf_get_config(char *path);
+void project_conf_free(Project_config *conf);
 
 #endif
