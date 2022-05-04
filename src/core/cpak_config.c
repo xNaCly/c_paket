@@ -14,6 +14,7 @@ Config *get_config(char *path) {
         fclose(file);
         free(c);
         throw_error("Can't read or find cpak config", CONF_MISSING_CONFIG);
+        return NULL;
     }
 
     char cur_line[255];

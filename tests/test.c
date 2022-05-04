@@ -19,7 +19,6 @@ void t_config() {
     assert(c->storeModulesGlobal == 1 && "reading config key storeModulesGlobal failed");
     cpak_log("storeModulesGlobal correct!", SUCCESS);
 
-    free(c);
     cpak_log("ran t_config", 0);
 }
 

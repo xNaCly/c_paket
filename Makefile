@@ -1,7 +1,7 @@
 FLAGS := -fdiagnostics-color=always  \
 									 -Wall \
 									 -Wpedantic \
-									 -std=c99 \
+									 -std=c11 \
 									 -Wextra \
 									 -Werror \
 									 -Wshadow \

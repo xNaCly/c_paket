@@ -23,13 +23,13 @@ Project_config *project_conf_get_config(char *path) {
     pc->cwd = malloc(sizeof(path));
     pc->cwd = path;
     cpak_log(pc->cwd, DEBUG);
-    pc->deps = (char **) malloc(sizeof(char *) * 15);
+    pc->deps = malloc(sizeof(char *) * 15);
     FILE *file = fopen(path, "r");
 
     // TODO: needs check if file has correct file ending (.conf)
 
     if (file == NULL) {
-        project_conf_free(pc);
+        //project_conf_free(pc);
         fclose(file);
         throw_error("Can't read or find project config", P_MISSING_CONFIG);
     }
@@ -52,7 +52,7 @@ Project_config *project_conf_get_config(char *path) {
             char *ptr = strtok(cur_line, " ");
             int i = 0;
             while (ptr != NULL) {
-                pc->deps[i] = (char *) malloc(sizeof(ptr));
+                pc->deps[i] = malloc(sizeof(ptr));
                 strcpy(pc->deps[i], ptr);
                 i++;
                 ptr = strtok(NULL, " ");
