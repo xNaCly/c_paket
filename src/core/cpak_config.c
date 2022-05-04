@@ -10,8 +10,11 @@ Config *get_config(char *path) {
     c = (Config *) malloc(sizeof *c);
     FILE *file = fopen(path, "r");
 
-    if (file == NULL)
+    if (file == NULL){
+        fclose(file);
+        free(c);
         throw_error("Can't read or find cpak config", CONF_MISSING_CONFIG);
+    }
 
     char cur_line[255];
 
@@ -50,6 +53,7 @@ Config *get_config(char *path) {
             throw_warning(temp, CONF_UNKNOWN_KEY);
         }
     }
+    fclose(file);
 
     return c;
 }
