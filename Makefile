@@ -56,7 +56,7 @@ build: pre
 	gcc $(COMPILE) $(BUILD_DIR)/$(OUT_NAME).dev
 
 build/utest: pre
-	gcc $(FLAGS) ./tests/test.c $(CORE_FILES) -lm -o $(BUILD_DIR)/test.dev
+	gcc -g3 $(FLAGS) ./tests/test.c $(CORE_FILES) -lm -o $(BUILD_DIR)/test.dev
 
 build/debug: pre/debug
 	gcc -g3 $(COMPILE) $(DEBUG_DIR)/$(OUT_NAME).debug
