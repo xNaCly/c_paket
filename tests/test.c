@@ -19,6 +19,7 @@ void t_config() {
     assert(c->storeModulesGlobal == 1 && "reading config key storeModulesGlobal failed");
     cpak_log("storeModulesGlobal correct!", SUCCESS);
 
+    free(c);
     cpak_log("ran t_config", 0);
 }
 
@@ -44,11 +45,7 @@ void t_project_config() {
     assert(pc->amount_deps == 2 && "dependency amount incorrect");
     cpak_log("dependency amount correct!", SUCCESS);
 
-    for (int i = 0; i < pc->amount_deps; i++) {
-        free(pc->deps[i]);
-    }
-    free(pc->deps);
-    free(pc);
+    project_conf_free(pc);
 
     cpak_log("ran t_project_config", 0);
 }
