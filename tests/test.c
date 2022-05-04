@@ -9,8 +9,7 @@
 #include <string.h>
 
 void t_config() {
-    cpak_log("running t_config", 0);
-    char example_config_path[] = "./tests/example_config/cpak.conf";
+    cpak_log("running t_config", 0); char example_config_path[] = "./tests/example_config/cpak.conf";
     Config *c = get_config(example_config_path);
 
     assert(c->colors == 1 && "reading config key colors failed");
@@ -44,7 +43,7 @@ void t_project_config() {
     assert(pc->amount_deps == 2 && "dependency amount incorrect");
     cpak_log("dependency amount correct!", SUCCESS);
 
-    //project_conf_free(pc);
+    project_conf_free(pc);
 
     cpak_log("ran t_project_config", 0);
 }
