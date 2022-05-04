@@ -22,6 +22,10 @@ void cpak_log(const char *str, int log_level) {
                 printf("%s%serror:%s %s\n", ANSI_COLOR_BLACK_FG, ANSI_COLOR_RED,
                        ANSI_RESET, str);
                 break;
+            case DEBUG:
+                printf("%s%sdebug:%s %s\n", ANSI_COLOR_BLACK_FG, ANSI_COLOR_MAGENTA,
+                       ANSI_RESET, str);
+                break;
             case INFO:
             default:
                 printf("%s%sinfo:%s %s\n", ANSI_COLOR_BLACK_FG, ANSI_COLOR_BLUE,
@@ -37,6 +41,9 @@ void cpak_log(const char *str, int log_level) {
                 break;
             case ERROR:
                 printf("error %s\n", str);
+                break;
+            case DEBUG:
+                printf("debug %s\n", str);
                 break;
             case INFO:
             default:
