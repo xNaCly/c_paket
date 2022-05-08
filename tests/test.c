@@ -43,7 +43,7 @@ void t_project_config() {
     assert(pc->amount_deps == 2 && "dependency amount incorrect");
     cpak_log("dependency amount correct!", SUCCESS);
 
-    project_conf_free(pc);
+    //project_conf_free(pc);
 
     cpak_log("ran t_project_config", 0);
 }

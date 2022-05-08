@@ -28,7 +28,7 @@ int bootstrap(char *template_name, char *outdir) {
     }
 
     sprintf(template_path, "%s/cpak/templates/%s", CONFIG_HOME, template_name);
-    free(CONFIG_HOME);
+    //free(CONFIG_HOME);
 
     struct stat st;
     // check if directory exists
@@ -44,7 +44,7 @@ int bootstrap(char *template_name, char *outdir) {
     //free(template_path);
 
     int r = system(command);
-    free(command);
+    //free(command);
     if (r == EXIT_SUCCESS)
         cpak_log("Successfully bootstrapped project", SUCCESS);
 
