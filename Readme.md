@@ -1,4 +1,4 @@
-# c_paket 📦
+# cpak 📦
 fast and efficient package manager for the c programming language
 
 ## Features:
