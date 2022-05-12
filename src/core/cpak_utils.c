@@ -7,7 +7,7 @@
 // TODO: implement this in the global config as a keyword
 int color = 1;
 
-void cpak_log(const char *str, int log_level) {
+void cpak_log(const char *str, Log_level log_level) {
     if (color) {
         switch (log_level) {
             case SUCCESS:
