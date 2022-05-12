@@ -16,8 +16,7 @@ error: <warning_description>, err: <error_code>
 ```c
 // Argument is unknown to cpak
 UNKNOWN_ARGUMENT = 1437,
-// not enough arguments passed to cpak (TODO: soon deprecated in favor of
-// displaying usage / help)
+// not enough arguments passed to cpak 
 NOT_ENOUGH_ARGUMENTS = 1438,
 // cpak can't find your specifed template
 TEMPLATE_MISSING = 1439,
@@ -29,9 +28,5 @@ CONF_UNKNOWN_KEY = 1441,
 CONF_UNKNOWN_VALUE = 1442,
 // cpak can't find a project config in the current directory
 P_MISSING_CONFIG = 1443,
-// cpak can't find a name for your project in the project config
-P_MISSING_NAME = 1444,
-// cpak can't find a version for your project in the project config
-P_MISSING_VERSION = 1445,
 ```
 

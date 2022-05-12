@@ -12,8 +12,7 @@
 typedef enum {
   // Argument is unknown to cpak
   UNKNOWN_ARGUMENT = 1437,
-  // not enough arguments passed to cpak (TODO: soon deprecated in favor of
-  // displaying usage / help)
+  // not enough arguments passed to cpak
   NOT_ENOUGH_ARGUMENTS = 1438,
   // cpak can't find your specifed template
   TEMPLATE_MISSING = 1439,
