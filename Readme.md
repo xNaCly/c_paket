@@ -21,17 +21,50 @@ debug: cpak-alpha-0.0.1
 ```
 
 ### Commandline reference:
-
-#### `init` / `i`
+#### Version
+```bash
+cpak version
+cpak v
+```
+prints the version and exits
+#### Help
+```bash
+cpak help
+cpak h
+cpak help <command>
+cpak h <command>
+```
+prints usage and help either for cpak or for a cpak command
+#### Init
+```bash
+cpak init
+cpak i
+```
 This command initalises a new cpak project, creates a `cpak_project.conf` file
-#### `bootstrap <template>` / `b <template>`
+#### Bootstrap
+```bash
+cpak bootstrap <template>
+cpak b <template>
+```
 copies all the files specified in the `$XDG_CONFIG_HOME/cpak/templates/<template>` directory into the current dir.
-#### `install <module>` / `i <module>`
+#### Add
+```bash
+cpak add <module>
+cpak a <module>
+```
 installs the specifed module and links to its source in `$PWD/cpak_modules`
-#### `remove <module>` / `r <module>`
+#### Remove
+```bash
+cpak remove <module>
+cpak r <module>
+```
 uninstalls the specifed module and removes the link to its source from `$PWD/cpak_modules`
-#### `upgrade <module>` / `u <module>`
-tries to upgrade the specified module to the newest version
+#### Upgrade
+```bash
+cpak upgrade <module>
+cpak u <module>
+```
+upgrades the specified module to the newest version
 
 ### Global configuration
 The default config file can be found after first run in `$XDG_CONFIG_HOME/cpak`. This config currently includes the following content:
@@ -101,7 +134,7 @@ This has several positive effects on the developer experience:
 
 ### How do I do 'x'?
 Please take a look at the documentation featuring possible error codes you could encounter, global as well as project config files and how the templating toolkit works.
-If you can't find what your looking for, feel free to create a new [Issue](https://github.com/xNaCly/c_paket/issues)
+If you can't find what your looking for, feel free to create a new [Issue](https://github.com/xNaCly/c_paket/issues).
 
 ### What does 'cpak' mean?
 Cpak is a composition of c and Paket [pa'keːt]. Paket is german and can be translated to Package, therefore cpak means as much as C package.
