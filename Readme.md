@@ -16,13 +16,13 @@ fast and efficient package manager for the c programming language
 ```sh
 git clone https://github.com/xnacly/c_paket
 cd c_paket
-make install
-cpak --version
+make all
+cpak version
 ```
 
 This should print the following:
 
 ```
-cpak, c_paket - v0.0.1
+debug: cpak-alpha-0.0.1
 ```
 
