@@ -1,4 +1,3 @@
-#include "../src/core/cpak_project_config.h"
 #include "../src/core/cpak_config.h"
 #include "../src/core/cpak_utils.h"
 #include "../src/core/cpak_cli.h"
