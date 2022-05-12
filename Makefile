@@ -37,7 +37,7 @@ help:
 
 ## Build dev and run  
 all: build
-	$(BUILD_DIR)/$(OUT_NAME).dev
+	$(BUILD_DIR)/$(OUT_NAME).dev $(cmd)
 
 ## Build and run tests
 run/utest: build/utest
