@@ -1,6 +1,27 @@
 # cpak 📦
 fast and efficient package manager for the c programming language
 
+- [Features](https://github.com/xNaCly/c_paket#features)
+- [Documentation](https://github.com/xNaCly/c_paket#documentation)
+  - [Getting Started](https://github.com/xNaCly/c_paket#getting-started=)
+  - [Commandline reference](https://github.com/xNaCly/c_paket#commandline-reference=)
+    - [Version](https://github.com/xNaCly/c_paket#version=)
+    - [Help](https://github.com/xNaCly/c_paket#help=)
+    - [Init](https://github.com/xNaCly/c_paket#init=)
+    - [Boostrap](https://github.com/xNaCly/c_paket#bootstrap=)
+    - [Add](https://github.com/xNaCly/c_paket#add=)
+    - [Remove](https://github.com/xNaCly/c_paket#remove=)
+    - [Upgrade](https://github.com/xNaCly/c_paket#upgrade=)
+  - [Global Configuration](https://github.com/xNaCly/c_paket#global-configuration=)
+    - [Templates](https://github.com/xNaCly/c_paket#templates=)
+  - [Error codes](https://github.com/xNaCly/c_paket#error-codes=)
+    - [Specific Errorcodes and their meaning](https://github.com/xNaCly/c_paket#specific-errorcodes-and-their-meaning=)
+- [FAQ](https://github.com/xNaCly/c_paket#faq=)
+  - [How do you handle modules?](https://github.com/xNaCly/c_paket#how-do-you-handle-modules=)
+  - [How do i do x?](https://github.com/xNaCly/c_paket#how-do-i-do-x=)
+  - [What does cpak mean?](https://github.com/xNaCly/c_paket#what-does-cpak-mean=)
+  - [How do i contribute?](https://github.com/xNaCly/c_paket#what-does-cpak-mean=)
+
 ## Features:
 - managing modules
 - bootstraping projects with templates 
