@@ -1,11 +1,9 @@
-#include "../src/core/cpak_cli.h"
-#include "../src/core/cpak_config.h"
-#include "../src/core/cpak_utils.h"
-
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+
+#include "../src/core/cpak_config.h"
+#include "../src/core/cpak_utils.h"
 
 void t_config() {
   cpak_log("running t_config", INFO);
@@ -54,18 +52,9 @@ void t_project_config() {
   cpak_log("ran t_project_config", INFO);
 }
 
-void t_template() {
-  cpak_log("running t_template", INFO);
-  int r_value = bootstrap("default", "./tests/output");
-  assert(r_value == 0 && "bootstraping from template dir failed");
-  cpak_log("ran t_template", INFO);
-}
-
 int main() {
   t_config();
   printf("\n");
   t_project_config();
-  printf("\n");
-  t_template();
   return EXIT_SUCCESS;
 }

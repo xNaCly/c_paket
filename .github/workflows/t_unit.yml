@@ -1,4 +1,4 @@
-name: unittests
+name: t_unit
 
 on:
   push:
@@ -11,5 +11,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - name: run unittests
-      run: make run/utest
+    - name: run t_unit
+      run: make run/t_unit

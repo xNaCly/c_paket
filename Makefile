@@ -47,10 +47,14 @@ install: build/prod
 uninstall:
 	sudo rm /usr/local/bin/$(OUT_NAME)
 
-## Build and run tests
-run/utest: build/utest
+## Build and run unit tests
+run/t_unit: build/t_unit
 	cp -r ./tests/example_config ~/.config/cpak
-	$(BUILD_DIR)/test.dev
+	$(BUILD_DIR)/t_unit.dev
+
+## Build and run cli tests
+run/t_cli: build/t_cli
+	$(BUILD_DIR)/t_cli.dev
 
 ## Build debug build and run using gdb
 run/debug: build/debug
@@ -63,8 +67,11 @@ run/prod: build/prod
 build: pre
 	gcc $(COMPILE) $(BUILD_DIR)/$(OUT_NAME).dev
 
-build/utest: pre
-	gcc -g3 $(FLAGS) ./tests/test.c $(CORE_FILES) -lm -o $(BUILD_DIR)/test.dev
+build/t_unit: pre
+	gcc -g3 $(FLAGS) ./tests/t_unit.c $(CORE_FILES) -lm -o $(BUILD_DIR)/t_unit.dev
+
+build/t_cli: pre
+	gcc -g3 $(FLAGS) ./tests/t_cli.c $(CORE_FILES) -lm -o $(BUILD_DIR)/t_cli.dev
 
 build/debug: pre/debug
 	gcc -g3 $(COMPILE) $(DEBUG_DIR)/$(OUT_NAME).debug
