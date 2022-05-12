@@ -9,6 +9,8 @@ typedef struct {
 typedef struct {
   char *name;
   char *version;
+  char *author;
+  char *desc;
   char *cwd;
   char **deps;
   int amount_deps;

@@ -1,5 +1,5 @@
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "cpak_config.h"
@@ -12,7 +12,6 @@ Config *get_config(char *path) {
 
   if (file == NULL) {
     fclose(file);
-    // free(c);
     throw_error("Can't read or find cpak config", CONF_MISSING_CONFIG);
   }
 
@@ -61,11 +60,13 @@ Config *get_config(char *path) {
 }
 
 void project_conf_free(Project_config *conf) {
-  free(conf->name);
-  free(conf->version);
   for (int i = 0; i < conf->amount_deps; i++) {
     free(conf->deps[i]);
   }
+  free(conf->name);
+  free(conf->version);
+  free(conf->author);
+  free(conf->desc);
   free(conf);
   conf = NULL;
 }
@@ -73,18 +74,20 @@ void project_conf_free(Project_config *conf) {
 Project_config *project_conf_get_config(char *path) {
   Project_config *pc;
   pc = malloc(sizeof *pc);
-  pc->name = malloc(sizeof(char) * 255);
-  pc->version = malloc(sizeof(char) * 255);
+  pc->name = malloc(sizeof(char) * 510);
+  pc->version = malloc(sizeof(char) * 510);
+  pc->author = malloc(sizeof(char) * 510);
+  pc->desc = malloc(sizeof(char) * 1024);
   pc->cwd = malloc(sizeof(path));
-  pc->cwd = path;
-  cpak_log(pc->cwd, DEBUG);
   pc->deps = malloc(sizeof(char *) * 15);
+  pc->cwd = path;
+
   FILE *file = fopen(path, "r");
 
   // TODO: needs check if file has correct file ending (.conf)
 
   if (file == NULL) {
-    // project_conf_free(pc);
+    project_conf_free(pc);
     fclose(file);
     throw_error("Can't read or find project config", P_MISSING_CONFIG);
   }
@@ -94,22 +97,26 @@ Project_config *project_conf_get_config(char *path) {
   while (fgets(cur_line, 255, file)) {
     if (s_is_empty(cur_line))
       continue;
-    if (s_starts_with(cur_line, "#"))
+    else if (s_starts_with(cur_line, "#")) {
       continue;
-    if (s_starts_with(cur_line, "name=")) {
+    } else if (s_starts_with(cur_line, "name=")) {
       sscanf(cur_line, "name=%s\n", pc->name);
       continue;
-    };
-    if (s_starts_with(cur_line, "version=")) {
+    } else if (s_starts_with(cur_line, "author=")) {
+      sscanf(cur_line, "author=%s\n", pc->author);
+      continue;
+    } else if (s_starts_with(cur_line, "description=")) {
+      sscanf(cur_line, "description=%[^\n]", pc->desc);
+      continue;
+    } else if (s_starts_with(cur_line, "version=")) {
       sscanf(cur_line, "version=%s\n", pc->version);
       continue;
-    }
-    if (s_starts_with(cur_line, "deps=")) {
+    } else if (s_starts_with(cur_line, "deps=")) {
       sscanf(cur_line, "deps=%[^\n]", cur_line);
       char *ptr = strtok(cur_line, " ");
       int i = 0;
       while (ptr != NULL) {
-        pc->deps[i] = malloc(sizeof(ptr));
+        pc->deps[i] = malloc(sizeof(*ptr));
         strcpy(pc->deps[i], ptr);
         i++;
         ptr = strtok(NULL, " ");
@@ -118,13 +125,6 @@ Project_config *project_conf_get_config(char *path) {
     };
   }
 
-  if (s_is_empty(pc->name)) {
-    throw_warning("Project name is undefined!", P_MISSING_NAME);
-  }
-
-  if (s_is_empty(pc->version)) {
-    throw_warning("Project version is undefined!", P_MISSING_VERSION);
-  }
 
   fclose(file);
   return pc;

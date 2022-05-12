@@ -25,10 +25,6 @@ typedef enum {
   CONF_UNKNOWN_VALUE = 1442,
   // cpak can't find a project config in the current directory
   P_MISSING_CONFIG = 1443,
-  // cpak can't find a name for your project in the project config
-  P_MISSING_NAME = 1444,
-  // cpak can't find a version for your project in the project config
-  P_MISSING_VERSION = 1445,
 } Errors;
 
 typedef enum {
