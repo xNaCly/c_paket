@@ -85,7 +85,7 @@ int main(int argc, char *argv[]) {
     cpak_log("UPGRADE!", DEBUG);
     break;
   case VERSION:
-    cpak_log("cpak-" CPAK_VERSION, DEBUG);
+    cpak_log("cpak-" CPAK_VERSION, INFO);
     exit(EXIT_SUCCESS);
   case UNDEF:
     throw_warning("Not enough Arguments providen", NOT_ENOUGH_ARGUMENTS);
