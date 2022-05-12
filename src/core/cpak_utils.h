@@ -1,40 +1,42 @@
-#ifndef C_P_UTIL_H
-#define C_P_UTIL_H
+#ifndef CPAK_UTIL_H
+#define CPAK_UTIL_H
 
 #define ANSI_COLOR_BLACK_FG "\x1b[97m"
 #define ANSI_COLOR_RED "\x1b[91m"
 #define ANSI_COLOR_GREEN "\x1b[92m"
 #define ANSI_COLOR_YELLOW "\x1b[93m"
-#define ANSI_COLOR_BLUE "\x1b[96m" 
+#define ANSI_COLOR_BLUE "\x1b[96m"
 #define ANSI_COLOR_MAGENTA "\x1b[95m"
 #define ANSI_RESET "\x1b[0m"
 
 typedef enum {
-    UNKNOWN_ARGUMENT = 1437,
-    // not enough arguments passed to cpak (TODO: soon deprecated in favor of displaying usage / help)
-    NOT_ENOUGH_ARGUMENTS = 1438,    
-    // cpak can't find your specifed template
-    TEMPLATE_MISSING = 1439,
-    // cpak can't find its config file 
-    CONF_MISSING_CONFIG = 1440,     
-    // cpak found an unknown key in its config file
-    CONF_UNKNOWN_KEY = 1441,        
-    // cpak found an unknown value for a key in its config file
-    CONF_UNKNOWN_VALUE = 1442,      
-    // cpak can't find a project config in the current directory
-    P_MISSING_CONFIG = 1443,
-    // cpak can't find a name for your project in the project config
-    P_MISSING_NAME = 1444,          
-    // cpak can't find a version for your project in the project config
-    P_MISSING_VERSION = 1445,       
+  // Argument is unknown to cpak
+  UNKNOWN_ARGUMENT = 1437,
+  // not enough arguments passed to cpak (TODO: soon deprecated in favor of
+  // displaying usage / help)
+  NOT_ENOUGH_ARGUMENTS = 1438,
+  // cpak can't find your specifed template
+  TEMPLATE_MISSING = 1439,
+  // cpak can't find its config file
+  CONF_MISSING_CONFIG = 1440,
+  // cpak found an unknown key in its config file
+  CONF_UNKNOWN_KEY = 1441,
+  // cpak found an unknown value for a key in its config file
+  CONF_UNKNOWN_VALUE = 1442,
+  // cpak can't find a project config in the current directory
+  P_MISSING_CONFIG = 1443,
+  // cpak can't find a name for your project in the project config
+  P_MISSING_NAME = 1444,
+  // cpak can't find a version for your project in the project config
+  P_MISSING_VERSION = 1445,
 } Errors;
 
 typedef enum {
-    INFO = 0,
-    SUCCESS,
-    WARN,
-    ERROR,
-    DEBUG,
+  INFO = 0,
+  SUCCESS,
+  WARN,
+  ERROR,
+  DEBUG,
 } Log_level;
 
 /**
