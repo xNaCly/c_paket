@@ -39,6 +39,14 @@ help:
 all: build
 	$(BUILD_DIR)/$(OUT_NAME).dev $(cmd)
 
+# install cpak
+install: build/prod
+	sudo mv $(PROD_DIR)/$(OUT_NAME) /usr/local/bin/$(OUT_NAME)
+
+#uninstall
+uninstall:
+	sudo rm /usr/local/bin/$(OUT_NAME)
+
 ## Build and run tests
 run/utest: build/utest
 	cp -r ./tests/example_config ~/.config/cpak
