@@ -54,6 +54,7 @@ run/t_unit: build/t_unit
 
 ## Build and run cli tests
 run/t_cli: build/t_cli
+	cp -r ./tests/example_config ~/.config/cpak
 	$(BUILD_DIR)/t_cli.dev
 
 ## Build debug build and run using gdb
