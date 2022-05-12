@@ -10,14 +10,23 @@
 #define ANSI_RESET "\x1b[0m"
 
 typedef enum {
-    UNKNOWN_ARGUMENT = 1437,        //
-    NOT_ENOUGH_ARGUMENTS = 1438,    // not enough arguments passed to cpak (TODO: soon deprecated in favor of displaying usage / help)
-    TEMPLATE_MISSING = 1439,        // cpak can't find your specifed template
-    CONF_MISSING_CONFIG = 1440,     // cpak can't find its config file CONF_UNKNOWN_KEY = 1441,        // cpak found an unknown key in its config file
-    CONF_UNKNOWN_VALUE = 1442,      // cpak found an unknown value for a key in its config file
-    P_MISSING_CONFIG = 1443,        // cpak can't find a project config in the current directory
-    P_MISSING_NAME = 1444,          // cpak can't find a name for your project in the project config
-    P_MISSING_VERSION = 1445,       // cpak can't find a version for your project in the project config
+    UNKNOWN_ARGUMENT = 1437,
+    // not enough arguments passed to cpak (TODO: soon deprecated in favor of displaying usage / help)
+    NOT_ENOUGH_ARGUMENTS = 1438,    
+    // cpak can't find your specifed template
+    TEMPLATE_MISSING = 1439,
+    // cpak can't find its config file 
+    CONF_MISSING_CONFIG = 1440,     
+    // cpak found an unknown key in its config file
+    CONF_UNKNOWN_KEY = 1441,        
+    // cpak found an unknown value for a key in its config file
+    CONF_UNKNOWN_VALUE = 1442,      
+    // cpak can't find a project config in the current directory
+    P_MISSING_CONFIG = 1443,
+    // cpak can't find a name for your project in the project config
+    P_MISSING_NAME = 1444,          
+    // cpak can't find a version for your project in the project config
+    P_MISSING_VERSION = 1445,       
 } Errors;
 
 typedef enum {
