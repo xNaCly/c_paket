@@ -1,26 +1,26 @@
 # cpak 📦
 fast and efficient package manager for the c programming language
 
-- [Features](https://github.com/xNaCly/c_paket#features)
-- [Documentation](https://github.com/xNaCly/c_paket#documentation)
-  - [Getting Started](https://github.com/xNaCly/c_paket#getting-started=)
-  - [Commandline reference](https://github.com/xNaCly/c_paket#commandline-reference=)
-    - [Version](https://github.com/xNaCly/c_paket#version=)
-    - [Help](https://github.com/xNaCly/c_paket#help=)
-    - [Init](https://github.com/xNaCly/c_paket#init=)
-    - [Boostrap](https://github.com/xNaCly/c_paket#bootstrap=)
-    - [Add](https://github.com/xNaCly/c_paket#add=)
-    - [Remove](https://github.com/xNaCly/c_paket#remove=)
-    - [Upgrade](https://github.com/xNaCly/c_paket#upgrade=)
-  - [Global Configuration](https://github.com/xNaCly/c_paket#global-configuration=)
-    - [Templates](https://github.com/xNaCly/c_paket#templates=)
-  - [Error codes](https://github.com/xNaCly/c_paket#error-codes=)
-    - [Specific Errorcodes and their meaning](https://github.com/xNaCly/c_paket#specific-errorcodes-and-their-meaning=)
-- [FAQ](https://github.com/xNaCly/c_paket#faq=)
-  - [How do you handle modules?](https://github.com/xNaCly/c_paket#how-do-you-handle-modules=)
-  - [How do i do x?](https://github.com/xNaCly/c_paket#how-do-i-do-x=)
-  - [What does cpak mean?](https://github.com/xNaCly/c_paket#what-does-cpak-mean=)
-  - [How do i contribute?](https://github.com/xNaCly/c_paket#what-does-cpak-mean=)
+- [Features](#features)
+- [Documentation](#documentation)
+  - [Getting Started](#getting-started)
+  - [Commandline reference](#commandline-reference)
+    - [Version](#version)
+    - [Help](#help)
+    - [Init](#init)
+    - [Boostrap](#bootstrap)
+    - [Add](#add)
+    - [Remove](#remove)
+    - [Upgrade](#upgrade)
+  - [Global Configuration](#global-configuration)
+    - [Templates](#templates)
+  - [Error codes](#error-codes)
+    - [Specific Errorcodes and their meaning](#specific-errorcodes-and-their-meaning)
+- [FAQ](#faq=)
+  - [How do you handle modules?](#how-do-you-handle-modules)
+  - [How do i do x?](#how-do-i-do-x)
+  - [What does cpak mean?](#what-does-cpak-mean)
+  - [How do i contribute?](#how-do-i-contribute)
 
 ## Features:
 - managing modules
@@ -38,16 +38,18 @@ cpak version
 ```
 This should print the following:
 ```
-debug: cpak-alpha-0.0.1
+info: cpak-alpha-0.0.1
 ```
 
 ### Commandline reference:
+
 #### Version
 ```bash
 cpak version
 cpak v
 ```
 prints the version and exits
+
 #### Help
 ```bash
 cpak help
@@ -55,37 +57,42 @@ cpak h
 cpak help <command>
 cpak h <command>
 ```
-prints usage and help either for cpak or for a cpak command
+Prints usage and help either for cpak or for a cpak command
+
 #### Init
 ```bash
 cpak init
 cpak i
 ```
 This command initalises a new cpak project, creates a `cpak_project.conf` file
+
 #### Bootstrap
 ```bash
 cpak bootstrap <template>
 cpak b <template>
 ```
-copies all the files specified in the `$XDG_CONFIG_HOME/cpak/templates/<template>` directory into the current dir.
+Copies all the files specified in the `$XDG_CONFIG_HOME/cpak/templates/<template>` directory into the current dir.
+
 #### Add
 ```bash
 cpak add <module>
 cpak a <module>
 ```
-installs the specifed module and links to its source in `$PWD/cpak_modules`
+Installs the specifed module and links to its source in `$PWD/cpak_modules`
+
 #### Remove
 ```bash
 cpak remove <module>
 cpak r <module>
 ```
-uninstalls the specifed module and removes the link to its source from `$PWD/cpak_modules`
+Uninstalls the specifed module and removes the link to its source from `$PWD/cpak_modules`
+
 #### Upgrade
 ```bash
 cpak upgrade <module>
 cpak u <module>
 ```
-upgrades the specified module to the newest version
+Upgrades the specified module to the newest version
 
 ### Global configuration
 The default config file can be found after first run in `$XDG_CONFIG_HOME/cpak`. This config currently includes the following content:
@@ -101,7 +108,8 @@ storeModulesGlobal=true
 ```
 
 #### Templates
-To use templates and boostrap new project use the `cpak bootstrap <template_name>` command, this will create a new cpak project with the following file structure:
+To use templates and boostrap new project use the `cpak bootstrap <template_name>` command.
+Here, we use `cpak b default`, this will create a new cpak project with the following file structure:
 
 ```
 .
@@ -143,18 +151,19 @@ P_MISSING_CONFIG = 1443,
 
 ## FAQ:
 ### Why should I use 'cpak'?
-Cpak makes it easy for the developer to manage packages for c projects, because it allows devs to store projects dependencies globally or inside a project.
-It also enables a templating and boostraping toolkit. Cpak features a extensive documentation and a very verbose logging system to warn the users of: malformatted config files and several other nuances.
+Cpak makes it easy for the developer to manage packages for c projects, by allowing devs to store project dependencies globally or inside a project.
+It also enables a templating and bootstraping toolkit. Cpak features a extensive documentation and a very verbose logging system to warn the users of malformatted config files and several other nuances.
 
 ### How do you handle modules?
 cpak installs modules globaly, therefore all modules are stored in `$XDG_CONTENT_HOME/cpak` and are softlinked to the `cpak_modules` folder in the current cpak project.
 This has several positive effects on the developer experience:
-- decrease load on the file system by not storing multiple versions of code in multiple places
-- keep dependencies up to date regardless of the project they are used in
-- make dependecy managment easier for the developer
+
+- decreases load on the file system by not storing multiple versions of code in multiple places
+- keeps dependencies up to date regardless of the project they are used in
+- makes dependecy managment easier for the developer
 
 ### How do I do 'x'?
-Please take a look at the documentation featuring possible error codes you could encounter, global as well as project config files and how the templating toolkit works.
+Please take a look at the documentation featuring possible error codes you could encounter, global configuration as well as project config files and how the templating toolkit works.
 If you can't find what your looking for, feel free to create a new [Issue](https://github.com/xNaCly/c_paket/issues).
 
 ### What does 'cpak' mean?
