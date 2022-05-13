@@ -12,8 +12,8 @@ int bootstrap(char *template_name, char *outdir) {
   char *template_path = malloc(sizeof(char) * 510);
   char *path = malloc(sizeof(char) * 510);
 
-  CONFIG_HOME = getenv("XDG_CONFIG_HOME");
-  HOME_DIR = getenv("HOME");
+  strcpy(CONFIG_HOME, getenv("XDG_CONFIG_HOME"));
+  strcpy(HOME_DIR, getenv("HOME"));
 
   if (HOME_DIR == NULL || s_is_empty(HOME_DIR)) {
     strcpy(HOME_DIR, "~");
