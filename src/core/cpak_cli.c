@@ -48,3 +48,11 @@ int bootstrap(char *template_name, char *outdir) {
   free(command);
   return r;
 }
+
+void help(char *command){
+  if(s_is_equal(command, "all")){
+    printf("%s\n", USAGE);
+    return;
+  }
+  printf("help: %s\n", command);
+}
