@@ -73,4 +73,7 @@ int s_starts_with(const char *str, const char *str1) {
     return strncmp(str1, str, strlen(str1)) == 0;
 }
 
-int s_is_empty(const char *str) { return str[0] == '\0'; }
+int s_is_empty(const char *str) { 
+    if(!str) return 1;
+    return str[0] == '\0'; 
+}
