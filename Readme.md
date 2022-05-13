@@ -2,7 +2,8 @@
 fast and efficient package manager for the c programming language
 
 - [Features](#features)
-- [FAQ](#faq=)
+- [FAQ](#faq)
+  - [Why should i use cpak](#why-should-i-use-cpak)
   - [How do you handle modules?](#how-do-you-handle-modules)
   - [How do i do x?](#how-do-i-do-x)
   - [What does cpak mean?](#what-does-cpak-mean)
