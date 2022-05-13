@@ -10,6 +10,9 @@ jobs:
   t_cli:
     runs-on: ubuntu-latest
     steps:
+    - name: display gcc version
+      run: gcc --version
+      shell: bash
     - uses: actions/checkout@v3
     - name: run t_cli
       run: make run/t_cli
