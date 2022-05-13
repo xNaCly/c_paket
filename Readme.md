@@ -2,6 +2,11 @@
 fast and efficient package manager for the c programming language
 
 - [Features](#features)
+- [FAQ](#faq=)
+  - [How do you handle modules?](#how-do-you-handle-modules)
+  - [How do i do x?](#how-do-i-do-x)
+  - [What does cpak mean?](#what-does-cpak-mean)
+  - [How do i contribute?](#how-do-i-contribute)
 - [Documentation](#documentation)
   - [Getting Started](#getting-started)
   - [Commandline reference](#commandline-reference)
@@ -16,16 +21,34 @@ fast and efficient package manager for the c programming language
     - [Templates](#templates)
   - [Error codes](#error-codes)
     - [Specific Errorcodes and their meaning](#specific-errorcodes-and-their-meaning)
-- [FAQ](#faq=)
-  - [How do you handle modules?](#how-do-you-handle-modules)
-  - [How do i do x?](#how-do-i-do-x)
-  - [What does cpak mean?](#what-does-cpak-mean)
-  - [How do i contribute?](#how-do-i-contribute)
 
 ## Features:
 - managing modules
 - bootstraping projects with templates 
 - global/linked dependencies 
+
+## FAQ:
+### Why should I use 'cpak'?
+Cpak makes it easy for the developer to manage packages for c projects, by allowing devs to store project dependencies globally or inside a project.
+It also enables a templating and bootstraping toolkit. Cpak features a extensive documentation and a very verbose logging system to warn the users of malformatted config files and several other nuances.
+
+### How do you handle modules?
+cpak installs modules globaly, therefore all modules are stored in `$XDG_CONTENT_HOME/cpak` and are softlinked to the `cpak_modules` folder in the current cpak project.
+This has several positive effects on the developer experience:
+
+- decreases load on the file system by not storing multiple versions of code in multiple places
+- keeps dependencies up to date regardless of the project they are used in
+- makes dependecy managment easier for the developer
+
+### How do I do 'x'?
+Please take a look at the documentation featuring possible error codes you could encounter, global configuration as well as project config files and how the templating toolkit works.
+If you can't find what your looking for, feel free to create a new [Issue](https://github.com/xNaCly/c_paket/issues).
+
+### What does 'cpak' mean?
+Cpak is a composition of c and Paket [pa'keːt]. Paket is german and can be translated to Package, therefore cpak means as much as C package.
+
+### How do I contribute?
+Take a look at [Contributing](/CONTRIBUTING.md).
 
 ## Documentation:
 ### Getting started:
@@ -149,25 +172,3 @@ CONF_UNKNOWN_VALUE = 1442,
 P_MISSING_CONFIG = 1443,
 ```
 
-## FAQ:
-### Why should I use 'cpak'?
-Cpak makes it easy for the developer to manage packages for c projects, by allowing devs to store project dependencies globally or inside a project.
-It also enables a templating and bootstraping toolkit. Cpak features a extensive documentation and a very verbose logging system to warn the users of malformatted config files and several other nuances.
-
-### How do you handle modules?
-cpak installs modules globaly, therefore all modules are stored in `$XDG_CONTENT_HOME/cpak` and are softlinked to the `cpak_modules` folder in the current cpak project.
-This has several positive effects on the developer experience:
-
-- decreases load on the file system by not storing multiple versions of code in multiple places
-- keeps dependencies up to date regardless of the project they are used in
-- makes dependecy managment easier for the developer
-
-### How do I do 'x'?
-Please take a look at the documentation featuring possible error codes you could encounter, global configuration as well as project config files and how the templating toolkit works.
-If you can't find what your looking for, feel free to create a new [Issue](https://github.com/xNaCly/c_paket/issues).
-
-### What does 'cpak' mean?
-Cpak is a composition of c and Paket [pa'keːt]. Paket is german and can be translated to Package, therefore cpak means as much as C package.
-
-### How do I contribute?
-Take a look at [Contributing](/CONTRIBUTING.md).
