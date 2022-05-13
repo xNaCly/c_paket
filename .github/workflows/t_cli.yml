@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  t_cli:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
