@@ -3,24 +3,13 @@
 #include <string.h>
 
 #include "./core/cpak_utils.h"
+#include "./core/cpak_cli.h"
 #include "cpak.h"
 
-typedef enum {
-  INIT = 0,
-  ADD,
-  REMOVE,
-  UPGRADE,
-  BOOTSTRAP,
-  VERSION,
-  HELP,
-  UNDEF,
-  UNKNOWN,
-} command;
-
-typedef struct {
-  command cmd; // primary argument
-  char *c_cmd; // child argument
-} Cli_arguments;
+void help_wrapper(){
+    printf("cpak-%s\n", CPAK_VERSION);
+    help("all");
+}
 
 Cli_arguments *parse_arguments(int arguments_amount, char **arguments) {
   Cli_arguments *ca;
@@ -30,7 +19,6 @@ Cli_arguments *parse_arguments(int arguments_amount, char **arguments) {
     ca->cmd = UNDEF;
     return ca;
   }
-
   char *cmd = arguments[1];
 
   if (s_is_equal(cmd, "help")|| s_is_equal(cmd, "h")) {
@@ -52,13 +40,14 @@ Cli_arguments *parse_arguments(int arguments_amount, char **arguments) {
   }
 
   if (ca->cmd != VERSION) {
-    if (arguments_amount >= 1) {
+    if (arguments_amount >= 2) {
       ca->c_cmd = malloc(sizeof(arguments[2]));
       ca->c_cmd = arguments[2];
     } else {
-      throw_error("Not enough arguments, use help <command> to view in-depth "
-                  "information about <command>",
-                  NOT_ENOUGH_ARGUMENTS);
+      ca->c_cmd = "";
+      //throw_error("Not enough arguments, use help <command> to view in-depth "
+      //            "information about <command>",
+      //            NOT_ENOUGH_ARGUMENTS);
     }
   }
 
@@ -90,12 +79,19 @@ int main(int argc, char *argv[]) {
   case UNDEF:
     throw_warning("Not enough Arguments providen", NOT_ENOUGH_ARGUMENTS);
     break;
+  case HELP:
+    if(!s_is_empty(arg->c_cmd)){
+      help(arg->c_cmd);
+    } else {
+      help_wrapper();
+    }
+    break;
   case UNKNOWN:
     throw_warning("Unknown Argument", UNKNOWN_ARGUMENT);
+    help_wrapper();
     break;
-  case HELP:
   default:
-    cpak_log("HELP!", DEBUG);
+    help_wrapper();
     break;
   }
 
