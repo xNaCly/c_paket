@@ -15,7 +15,7 @@
 3. Write your code in your local copy. It's good practice to create a branch for
    each new issue you work on, although not compulsory.
 4. To run the test suite:
-   - `make build`
+   - `make build` to check if cpak still compiles
    - `make run/t_unit` for unit tests
    - `make run/t_cli` for testing cli commands.
 5. If the tests pass, you can commit your changes to your fork and then create
