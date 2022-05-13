@@ -33,7 +33,7 @@ Cli_arguments *parse_arguments(int arguments_amount, char **arguments) {
 
   char *cmd = arguments[1];
 
-  if (s_is_equal(cmd, "help"), s_is_equal(cmd, "h")) {
+  if (s_is_equal(cmd, "help")|| s_is_equal(cmd, "h")) {
     ca->cmd = HELP;
   } else if (s_is_equal(cmd, "bootstrap") || s_is_equal(cmd, "b")) {
     ca->cmd = BOOTSTRAP;
