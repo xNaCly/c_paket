@@ -35,10 +35,14 @@ int bootstrap(char *template_name, char *outdir) {
   return r;
 }
 
-void help(char *command){
+int help(char *command){
+  char *T_CPAK = getenv("CPAK_TESTING");
+  int t_flag = T_CPAK != NULL && s_is_equal(T_CPAK, "true") ? 1 : 0;
   if(s_is_equal(command, "all")){
-    printf("%s\n", USAGE);
-    return;
+    printf("%s", t_flag ? "" : USAGE"\n");
+    return EXIT_SUCCESS;
+  } else {
+    printf("%s", t_flag ? "" : USAGE"\n");
+    return EXIT_FAILURE;
   }
-  printf("help: %s\n", command);
 }

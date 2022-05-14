@@ -26,7 +26,8 @@ int bootstrap(char *template_name, char *outdir);
 /*
  * @brief displays global help if param command is "none", otherwise prints help for a specif command
  * @param *command
+ * @returns EXIT_SUCCESS or EXIT_FAILURE
  */
-void help(char *command);
+int help(char *command);
 
 #endif
