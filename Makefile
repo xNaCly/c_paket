@@ -55,6 +55,7 @@ run/t_unit: build/t_unit
 ## Build and run cli tests
 run/t_cli: build/t_cli
 	cp -r ./tests/example_config ~/.config/cpak
+	export CPAK_TESTING=true && \
 	$(BUILD_DIR)/t_cli.dev
 
 ## Build debug build and run using gdb
@@ -65,7 +66,7 @@ run/debug: build/debug
 run/prod: build/prod
 	$(PROD_DIR)/$(OUT_NAME)
 
-build: pre
+build: pre 
 	gcc $(COMPILE) $(BUILD_DIR)/$(OUT_NAME).dev
 
 build/t_unit: pre
