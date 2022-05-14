@@ -7,25 +7,15 @@
 #include "cpak_utils.h"
 
 int bootstrap(char *template_name, char *outdir) {
-  char *CONFIG_HOME = malloc(sizeof(char) * 255);
-  char *HOME_DIR = malloc(sizeof(char) * 255);
   char *template_path = malloc(sizeof(char) * 510);
   char *path = malloc(sizeof(char) * 510);
 
-  strcpy(CONFIG_HOME, getenv("XDG_CONFIG_HOME"));
-  strcpy(HOME_DIR, getenv("HOME"));
+  char *HOME_DIR = getenv("HOME");
 
-  if (HOME_DIR == NULL || s_is_empty(HOME_DIR)) {
-    strcpy(HOME_DIR, "~");
+  if (getenv("XDG_CONFIG_DIR") == NULL) {
+    sprintf(path, "%s/.config/cpak/templates/%s", HOME_DIR, template_name);
+    strcpy(template_path, path);
   }
-
-  if (CONFIG_HOME == NULL || s_is_empty(CONFIG_HOME)) {
-    sprintf(path, "%s/.config", HOME_DIR);
-    CONFIG_HOME = malloc(sizeof(path));
-    strcpy(CONFIG_HOME, path);
-  }
-
-  sprintf(template_path, "%s/cpak/templates/%s", CONFIG_HOME, template_name);
 
   struct stat st;
   if (stat(template_path, &st) != 0) {
@@ -38,14 +28,10 @@ int bootstrap(char *template_name, char *outdir) {
 
   int r = system(command);
 
-  if (r == EXIT_SUCCESS)
-    cpak_log("Successfully bootstrapped project", SUCCESS);
-
-  free(CONFIG_HOME);
-  free(HOME_DIR);
   free(template_path);
   free(path);
   free(command);
+
   return r;
 }
 

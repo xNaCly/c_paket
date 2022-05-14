@@ -19,7 +19,7 @@ List of commands:\n\
  * @brief bootstraps a project in 'outdir' with the name 'template_name'
  * @param *template_name
  * @param *outdir dir to copy template content to
- * @returns shell cp return code (0 on success)
+ * @returns EXIT_SUCCESS or EXIT_FAILURE
  */
 int bootstrap(char *template_name, char *outdir);
 
