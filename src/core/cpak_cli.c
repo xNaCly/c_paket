@@ -40,9 +40,25 @@ int c_help(char *command){
   int t_flag = T_CPAK != NULL && s_is_equal(T_CPAK, "true") ? 1 : 0;
   if(s_is_equal(command, "all")){
     printf("%s", t_flag ? "" : USAGE"\n");
-    return EXIT_SUCCESS;
+  } else if(s_is_equal(command, "help")){
+    printf("%s", U_HELP);
+  } else if(s_is_equal(command, "init")){
+    printf("%s", U_INIT);
+  } else if(s_is_equal(command, "add")){
+    printf("%s", U_ADD);
+  } else if(s_is_equal(command, "remove")){
+    printf("%s", U_REMOVE);
+  } else if(s_is_equal(command, "bootstrap")){
+    printf("%s", U_BOOTSTRAP);
+  } else if(s_is_equal(command, "version")){
+    printf("%s", U_VERSION);
   } else {
     printf("%s", t_flag ? "" : USAGE"\n");
     return EXIT_FAILURE;
   }
+  return EXIT_SUCCESS;
 }
+
+//int c_init(char *outdir){
+//  return EXIT_SUCCESS;
+//}
