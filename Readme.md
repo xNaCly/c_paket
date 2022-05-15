@@ -18,7 +18,7 @@ fast and efficient package manager for the c programming language
     - [Add](#add)
     - [Remove](#remove)
     - [Upgrade](#upgrade)
-  - [Project config]()
+  - [Project config](#project-config)
   - [Global Configuration](#global-configuration)
     - [Templates](#templates)
   - [Error codes](#error-codes)
@@ -124,7 +124,7 @@ Upgrades the specified module to the newest version
 The project config is a file found in a directory after `cpak init` was ran in it.
 The following shows a simple example what a `cpak_project.conf` file could look like:
 
-```config
+```bash
 # cpak config file
 
 # name of the project
@@ -135,7 +135,7 @@ description=a very simple program
 version=v0.0.1
 # author of the project
 author=https://github.com/xnacly
-# dependencies, seperated by whitespace 
+# dependencies, separated by whitespace 
 deps=xnacly/pgme xnacly/xc
 ```
 
