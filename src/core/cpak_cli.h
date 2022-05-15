@@ -21,13 +21,20 @@ List of commands:\n\
  * @param *outdir dir to copy template content to
  * @returns EXIT_SUCCESS or EXIT_FAILURE
  */
-int bootstrap(char *template_name, char *outdir);
+int c_bootstrap(char *template_name, char *outdir);
 
 /*
  * @brief displays global help if param command is "none", otherwise prints help for a specif command
  * @param *command
  * @returns EXIT_SUCCESS or EXIT_FAILURE
  */
-int help(char *command);
+int c_help(char *command);
+
+/*
+ * @brief inits a new cpak project by creating a 'cpak_project.conf' file
+ * @param *outdir
+ * @returns EXIT_SUCCESS or EXIT_FAILURE
+ */
+int c_init(char *outdir);
 
 #endif

@@ -6,7 +6,7 @@
 #include "cpak_cli.h"
 #include "cpak_utils.h"
 
-int bootstrap(char *template_name, char *outdir) {
+int c_bootstrap(char *template_name, char *outdir) {
   char *template_path = malloc(sizeof(char) * 510);
   char *path = malloc(sizeof(char) * 510);
 
@@ -35,7 +35,7 @@ int bootstrap(char *template_name, char *outdir) {
   return r;
 }
 
-int help(char *command){
+int c_help(char *command){
   char *T_CPAK = getenv("CPAK_TESTING");
   int t_flag = T_CPAK != NULL && s_is_equal(T_CPAK, "true") ? 1 : 0;
   if(s_is_equal(command, "all")){

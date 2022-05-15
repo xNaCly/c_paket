@@ -8,7 +8,7 @@
 
 void help_wrapper(){
     printf("cpak-%s\n", CPAK_VERSION);
-    help("all");
+    c_help("all");
 }
 
 Cli_arguments *parse_arguments(int arguments_amount, char **arguments) {
@@ -81,7 +81,7 @@ int main(int argc, char *argv[]) {
     break;
   case HELP:
     if(!s_is_empty(arg->c_cmd)){
-      help(arg->c_cmd);
+      c_help(arg->c_cmd);
     } else {
       help_wrapper();
     }
