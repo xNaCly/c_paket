@@ -18,6 +18,7 @@ fast and efficient package manager for the c programming language
     - [Add](#add)
     - [Remove](#remove)
     - [Upgrade](#upgrade)
+  - [Project config]()
   - [Global Configuration](#global-configuration)
     - [Templates](#templates)
   - [Error codes](#error-codes)
@@ -117,6 +118,26 @@ cpak upgrade <module>
 cpak u <module>
 ```
 Upgrades the specified module to the newest version
+
+
+### Project Config:
+The project config is a file found in a directory after `cpak init` was ran in it.
+The following shows a simple example what a `cpak_project.conf` file could look like:
+
+```config
+# cpak config file
+
+# name of the project
+name=example_app
+# project description
+description=a very simple program
+# version of the project 
+version=v0.0.1
+# author of the project
+author=https://github.com/xnacly
+# dependencies, seperated by whitespace 
+deps=xnacly/pgme xnacly/xc
+```
 
 ### Global configuration
 The default config file can be found after first run in `$XDG_CONFIG_HOME/cpak`. This config currently includes the following content:
