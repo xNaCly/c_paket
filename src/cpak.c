@@ -78,6 +78,7 @@ int main(int argc, char *argv[]) {
     exit(EXIT_SUCCESS);
   case UNDEF:
     throw_warning("Not enough Arguments providen", NOT_ENOUGH_ARGUMENTS);
+    exit(EXIT_FAILURE);
     break;
   case HELP:
     if(!s_is_empty(arg->c_cmd)){
