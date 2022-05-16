@@ -11,7 +11,6 @@ Config *get_config(char *path) {
   FILE *file = fopen(path, "r");
 
   if (file == NULL) {
-    fclose(file);
     throw_error("Can't read or find cpak config", CONF_MISSING_CONFIG);
   }
 
@@ -68,7 +67,6 @@ void project_conf_free(Project_config *conf) {
   free(conf->author);
   free(conf->desc);
   free(conf);
-  conf = NULL;
 }
 
 Project_config *project_conf_get_config(char *path) {
@@ -88,7 +86,6 @@ Project_config *project_conf_get_config(char *path) {
 
   if (file == NULL) {
     project_conf_free(pc);
-    fclose(file);
     throw_error("Can't read or find project config", P_MISSING_CONFIG);
   }
 
