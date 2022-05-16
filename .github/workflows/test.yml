@@ -14,7 +14,7 @@ jobs:
     - name: install cppcheck
       run: sudo apt install cppcheck
     - name: run lint
-      run: cppcheck --enable=all --error-exitcode=1 -q **.c **.h
+      run: cppcheck --enable=all --error-exitcode=1 -q src/**.c src/**.h
   build:
     runs-on: ubuntu-latest
     steps:
