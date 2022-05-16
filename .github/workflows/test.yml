@@ -1,4 +1,4 @@
-name: test/
+name: test
 
 on:
   push:
@@ -7,13 +7,21 @@ on:
     branches: [ master ]
 
 jobs:
-  make-target:
+  build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
     - name: test/build
-      run: make all
-    - name: test/cli
-      run: make test/cli
+      run: make build
+  unit:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
     - name: test/unit
       run: make test/unit
+  cli:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: test/cli
+      run: make test/cli
