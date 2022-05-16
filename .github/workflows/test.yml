@@ -7,6 +7,14 @@ on:
     branches: [ master ]
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: install cppcheck
+      run: sudo apt install cppcheck
+    - name: run lint
+      run: cppcheck --enable=all --error-exitcode=1 -q **.c **.h
   build:
     runs-on: ubuntu-latest
     steps:
