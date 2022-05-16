@@ -56,7 +56,7 @@ void throw_warning(const char *text, Errors error);
  * @param str2
  * @return boolean as integer
  */
-int s_is_equal(const char *str1, const char *str2);
+int s_is_equal(const char *str, const char *str1);
 
 /**
  * checks if string str is empty
@@ -68,10 +68,10 @@ int s_is_empty(const char *str);
 /**
  * checks if string str starts with string str1
  * @param str
- * @param str1
+ * @param start
  * @return boolean as integer
  */
-int s_starts_with(const char *str, const char *str1);
+int s_starts_with(const char *str, const char *start);
 
 /**
  * logging utility

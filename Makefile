@@ -11,6 +11,7 @@ FLAGS := -fdiagnostics-color=always  \
 SRC_DIR := ./src
 BUILD_DIR := ./dist
 DEBUG_DIR := $(BUILD_DIR)/debug
+TEST_DIR := $(BUILD_DIR)/test
 PROD_DIR := $(BUILD_DIR)/prod
 
 OUT_NAME := cpak
@@ -39,24 +40,25 @@ help:
 all: build
 	$(BUILD_DIR)/$(OUT_NAME).dev $(cmd)
 
-# install cpak
+## install cpak
 install: build/prod
 	sudo mv $(PROD_DIR)/$(OUT_NAME) /usr/local/bin/$(OUT_NAME)
 
-#uninstall
+## uninstall cpak
 uninstall:
 	sudo rm /usr/local/bin/$(OUT_NAME)
 
 ## Build and run unit tests
-run/t_unit: build/t_unit
-	cp -r ./tests/example_config ~/.config/cpak
-	$(BUILD_DIR)/t_unit.dev
-
-## Build and run cli tests
-run/t_cli: build/t_cli
+test/unit: build/unit
 	cp -r ./tests/example_config ~/.config/cpak
 	export CPAK_TESTING=true && \
-	$(BUILD_DIR)/t_cli.dev
+	$(TEST_DIR)/t_unit.dev
+
+## Build and run cli tests
+test/cli: build/cli
+	cp -r ./tests/example_config ~/.config/cpak
+	export CPAK_TESTING=true && \
+	$(TEST_DIR)/t_cli.dev
 
 ## Build debug build and run using gdb
 run/debug: build/debug
@@ -69,11 +71,11 @@ run/prod: build/prod
 build: pre 
 	gcc $(COMPILE) $(BUILD_DIR)/$(OUT_NAME).dev
 
-build/t_unit: pre
-	gcc -g3 $(FLAGS) ./tests/t_unit.c $(CORE_FILES) -lm -o $(BUILD_DIR)/t_unit.dev
+build/unit: pre/test
+	gcc -g3 $(FLAGS) ./tests/t_unit.c $(CORE_FILES) -lm -o $(TEST_DIR)/t_unit.dev
 
-build/t_cli: pre
-	gcc -g3 $(FLAGS) ./tests/t_cli.c $(CORE_FILES) -lm -o $(BUILD_DIR)/t_cli.dev
+build/cli: pre/test
+	gcc -g3 $(FLAGS) ./tests/t_cli.c $(CORE_FILES) -lm -o $(TEST_DIR)/t_cli.dev
 
 build/debug: pre/debug
 	gcc -g3 $(COMPILE) $(DEBUG_DIR)/$(OUT_NAME).debug
@@ -86,6 +88,9 @@ pre:
 
 pre/debug:
 	mkdir -p $(DEBUG_DIR)
+
+pre/test:
+	mkdir -p $(TEST_DIR)
 
 pre/prod:
 	mkdir -p $(PROD_DIR)
