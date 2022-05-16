@@ -1,4 +1,4 @@
-name: test/cli
+name: test/
 
 on:
   push:
@@ -11,5 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - name: run cli tests
+    - name: test/build
+      run: make all
+    - name: test/cli
       run: make test/cli
+    - name: test/unit
+      run: make test/unit
