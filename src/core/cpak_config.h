@@ -34,6 +34,6 @@ Project_config *project_conf_get_config(char *path);
  * @brief frees given project pointer
  * @param *conf Project_config pointer
  */
-void project_conf_free(Project_config *conf);
+void project_conf_destroy(Project_config *conf);
 
 #endif

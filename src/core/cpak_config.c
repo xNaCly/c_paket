@@ -58,7 +58,7 @@ Config *get_config(char *path) {
   return c;
 }
 
-void project_conf_free(Project_config *conf) {
+void project_conf_destroy(Project_config *conf) {
   for (int i = 0; i < conf->amount_deps; i++) {
     free(conf->deps[i]);
   }
@@ -85,7 +85,7 @@ Project_config *project_conf_get_config(char *path) {
   // TODO: needs check if file has correct file ending (.conf)
 
   if (file == NULL) {
-    project_conf_free(pc);
+    project_conf_destroy(pc);
     throw_error("Can't read or find project config", P_MISSING_CONFIG);
   }
 
