@@ -62,7 +62,12 @@ int main(int argc, char *argv[]) {
     cpak_log("BOOTSTRAP!", DEBUG);
     break;
   case INIT:
-    cpak_log("INIT!", DEBUG);
+    if(!s_is_empty(arg->c_cmd)){
+      c_init(arg->c_cmd);
+    } else {
+      throw_warning("Not enough Arguments providen", NOT_ENOUGH_ARGUMENTS);
+      c_help("init");
+    }
     break;
   case ADD:
     cpak_log("ADD!", DEBUG);

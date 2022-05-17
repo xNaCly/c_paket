@@ -32,6 +32,7 @@ List of commands:\n\
 #define U_VERSION "Version displays version.\n\n\
 \tversion\n\tv\n\nExample:\n\tcpak v\n"
 
+
 /*
  * @brief bootstraps a project in 'outdir' with the name 'template_name'
  * @param *template_name
