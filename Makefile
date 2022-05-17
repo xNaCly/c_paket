@@ -49,7 +49,7 @@ uninstall:
 	sudo rm /usr/local/bin/$(OUT_NAME)
 
 test/lint:
-	cppcheck --enable=all --error-exitcode=1 src/**
+	cppcheck --enable=all --error-exitcode=1 src/** --suppress=unusedFunction
 
 ## Build and run unit tests
 test/unit: build/unit
