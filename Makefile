@@ -91,6 +91,7 @@ pre/debug:
 	mkdir -p $(DEBUG_DIR)
 
 pre/test:
+	mkdir -p ./tests/output
 	mkdir -p $(TEST_DIR)
 
 pre/prod:
