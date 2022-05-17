@@ -151,6 +151,16 @@ colors=true
 # specify if the installed modules should be stored globaly or locally
 storeModulesGlobal=true
 ```
+#### keys
+##### colors
+`colors=true`
+
+![image](https://user-images.githubusercontent.com/47723417/168904652-faacd878-6de2-4c0f-928a-6a6001f7347b.png)
+
+`colors=false`
+
+![image](https://user-images.githubusercontent.com/47723417/168905735-44d1d34a-4ccf-4c5d-bf06-feca85201b6b.png)
+
 
 #### Templates
 To use templates and boostrap new project use the `cpak bootstrap <template_name>` command.
