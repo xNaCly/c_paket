@@ -14,16 +14,16 @@ Config *get_config(char *path) {
     throw_error("Can't read or find cpak config", CONF_MISSING_CONFIG);
   }
 
-  char cur_line[255];
+  char cur_line[1024];
 
-  while (fgets(cur_line, 255, file)) {
+  while (fgets(cur_line, 1024, file)) {
     if (s_is_empty(cur_line))
       continue;
     else if (s_starts_with(cur_line, "#"))
       continue;
     else if (s_starts_with(cur_line, "colors=")) {
-      char temp[255 * 5];
-      sscanf(cur_line, "colors=%s\n", temp);
+      char temp[1024 * 4];
+      sscanf(cur_line, "colors=%1024s\n", temp);
       if (s_is_equal(temp, "true")) {
         c->colors = 1;
       } else if (s_is_equal(temp, "false")) {
@@ -35,8 +35,8 @@ Config *get_config(char *path) {
       }
       continue;
     } else if (s_starts_with(cur_line, "storeModulesGlobal=")) {
-      char temp[255 * 5];
-      sscanf(cur_line, "storeModulesGlobal=%s\n", temp);
+      char temp[1024 * 4];
+      sscanf(cur_line, "storeModulesGlobal=%255s\n", temp);
       if (s_is_equal(temp, "true")) {
         c->storeModulesGlobal = 1;
       } else if (s_is_equal(temp, "false")) {
@@ -89,27 +89,27 @@ Project_config *project_conf_get_config(char *path) {
     throw_error("Can't read or find project config", P_MISSING_CONFIG);
   }
 
-  char cur_line[255];
+  char cur_line[1024];
 
-  while (fgets(cur_line, 255, file)) {
+  while (fgets(cur_line, 1024, file)) {
     if (s_is_empty(cur_line))
       continue;
     else if (s_starts_with(cur_line, "#")) {
       continue;
     } else if (s_starts_with(cur_line, "name=")) {
-      sscanf(cur_line, "name=%s\n", pc->name);
+      sscanf(cur_line, "name=%1024s\n", pc->name);
       continue;
     } else if (s_starts_with(cur_line, "author=")) {
-      sscanf(cur_line, "author=%s\n", pc->author);
+      sscanf(cur_line, "author=%1024s\n", pc->author);
       continue;
     } else if (s_starts_with(cur_line, "description=")) {
-      sscanf(cur_line, "description=%[^\n]", pc->desc);
+      sscanf(cur_line, "description=%1024[^\n]", pc->desc);
       continue;
     } else if (s_starts_with(cur_line, "version=")) {
-      sscanf(cur_line, "version=%s\n", pc->version);
+      sscanf(cur_line, "version=%1024s\n", pc->version);
       continue;
     } else if (s_starts_with(cur_line, "deps=")) {
-      sscanf(cur_line, "deps=%[^\n]", cur_line);
+      sscanf(cur_line, "deps=%1024[^\n]", cur_line);
       char *ptr = strtok(cur_line, " ");
       int i = 0;
       while (ptr != NULL) {

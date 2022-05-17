@@ -54,7 +54,6 @@ void t_project_config() {
 
 int main() {
   t_config();
-  printf("\n");
   t_project_config();
   return EXIT_SUCCESS;
 }
