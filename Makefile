@@ -48,6 +48,9 @@ install: build/prod
 uninstall:
 	sudo rm /usr/local/bin/$(OUT_NAME)
 
+test/lint:
+	cppcheck --enable=all --error-exitcode=1 src/**
+
 ## Build and run unit tests
 test/unit: build/unit
 	cp -r ./tests/example_config ~/.config/cpak

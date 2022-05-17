@@ -14,8 +14,7 @@ jobs:
     - name: install cppcheck
       run: sudo apt install cppcheck
     - name: run lint
-      run: |
-        cppcheck --enable=all --error-exitcode=1 src/**
+      run: make test/lint
   build:
     runs-on: ubuntu-latest
     steps:
