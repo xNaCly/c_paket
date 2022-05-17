@@ -70,7 +70,7 @@ run/prod: build/prod
 	$(PROD_DIR)/$(OUT_NAME)
 
 build: pre 
-	gcc $(COMPILE) $(BUILD_DIR)/$(OUT_NAME).dev
+	gcc -v $(COMPILE) $(BUILD_DIR)/$(OUT_NAME).dev
 
 build/unit: pre/test
 	gcc -g3 $(FLAGS) ./tests/t_unit.c $(CORE_FILES) -lm -o $(TEST_DIR)/t_unit.dev
