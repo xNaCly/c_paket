@@ -5,12 +5,42 @@
 #include "cpak_config.h"
 #include "cpak_utils.h"
 
-Config *get_config(char *path) {
+char* get_cpak_config_path(){
+  char *cpak_dir = getenv("CPAK_CONFIG_HOME");
+  char *xdg_dir = getenv("XDG_CONFIG_HOME");
+
+  if(!s_is_empty(cpak_dir)){
+    char *buf = malloc(sizeof(char)*255);
+    snprintf(buf, 255, "%s", cpak_dir);
+    return buf;
+  }
+
+  if(!s_is_empty(xdg_dir)){
+    char *buf = malloc(sizeof(char)*255);
+    snprintf(buf, 255, "%s/cpak", xdg_dir);
+    return buf;
+  }
+
+  char* p = NULL;
+  p = malloc(sizeof(char) * 255);
+  char *home = getenv("HOME");
+  snprintf(p, 255, "%s/.config/cpak", home);
+
+  return p;
+}
+
+Config *get_config() {
+  char *path = malloc(sizeof(char)*255);
+  char *config_path = get_cpak_config_path();
+
+  snprintf(path, 255, "%s/cpak.conf", config_path);
+  free(config_path);
+
   Config *c;
   c = (Config *)malloc(sizeof *c);
   FILE *file = fopen(path, "r");
 
-  if (file == NULL) {
+  if (s_is_empty(path) || file == NULL) {
     throw_error("Can't read or find cpak config", CONF_MISSING_CONFIG);
   }
 
@@ -53,6 +83,7 @@ Config *get_config(char *path) {
       throw_warning(temp, CONF_UNKNOWN_KEY);
     }
   }
+  free(path);
   fclose(file);
 
   return c;

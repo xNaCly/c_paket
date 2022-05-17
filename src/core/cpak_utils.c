@@ -3,12 +3,13 @@
 #include <string.h>
 
 #include "cpak_utils.h"
-
-// TODO: implement this in the global config as a keyword
-int color = 1;
+#include "cpak_config.h"
+#include "../cpak.h"
 
 void cpak_log(const char *str, Log_level log_level) {
-    if (color) {
+  Config *c = get_config();
+  int COLORS = c->colors;
+    if (COLORS) {
         switch (log_level) {
             case SUCCESS:
                 printf("%s%ssuccess:%s %s\n", ANSI_COLOR_BLACK_FG, ANSI_COLOR_GREEN,
@@ -77,3 +78,4 @@ int s_is_empty(const char *str) {
     if(!str || str == NULL) return 1;
     return str[0] == '\0'; 
 }
+

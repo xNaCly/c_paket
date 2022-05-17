@@ -4,18 +4,14 @@
 #include <sys/stat.h>
 
 #include "cpak_cli.h"
+#include "cpak_config.h"
 #include "cpak_utils.h"
 
 int c_bootstrap(char *template_name, char *outdir) {
-  char *template_path = malloc(sizeof(char) * 510);
-  char *path = malloc(sizeof(char) * 510);
+  char *template_path = malloc(sizeof(char) * 255);
+  char *path = get_cpak_config_path();
 
-  char *HOME_DIR = getenv("HOME");
-
-  if (getenv("XDG_CONFIG_DIR") == NULL) {
-    sprintf(path, "%s/.config/cpak/templates/%s", HOME_DIR, template_name);
-    strcpy(template_path, path);
-  }
+  snprintf(template_path, 255, "%s/templates/%s", path, template_name);
 
   struct stat st;
   if (stat(template_path, &st) != 0) {
