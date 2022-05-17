@@ -53,14 +53,12 @@ test/lint:
 
 ## Build and run unit tests
 test/unit: build/unit
-	cp -r ./tests/example_config ~/.config/cpak
-	export CPAK_TESTING=true && \
+	export CPAK_TESTING=true && export CPAK_CONFIG_HOME="$(XDG_CONFIG_HOME)/cpak" && \
 	$(TEST_DIR)/t_unit.dev
 
 ## Build and run cli tests
 test/cli: build/cli
-	cp -r ./tests/example_config ~/.config/cpak
-	export CPAK_TESTING=true && \
+	export CPAK_TESTING=true && export CPAK_CONFIG_HOME="$(XDG_CONFIG_HOME)/cpak" && \
 	$(TEST_DIR)/t_cli.dev
 
 ## Build debug build and run using gdb

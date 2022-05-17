@@ -7,8 +7,7 @@
 
 void t_config() {
   cpak_log("running t_config", INFO);
-  char example_config_path[] = "./tests/example_config/cpak.conf";
-  Config *c = get_config(example_config_path);
+  Config *c = get_config();
 
   assert(c->colors == 1 && "reading config key colors failed");
   cpak_log("colors value correct!", SUCCESS);
@@ -47,7 +46,7 @@ void t_project_config() {
   assert(pc->amount_deps == 2 && "dependency amount incorrect");
   cpak_log("dependency amount correct!", SUCCESS);
 
-  project_conf_free(pc);
+  project_conf_destroy(pc);
 
   cpak_log("ran t_project_config", INFO);
 }
