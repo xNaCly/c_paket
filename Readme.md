@@ -84,6 +84,14 @@ cpak h <command>
 ```
 Prints usage and help either for cpak or for a cpak command
 
+#### Config
+
+```bash
+cpak config
+cpak c
+```
+Generates the default config aswell as the default template in `$CPAK_CONFIG_HOME` or `$XDG_CONFIG_HOME`.
+
 #### Init
 ```bash
 cpak init
