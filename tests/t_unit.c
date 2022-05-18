@@ -7,12 +7,12 @@
 
 void t_config() {
   cpak_log("running t_config", INFO);
-  Config *c = get_config();
+  get_config();
 
-  assert(c->colors == 1 && "reading config key colors failed");
+  assert(flag_colors == 1 && "reading config key colors failed");
   cpak_log("colors value correct!", SUCCESS);
 
-  assert(c->storeModulesGlobal == 1 &&
+  assert(flag_storeModulesGlobal == 1 &&
          "reading config key storeModulesGlobal failed");
   cpak_log("storeModulesGlobal correct!", SUCCESS);
 
