@@ -16,15 +16,6 @@ typedef struct {
   int amount_deps;
 } Project_config;
 
-/*
- * @brief returns the path to the cpak config directory
- * @description scanning priority:
- *                1. 'CPAK_CONFIG_HOME' env variable
- *                2. 'XDG_CONFIG_HOME' env variable + '/cpak/'
- *                3. 'HOME' env variable + '/.config/cpak/'
- * @returns path to cpaks config
- */
-char* get_cpak_config_path();
 
 /*
  * @brief parses config at given path

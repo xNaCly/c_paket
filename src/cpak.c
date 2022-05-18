@@ -55,6 +55,10 @@ Cli_arguments *parse_arguments(int arguments_amount, char **arguments) {
 }
 
 int main(int argc, char *argv[]) {
+  int does_conf_exists = conf_exists();
+  if(!does_conf_exists)
+    throw_error("can't find cpak config file", CONF_MISSING_CONFIG);
+
   Cli_arguments *arg = parse_arguments(argc, argv);
 
   switch (arg->cmd) {

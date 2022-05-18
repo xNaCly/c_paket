@@ -34,6 +34,28 @@ typedef enum {
   DEBUG,
 } Log_level;
 
+/*
+ * checks if file exists
+ * @returns EXIT_SUCCESS or EXIT_FAILURE
+ */
+int f_exists(char *path);
+
+/*
+ * @brief returns the path to the cpak config directory
+ * @description scanning priority:
+ *                1. 'CPAK_CONFIG_HOME' env variable
+ *                2. 'XDG_CONFIG_HOME' env variable + '/cpak/'
+ *                3. 'HOME' env variable + '/.config/cpak/'
+ * @returns path to cpaks config
+ */
+char *get_cpak_config_path();
+
+/*
+ * @brief checks if cpaks config exists
+ * @returns EXIT_SUCCESS or EXIT_FAILURE
+ */
+int conf_exists();
+
 /**
  * throws error and exits the program
  * @param text
