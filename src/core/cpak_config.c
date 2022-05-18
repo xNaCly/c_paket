@@ -5,23 +5,23 @@
 #include "cpak_config.h"
 #include "cpak_utils.h"
 
-char* get_cpak_config_path(){
+char *get_cpak_config_path() {
   char *cpak_dir = getenv("CPAK_CONFIG_HOME");
   char *xdg_dir = getenv("XDG_CONFIG_HOME");
 
-  if(!s_is_empty(cpak_dir)){
-    char *buf = malloc(sizeof(char)*255);
+  if (!s_is_empty(cpak_dir)) {
+    char *buf = malloc(sizeof(char) * 255);
     snprintf(buf, 255, "%s", cpak_dir);
     return buf;
   }
 
-  if(!s_is_empty(xdg_dir)){
-    char *buf = malloc(sizeof(char)*255);
+  if (!s_is_empty(xdg_dir)) {
+    char *buf = malloc(sizeof(char) * 255);
     snprintf(buf, 255, "%s/cpak", xdg_dir);
     return buf;
   }
 
-  char* p = NULL;
+  char *p = NULL;
   p = malloc(sizeof(char) * 255);
   char *home = getenv("HOME");
   snprintf(p, 255, "%s/.config/cpak", home);
@@ -30,7 +30,7 @@ char* get_cpak_config_path(){
 }
 
 Config *get_config() {
-  char *path = malloc(sizeof(char)*255);
+  char *path = malloc(sizeof(char) * 255);
   char *config_path = get_cpak_config_path();
 
   snprintf(path, 255, "%s/cpak.conf", config_path);
@@ -152,7 +152,6 @@ Project_config *project_conf_get_config(char *path) {
       pc->amount_deps = i;
     };
   }
-
 
   fclose(file);
   return pc;

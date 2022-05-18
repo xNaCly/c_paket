@@ -6,6 +6,7 @@
 #include "cpak_config.h"
 #include "../cpak.h"
 
+
 void cpak_log(const char *str, Log_level log_level) {
   Config *c = get_config();
   int COLORS = c->colors;
