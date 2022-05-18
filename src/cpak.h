@@ -3,6 +3,7 @@
 
 #define CPAK_VERSION "alpha-0.0.1"
 
+
 typedef enum {
   INIT = 0,
   ADD,

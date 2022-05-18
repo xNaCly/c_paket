@@ -1,10 +1,8 @@
 #ifndef CPAK_CONFIG_H
 #define CPAK_CONFIG_H
 
-typedef struct {
-  int colors;
-  int storeModulesGlobal;
-} Config;
+extern int flag_colors;
+extern int flag_storeModulesGlobal;
 
 typedef struct {
   char *name;
@@ -16,12 +14,10 @@ typedef struct {
   int amount_deps;
 } Project_config;
 
-
 /*
  * @brief parses config at given path
- * @return Config pointer
  */
-Config *get_config();
+void get_config();
 
 /*
  * @brief parses project config at given path

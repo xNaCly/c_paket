@@ -3,7 +3,6 @@
 #include <string.h>
 #include <sys/stat.h>
 
-#include "../cpak.h"
 #include "cpak_config.h"
 #include "cpak_utils.h"
 
@@ -46,9 +45,7 @@ int conf_exists() {
 }
 
 void cpak_log(const char *str, Log_level log_level) {
-  Config *c = get_config();
-  int COLORS = c->colors;
-  if (COLORS) {
+  if (flag_colors) {
     switch (log_level) {
     case SUCCESS:
       printf("%s%ssuccess:%s %s\n", ANSI_COLOR_BLACK_FG, ANSI_COLOR_GREEN,
@@ -94,14 +91,14 @@ void cpak_log(const char *str, Log_level log_level) {
 
 void throw_error(const char *text, Errors error) {
   char error_text[sizeof(text) * 50];
-  sprintf(error_text, "%s, err: %d\n", text, error);
+  sprintf(error_text, "%s, err: %d", text, error);
   cpak_log(error_text, ERROR);
   exit(EXIT_FAILURE);
 }
 
 void throw_warning(const char *text, Errors error) {
   char error_text[sizeof(text) * 50];
-  sprintf(error_text, "%s, err: %d\n", text, error);
+  sprintf(error_text, "%s, err: %d", text, error);
   cpak_log(error_text, WARN);
 }
 

@@ -5,20 +5,20 @@
 #include "cpak_config.h"
 #include "cpak_utils.h"
 
+int flag_colors = 1;
+int flag_storeModulesGlobal = 1;
 
-Config *get_config() {
-  char *path = malloc(sizeof(char) * 510);
+void get_config() {
+  char *path = malloc(sizeof(char) * 256);
   char *config_path = get_cpak_config_path();
 
-  snprintf(path, 510, "%s/cpak.conf", config_path);
+  snprintf(path, 256, "%s/cpak.conf", config_path);
   free(config_path);
 
-  Config *c;
-  c = (Config *)malloc(sizeof *c);
   FILE *file = fopen(path, "r");
 
   if (s_is_empty(path) || file == NULL) {
-    throw_error("Can't read or find cpak config", CONF_MISSING_CONFIG);
+    return;
   }
 
   char cur_line[1024];
@@ -32,9 +32,9 @@ Config *get_config() {
       char temp[1024 * 4];
       sscanf(cur_line, "colors=%1024s\n", temp);
       if (s_is_equal(temp, "true")) {
-        c->colors = 1;
+        flag_colors = 1;
       } else if (s_is_equal(temp, "false")) {
-        c->colors = 0;
+        flag_colors = 0;
       } else {
         cur_line[strlen(cur_line) - 1] = '\0';
         sprintf(temp, "'%s' is not a known value for key: 'color'", cur_line);
@@ -45,9 +45,9 @@ Config *get_config() {
       char temp[1024 * 4];
       sscanf(cur_line, "storeModulesGlobal=%255s\n", temp);
       if (s_is_equal(temp, "true")) {
-        c->storeModulesGlobal = 1;
+        flag_storeModulesGlobal = 1;
       } else if (s_is_equal(temp, "false")) {
-        c->storeModulesGlobal = 0;
+        flag_storeModulesGlobal = 0;
       } else {
         sprintf(temp, "'%s' is not a known value for key: 'color'", cur_line);
         throw_warning(temp, CONF_UNKNOWN_VALUE);
@@ -62,8 +62,6 @@ Config *get_config() {
   }
   free(path);
   fclose(file);
-
-  return c;
 }
 
 void project_conf_destroy(Project_config *conf) {

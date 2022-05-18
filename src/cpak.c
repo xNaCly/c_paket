@@ -2,13 +2,14 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "./core/cpak_utils.h"
 #include "./core/cpak_cli.h"
+#include "./core/cpak_config.h"
+#include "./core/cpak_utils.h"
 #include "cpak.h"
 
-void help_wrapper(){
-    printf("cpak-%s\n", CPAK_VERSION);
-    c_help("all");
+void help_wrapper() {
+  printf("cpak-%s\n", CPAK_VERSION);
+  c_help("all");
 }
 
 Cli_arguments *parse_arguments(int arguments_amount, char **arguments) {
@@ -21,7 +22,7 @@ Cli_arguments *parse_arguments(int arguments_amount, char **arguments) {
   }
   char *cmd = arguments[1];
 
-  if (s_is_equal(cmd, "help")|| s_is_equal(cmd, "h")) {
+  if (s_is_equal(cmd, "help") || s_is_equal(cmd, "h")) {
     ca->cmd = HELP;
   } else if (s_is_equal(cmd, "bootstrap") || s_is_equal(cmd, "b")) {
     ca->cmd = BOOTSTRAP;
@@ -45,9 +46,10 @@ Cli_arguments *parse_arguments(int arguments_amount, char **arguments) {
       ca->c_cmd = arguments[2];
     } else {
       ca->c_cmd = "";
-      //throw_error("Not enough arguments, use help <command> to view in-depth "
-      //            "information about <command>",
-      //            NOT_ENOUGH_ARGUMENTS);
+      // throw_error("Not enough arguments, use help <command> to view in-depth
+      // "
+      //             "information about <command>",
+      //             NOT_ENOUGH_ARGUMENTS);
     }
   }
 
@@ -56,9 +58,11 @@ Cli_arguments *parse_arguments(int arguments_amount, char **arguments) {
 
 int main(int argc, char *argv[]) {
   int does_conf_exists = conf_exists();
-  if(!does_conf_exists)
-    throw_error("can't find cpak config file", CONF_MISSING_CONFIG);
-
+  if (!does_conf_exists)
+    throw_warning("can't find cpak's config file, consider generating the "
+                  "default config using: 'cpak config'",
+                  CONF_MISSING_CONFIG);
+  get_config();
   Cli_arguments *arg = parse_arguments(argc, argv);
 
   switch (arg->cmd) {
@@ -66,7 +70,7 @@ int main(int argc, char *argv[]) {
     cpak_log("BOOTSTRAP!", DEBUG);
     break;
   case INIT:
-    if(!s_is_empty(arg->c_cmd)){
+    if (!s_is_empty(arg->c_cmd)) {
       c_init(arg->c_cmd);
     } else {
       throw_warning("Not enough Arguments providen", NOT_ENOUGH_ARGUMENTS);
@@ -90,7 +94,7 @@ int main(int argc, char *argv[]) {
     exit(EXIT_FAILURE);
     break;
   case HELP:
-    if(!s_is_empty(arg->c_cmd)){
+    if (!s_is_empty(arg->c_cmd)) {
       c_help(arg->c_cmd);
     } else {
       help_wrapper();
