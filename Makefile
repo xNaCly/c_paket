@@ -18,7 +18,7 @@ OUT_NAME := cpak
 
 FILES := $(shell find $(SRC_DIR) -name "*.c") 
 CORE_FILES := $(shell find $(SRC_DIR)/core -name "*.c") 
-COMPILE := $(FLAGS) $(FILES) -lm -o 
+COMPILE := $(FLAGS) $(FILES) -o 
 default: help
 
 help:
@@ -70,7 +70,7 @@ run/prod: build/prod
 	$(PROD_DIR)/$(OUT_NAME)
 
 build: pre 
-	gcc -v $(COMPILE) $(BUILD_DIR)/$(OUT_NAME).dev
+	gcc $(COMPILE) $(BUILD_DIR)/$(OUT_NAME).dev
 
 build/unit: pre/test
 	gcc -g3 $(FLAGS) ./tests/t_unit.c $(CORE_FILES) -lm -o $(TEST_DIR)/t_unit.dev
