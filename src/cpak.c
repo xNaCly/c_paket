@@ -26,6 +26,8 @@ Cli_arguments *parse_arguments(int arguments_amount, char **arguments) {
     ca->cmd = HELP;
   } else if (s_is_equal(cmd, "bootstrap") || s_is_equal(cmd, "b")) {
     ca->cmd = BOOTSTRAP;
+  } else if (s_is_equal(cmd, "config") || s_is_equal(cmd, "c")) {
+    ca->cmd = CONFIG;
   } else if (s_is_equal(cmd, "init") || s_is_equal(cmd, "i")) {
     ca->cmd = INIT;
   } else if (s_is_equal(cmd, "add") || s_is_equal(cmd, "a")) {
@@ -76,6 +78,9 @@ int main(int argc, char *argv[]) {
       throw_warning("Not enough Arguments providen", NOT_ENOUGH_ARGUMENTS);
       c_help("init");
     }
+    break;
+  case CONFIG:
+    c_config();
     break;
   case ADD:
     cpak_log("ADD!", DEBUG);

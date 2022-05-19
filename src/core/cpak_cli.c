@@ -38,6 +38,8 @@ int c_help(char *command) {
     printf("%s", U_HELP);
   } else if (s_is_equal(command, "init")) {
     printf("%s", U_INIT);
+  } else if (s_is_equal(command, "config")) {
+    printf("%s", U_CONFIG);
   } else if (s_is_equal(command, "add")) {
     printf("%s", U_ADD);
   } else if (s_is_equal(command, "remove")) {
@@ -98,3 +100,7 @@ deps=\n",
 
   return EXIT_SUCCESS;
 }
+
+int c_config() { 
+  cpak_log("generate config here!", DEBUG);
+  return (EXIT_SUCCESS); }

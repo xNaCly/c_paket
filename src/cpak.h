@@ -12,6 +12,7 @@ typedef enum {
   BOOTSTRAP,
   VERSION,
   HELP,
+  CONFIG,
   UNDEF,
   UNKNOWN,
 } command;

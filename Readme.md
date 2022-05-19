@@ -58,7 +58,7 @@ Take a look at [Contributing](/CONTRIBUTING.md).
 ```sh
 git clone https://github.com/xnacly/c_paket
 cd c_paket
-make all
+make install
 cpak version
 ```
 This should print the following:
