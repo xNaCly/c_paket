@@ -5,7 +5,15 @@
 #include "../src/core/cpak_cli.h"
 #include "../src/core/cpak_utils.h"
 
-void t_init(){
+void t_config() {
+  cpak_log("running t_config", INFO);
+  int r_value = c_config();
+  assert(r_value == EXIT_SUCCESS && "config command failed");
+  cpak_log("config cmd worked!", SUCCESS);
+  cpak_log("ran t_config", INFO);
+}
+
+void t_init() {
   cpak_log("running t_init", INFO);
   int r_value = c_init("./tests/output");
   assert(r_value == EXIT_SUCCESS && "init command failed");
@@ -13,7 +21,7 @@ void t_init(){
   cpak_log("ran t_help", INFO);
 }
 
-void t_help(){
+void t_help() {
   cpak_log("running t_help", INFO);
   int r_value = c_help("all");
   assert(r_value == EXIT_SUCCESS && "help all command failed");
@@ -34,6 +42,7 @@ void t_template() {
 
 int main() {
   t_init();
+  t_config();
   t_template();
   t_help();
   return EXIT_SUCCESS;
