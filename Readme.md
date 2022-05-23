@@ -1,4 +1,6 @@
 # cpak 📦
+[![tests](https://github.com/xNaCly/c_paket/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/xNaCly/c_paket/actions/workflows/test.yml)
+
 fast and efficient package manager for the c programming language
 
 - [Features](#features)
