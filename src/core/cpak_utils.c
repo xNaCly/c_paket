@@ -77,14 +77,14 @@ void cpak_log(const char *str, Log_level log_level) {
                 printf("warning: %s\n", str);
                 break;
             case ERROR:
-                printf("error %s\n", str);
+                printf("error: %s\n", str);
                 break;
             case DEBUG:
-                printf("debug %s\n", str);
+                printf("debug: %s\n", str);
                 break;
             case INFO:
             default:
-                printf("info %s\n", str);
+                printf("info: %s\n", str);
         }
     }
 }
