@@ -77,14 +77,11 @@ Take a look at [Contributing](/CONTRIBUTING.md).
 git clone https://github.com/xnacly/c_paket
 cd c_paket
 make install
-cpak version
+cpak
 ```
 
 This should print the following:
-
-```
-info: cpak-alpha-0.0.1
-```
+![image](https://user-images.githubusercontent.com/47723417/170288034-02689782-a955-427c-b697-8abf3f4e8cbb.png)
 
 ### Commandline reference:
 
@@ -200,14 +197,12 @@ storeModulesGlobal=true
 #### Keys
 
 ##### Colors
+`color=true / false`
 
-`colors=true`
+![image](https://user-images.githubusercontent.com/47723417/170291260-4af97de4-a9c8-4c5f-a593-2fa44bdb2522.png)
 
-![image](https://user-images.githubusercontent.com/47723417/168904652-faacd878-6de2-4c0f-928a-6a6001f7347b.png)
 
-`colors=false`
 
-![image](https://user-images.githubusercontent.com/47723417/168905735-44d1d34a-4ccf-4c5d-bf06-feca85201b6b.png)
 
 #### Templates
 
