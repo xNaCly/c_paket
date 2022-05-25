@@ -164,35 +164,14 @@ Upgrades the specified module to the newest version
 The project config is a file found in a directory after `cpak init` was ran in it. The following shows a simple example
 what a `cpak_project.conf` file could look like:
 
-```bash
-# cpak config file
-
-# name of the project
-name=example_app
-# project description
-description=a very simple program
-# version of the project
-version=v0.0.1
-# author of the project
-author=https://github.com/xnacly
-# dependencies, separated by whitespace
-deps=xnacly/pgme xnacly/xc
-```
+![image](https://user-images.githubusercontent.com/47723417/170292569-e48f2c75-0798-40b1-88b8-f32932e7d7ff.png)
 
 ### Global configuration
 
 The default config file can be found after first run in `$XDG_CONFIG_HOME/cpak`. This config currently includes the
 following content:
 
-```bash
-# cpak global config
-
-# specify if the output of cpak should be colored
-colors=true
-
-# specify if the installed modules should be stored globaly or locally
-storeModulesGlobal=true
-```
+![image](https://user-images.githubusercontent.com/47723417/170292308-f04c81ee-459d-4d30-bde2-38016c98e8eb.png)
 
 #### Keys
 
