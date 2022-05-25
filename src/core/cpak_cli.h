@@ -44,6 +44,13 @@ List of commands:\n\
   "Version displays version.\n\n\
 \tversion\n\tv\n\nExample:\n\tcpak v\n"
 
+#define CONFIG_FILE \
+"#cpak global config\n\
+#specify if the output of cpak should be colored\n\
+colors=true\n\
+#specify if the installed modules should be stored globaly or locally\n\
+storeModulesGlobal=true\n"
+
 /*
  * @brief bootstraps a project in 'outdir' with the name 'template_name'
  * @param *template_name
