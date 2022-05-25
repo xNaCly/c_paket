@@ -68,9 +68,10 @@ int main(int argc, char *argv[]) {
     get_config();
 
     switch (arg->cmd) {
-        case BOOTSTRAP:
-            c_bootstrap(arg->c_cmd, ".");
-            break;
+        case BOOTSTRAP: {
+            int r = c_bootstrap(arg->c_cmd, ".");
+            return r;
+        }
         case INIT:
             if (!s_is_empty(arg->c_cmd)) {
                 c_init(arg->c_cmd);

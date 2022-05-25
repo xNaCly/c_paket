@@ -26,6 +26,11 @@ int c_bootstrap(char *template_name, char *outdir) {
     free(path);
     free(command);
 
+    if(r == EXIT_SUCCESS){
+      cpak_log("bootstraped template", SUCCESS);
+    } else {
+      cpak_log("bootstraping template failed", ERROR);
+    }
     return r;
 }
 
