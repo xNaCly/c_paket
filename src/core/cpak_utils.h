@@ -10,28 +10,30 @@
 #define ANSI_RESET "\x1b[0m"
 
 typedef enum {
-  // Argument is unknown to cpak
-  UNKNOWN_ARGUMENT = 1437,
-  // not enough arguments passed to cpak
-  NOT_ENOUGH_ARGUMENTS = 1438,
-  // cpak can't find your specifed template
-  TEMPLATE_MISSING = 1439,
-  // cpak can't find its config file
-  CONF_MISSING_CONFIG = 1440,
-  // cpak found an unknown key in its config file
-  CONF_UNKNOWN_KEY = 1441,
-  // cpak found an unknown value for a key in its config file
-  CONF_UNKNOWN_VALUE = 1442,
-  // cpak can't find a project config in the current directory
-  P_MISSING_CONFIG = 1443,
+    // Argument is unknown to cpak
+    UNKNOWN_ARGUMENT = 1437,
+    // not enough arguments passed to cpak
+    NOT_ENOUGH_ARGUMENTS = 1438,
+    // cpak can't find your specifed template
+    TEMPLATE_MISSING = 1439,
+    // cpak can't find its config file
+    CONF_MISSING_CONFIG = 1440,
+    // cpak's config already exists
+    CONF_EXISTS = 1441,
+    // cpak found an unknown key in its config file
+    CONF_UNKNOWN_KEY = 1442,
+    // cpak found an unknown value for a key in its config file
+    CONF_UNKNOWN_VALUE = 1443,
+    // cpak can't find a project config in the current directory
+    P_MISSING_CONFIG = 1444,
 } Errors;
 
 typedef enum {
-  INFO = 0,
-  SUCCESS,
-  WARN,
-  ERROR,
-  DEBUG,
+    INFO = 0,
+    SUCCESS,
+    WARN,
+    ERROR,
+    DEBUG,
 } Log_level;
 
 /*
