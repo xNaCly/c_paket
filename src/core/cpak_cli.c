@@ -90,10 +90,8 @@ deps=\n",
 
     fclose(file);
 
-    if (!t_flag)
-        cpak_log("Created 'cpak_project.conf'", INFO);
-
     if (!t_flag) {
+        cpak_log("Created 'cpak_project.conf'", INFO);
         int len = sizeof(char) * 1024;
         char *buf = malloc(len);
         snprintf(buf, len, "Initialised new Project in: %s", pwd);
