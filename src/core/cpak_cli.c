@@ -136,3 +136,25 @@ int c_config(int overwrite) {
     free(conf_file_path);
     return (EXIT_SUCCESS);
 }
+
+int c_add(char *module){
+// checks if git is installed via checking installation path and redirecting the output to dev null
+  int git_exists = system("which git > /dev/null 2>&1");
+  char *command = malloc(sizeof(char) * 1024);
+
+  if(git_exists != EXIT_SUCCESS) {
+    free(command);
+    throw_error("Couldn't install module using git, please verify git is installed", -1);
+  }
+
+  snprintf(command, 255, "git clone %s%s cpak_modules/%s > /dev/null 2>&1", VSC_PREFIX, module, module);
+  int feedback = system(command);
+  free(command);
+
+  if(feedback != EXIT_SUCCESS){
+      throw_error("Couldn't install module using git, check if the module can be found at the given url", -1);
+  }
+
+  cpak_log("Installed module", SUCCESS);
+  return EXIT_SUCCESS;
+}

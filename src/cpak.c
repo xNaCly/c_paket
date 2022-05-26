@@ -11,9 +11,7 @@ void help_wrapper() {
     printf("cpak-%s\n", CPAK_VERSION);
     c_help("all");
 }
-
-Cli_arguments *parse_arguments(int arguments_amount, char **arguments) {
-    Cli_arguments *ca;
+Cli_arguments *parse_arguments(int arguments_amount, char **arguments) { Cli_arguments *ca;
     ca = malloc(sizeof(*ca));
     ca->c_cmd = malloc(sizeof(arguments[2]));
 
@@ -82,7 +80,7 @@ int main(int argc, char *argv[]) {
             break;
         }
         case ADD:
-            cpak_log("ADD!", DEBUG);
+            c_add(arg->c_cmd);
             break;
         case REMOVE:
             cpak_log("REMOVE!", DEBUG);

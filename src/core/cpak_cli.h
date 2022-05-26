@@ -80,4 +80,10 @@ int c_init(char *outdir);
  */
 int c_config();
 
+/*
+ * @brief adds a new dependency to the project
+ * @returns EXIT_SUCCESS or EXIT_FAILURE
+ */
+int c_add(char *module);
+
 #endif

@@ -1,8 +1,11 @@
 #ifndef CPAK_CONFIG_H
 #define CPAK_CONFIG_H
 
+#define VSC_PREFIX "https://github.com/"
+
 extern int flag_colors;
 extern int flag_storeModulesGlobal;
+
 
 typedef struct {
   char *name;

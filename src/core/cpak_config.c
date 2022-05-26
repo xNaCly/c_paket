@@ -115,7 +115,7 @@ Project_config *project_conf_get_config(char *path) {
       sscanf(cur_line, "version=%1024s\n", pc->version);
       continue;
     } else if (s_starts_with(cur_line, "deps=")) {
-      sscanf(cur_line, "deps=%1024[^\n]", cur_line);
+      sscanf(cur_line, "deps=%1023[^\n]", cur_line);
       char *ptr = strtok(cur_line, " ");
       int i = 0;
       while (ptr != NULL) {
@@ -131,3 +131,4 @@ Project_config *project_conf_get_config(char *path) {
   fclose(file);
   return pc;
 }
+
