@@ -11,6 +11,7 @@ FLAGS := -fdiagnostics-color=always  \
 SRC_DIR := ./src
 BUILD_DIR := ./dist
 DEBUG_DIR := $(BUILD_DIR)/debug
+DEV_DIR := $(BUILD_DIR)/dev
 TEST_DIR := $(BUILD_DIR)/test
 PROD_DIR := $(BUILD_DIR)/prod
 
@@ -38,7 +39,7 @@ help:
 
 ## Build dev and run  
 all: build
-	$(BUILD_DIR)/$(OUT_NAME).dev $(cmd)
+	$(DEV_DIR)/$(OUT_NAME).dev $(cmd)
 
 ## install cpak
 install: build/prod
@@ -69,8 +70,8 @@ run/debug: build/debug
 run/prod: build/prod
 	$(PROD_DIR)/$(OUT_NAME)
 
-build: pre 
-	gcc $(COMPILE) $(BUILD_DIR)/$(OUT_NAME).dev
+build: pre/dev
+	gcc $(COMPILE) $(DEV_DIR)/$(OUT_NAME).dev
 
 build/unit: pre/test
 	gcc -g3 $(FLAGS) ./tests/t_unit.c $(CORE_FILES) -lm -o $(TEST_DIR)/t_unit.dev
@@ -84,8 +85,8 @@ build/debug: pre/debug
 build/prod: pre/prod
 	gcc -O3 $(COMPILE) $(PROD_DIR)/$(OUT_NAME)
 
-pre: 
-	mkdir -p $(BUILD_DIR)
+pre/dev:
+	mkdir -p $(DEV_DIR)
 
 pre/debug:
 	mkdir -p $(DEBUG_DIR)
@@ -96,6 +97,7 @@ pre/test:
 
 pre/prod:
 	mkdir -p $(PROD_DIR)
+
 
 ## Clean dir up
 clean:
