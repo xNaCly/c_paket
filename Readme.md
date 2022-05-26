@@ -83,6 +83,43 @@ cpak
 This should print the following:
 ![image](https://user-images.githubusercontent.com/47723417/170288034-02689782-a955-427c-b697-8abf3f4e8cbb.png)
 
+### Building a project with a dependency
+1. Add a dependency to your project:
+
+```sh
+cpak add xnacly/saltyutils
+```
+
+2. Create a C file:
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include "../cpak_modules/salty_utils/xutils.h"
+
+int main(void){
+    char *str1 = "Hello World";
+    char *str2 = "Hello World";
+
+    if(s_is_equal(str1, str2)){
+        printf("String 'str1' and 'str2' are equal!\n");
+    }
+
+    return EXIT_SUCCESS;
+}
+```
+
+3. Add the installed dependency to your build tool chain by passing all c source files in the module folder to the compiler like so:
+```bash
+gcc cpak_modules/**.c ./main.c -o ./main.out
+```
+A better alternative is to specify only the included headers and sources by just passing it to the compiler:
+```bash
+gcc cpak_modules/salty_utils/xutils.c ./main.c -o ./main.out
+```
+
+> A better way of handling this is currently in development!
+
+
 ### Command line reference:
 
 #### Version
