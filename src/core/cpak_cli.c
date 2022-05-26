@@ -67,7 +67,7 @@ int c_init(char *outdir) {
         cpak_log("Initialising new Project", INFO);
     char *file_name = "cpak_project.conf";
     char *file_path = malloc(sizeof(char) * 255);
-    char *description = malloc(sizeof(char) * 255);
+    char *description = "";
     char *version = "v0.0.1";
     char *author = s_is_empty(getenv("USER")) ? "anon" : getenv("USER");
     char *pwd = s_is_empty(getenv("PWD")) ? "anon" : getenv("PWD");
@@ -92,8 +92,6 @@ deps=\n",
 
     if (!t_flag)
         cpak_log("Created 'cpak_project.conf'", INFO);
-
-    free(description);
 
     if (!t_flag) {
         int len = sizeof(char) * 1024;
@@ -122,7 +120,10 @@ int c_config(int overwrite) {
     sprintf(command, "mkdir -p %s", path);
     snprintf(conf_file_path, 255, "%s/cpak.conf", path);
 
-    system(command);
+    int r = system(command);
+    if(r != EXIT_SUCCESS){
+        throw_warning("Couldn't create cpak folder in config directory", -1);
+    }
 
     FILE *file = fopen(conf_file_path, "w");
 

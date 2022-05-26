@@ -15,6 +15,7 @@ void help_wrapper() {
 Cli_arguments *parse_arguments(int arguments_amount, char **arguments) {
     Cli_arguments *ca;
     ca = malloc(sizeof(*ca));
+    ca->c_cmd = malloc(sizeof(arguments[2]));
 
     if (arguments_amount == 1) {
         ca->cmd = UNDEF;
@@ -44,14 +45,7 @@ Cli_arguments *parse_arguments(int arguments_amount, char **arguments) {
 
     if (ca->cmd != VERSION) {
         if (arguments_amount >= 2) {
-            ca->c_cmd = malloc(sizeof(arguments[2]));
             ca->c_cmd = arguments[2];
-        } else {
-            ca->c_cmd = "";
-            // throw_error("Not enough arguments, use help <command> to view in-depth
-            // "
-            //             "information about <command>",
-            //             NOT_ENOUGH_ARGUMENTS);
         }
     }
 
@@ -68,10 +62,9 @@ int main(int argc, char *argv[]) {
     get_config();
 
     switch (arg->cmd) {
-        case BOOTSTRAP: {
-            int r = c_bootstrap(arg->c_cmd, ".");
-            return r;
-        }
+        case BOOTSTRAP:
+            c_bootstrap(arg->c_cmd, ".");
+            break;
         case INIT:
             if (!s_is_empty(arg->c_cmd)) {
                 c_init(arg->c_cmd);
@@ -98,8 +91,8 @@ int main(int argc, char *argv[]) {
             cpak_log("UPGRADE!", DEBUG);
             break;
         case VERSION:
-            cpak_log("cpak-" CPAK_VERSION, INFO);
-            exit(EXIT_SUCCESS);
+            cpak_log("cpak_" CPAK_VERSION, INFO);
+            break;
         case UNDEF:
             throw_warning("Not enough Arguments providen", NOT_ENOUGH_ARGUMENTS);
             help_wrapper();
@@ -120,5 +113,6 @@ int main(int argc, char *argv[]) {
             break;
     }
 
+    free(arg->c_cmd);
     free(arg);
 }
