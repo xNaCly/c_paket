@@ -2,7 +2,7 @@
 
 [![tests](https://github.com/xNaCly/c_paket/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/xNaCly/c_paket/actions/workflows/test.yml)
 
-fast and efficient package manager for the c programming language
+Fast and efficient package manager for the c programming language
 
 -   [Features](#features)
 -   [FAQ](#faq)
@@ -52,12 +52,12 @@ nuances.
 
 ### How do you handle modules?
 
-Cpak installs modules globaly, therefore all modules are stored in `$XDG_CONTENT_HOME/cpak` and are softlinked to the
+Cpak installs modules globally, therefore all modules are stored in `$XDG_CONTENT_HOME/cpak` and are soft linked to the
 `cpak_modules` folder in the current cpak project. This has several positive effects on the developer experience:
 
 -   decreases load on the file system by not storing multiple versions of code in multiple places
 -   keeps dependencies up to date regardless of the project they are used in
--   makes dependecy managment easier for the developer
+-   makes dependency management easier for the developer
 
 ### How do I do 'x'?
 
@@ -83,7 +83,7 @@ cpak
 This should print the following:
 ![image](https://user-images.githubusercontent.com/47723417/170288034-02689782-a955-427c-b697-8abf3f4e8cbb.png)
 
-### Commandline reference:
+### Command line reference:
 
 #### Version
 
@@ -92,7 +92,7 @@ cpak version
 cpak v
 ```
 
-prints the version and exits
+Prints the version and exits
 
 #### Help
 
@@ -112,7 +112,7 @@ cpak config
 cpak c
 ```
 
-Generates the default config aswell as the default template in `$CPAK_CONFIG_HOME` or `$XDG_CONFIG_HOME`.
+Generates the default config as well as the default template in `$CPAK_CONFIG_HOME` or `$XDG_CONFIG_HOME`.
 
 #### Init
 
@@ -121,7 +121,7 @@ cpak init
 cpak i
 ```
 
-This command initalises a new cpak project, creates a `cpak_project.conf` file
+This command initialises a new cpak project, creates a `cpak_project.conf` file
 
 #### Bootstrap
 
@@ -139,7 +139,7 @@ cpak add <module>
 cpak a <module>
 ```
 
-Installs the specifed module and links to its source in `$PWD/cpak_modules`
+Installs the specified module and links to its source in `$PWD/cpak_modules`
 
 #### Remove
 
@@ -148,7 +148,7 @@ cpak remove <module>
 cpak r <module>
 ```
 
-Uninstalls the specifed module and removes the link to its source from `$PWD/cpak_modules`
+Uninstalls the specified module and removes the link to its source from `$PWD/cpak_modules`
 
 #### Upgrade
 
@@ -194,7 +194,7 @@ To use templates and boostrap new project use the `cpak bootstrap <template_name
 └── Makefile
 ```
 
-The contents of the bootstraped project is specifed in `$XDG_CONFIG_HOME/cpak/templates/<template_name>`. To use custom
+The contents of the bootstraped project is specified in `$XDG_CONFIG_HOME/cpak/templates/<template_name>`. To use custom
 templates simply create a new folder with your template including files you want in your template. For reference view
 the `default` template in the above mentioned directory.
 
@@ -205,9 +205,9 @@ warning: <error_description>, err: <error_code>
 error: <warning_description>, err: <error_code>
 ```
 
-#### Specific Errorcodes and their meaning:
+#### Specific Error codes and their meaning:
 
-Do not expect this section to be up to date with the source code, if you want to view the current errorcodes take a look
+Do not expect this section to be up to date with the source code, if you want to view the current error codes take a look
 at [core/cpak_utils.h]()
 
 ```c
