@@ -145,6 +145,7 @@ int c_add(char *module){
   if(git_exists != EXIT_SUCCESS) {
     free(command);
     throw_error("Couldn't install module using git, please verify git is installed", -1);
+    return EXIT_FAILURE;
   }
 
   snprintf(command, 255, "git clone %s%s cpak_modules/%s > /dev/null 2>&1", VSC_PREFIX, module, module);
