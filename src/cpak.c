@@ -114,5 +114,8 @@ int main(int argc, char *argv[]) {
     }
 
     free(arg->c_cmd);
+    int cmd = arg->cmd;
     free(arg);
+    if(cmd == UNDEF || cmd == UNKNOWN ) return EXIT_FAILURE;
+    return EXIT_SUCCESS;
 }
