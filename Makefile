@@ -6,6 +6,8 @@ FLAGS := -fdiagnostics-color=always  \
 									 -Werror \
 									 -Wshadow \
 									 -Wundef \
+									 -I./lib/libgit2-1.4.3/include\
+									 -lgit2 \
 									 -fno-common
 
 SRC_DIR := ./src
@@ -74,13 +76,13 @@ build: pre/dev
 	gcc $(COMPILE) $(DEV_DIR)/$(OUT_NAME).dev
 
 build/unit: pre/test
-	gcc -g3 $(FLAGS) ./tests/t_unit.c $(CORE_FILES) -lm -o $(TEST_DIR)/t_unit.dev
+	gcc -g3 $(FLAGS) ./tests/t_unit.c $(CORE_FILES) -o $(TEST_DIR)/t_unit.dev
 
 build/cli: pre/test
-	gcc -g3 $(FLAGS) ./tests/t_cli.c $(CORE_FILES) -lm -o $(TEST_DIR)/t_cli.dev
+	gcc -g3 $(FLAGS) ./tests/t_cli.c $(CORE_FILES) -o $(TEST_DIR)/t_cli.dev
 
 build/debug: pre/debug
-	gcc -g3 $(COMPILE) $(DEBUG_DIR)/$(OUT_NAME).debug
+	gcc -g3 $(COMPILE) $(DEBUG_DIR)/$(OUT_NAME).debug 
 
 build/prod: pre/prod
 	gcc -O3 $(COMPILE) $(PROD_DIR)/$(OUT_NAME)
