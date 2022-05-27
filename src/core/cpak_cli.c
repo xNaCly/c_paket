@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../../libs/libgit2/include/git2.h"
+#include "../../cpak_modules/libgit2/include/git2.h"
 
 #include "cpak_cli.h"
 #include "cpak_config.h"
@@ -19,7 +19,8 @@ int c_bootstrap(char *template_name, char *outdir) {
     }
 
     char *command = malloc(sizeof(char) * 510);
-    sprintf(command, "cp -r %s/* %s", template_path, outdir);
+    sprintf(command, "cp -r %s/. %s", template_path, outdir);
+    printf("test: %s", command);
 
     int r = system(command);
 
@@ -113,10 +114,11 @@ int c_config(int overwrite) {
 
     char *path = get_cpak_config_path();
     char *conf_file_path = malloc(sizeof(char) * 255);
+    char *template_file_path = malloc(sizeof(char) * 255);
     char *command = malloc(sizeof(char) * 1042);
 
 
-    sprintf(command, "mkdir -p %s", path);
+    sprintf(command, "mkdir -p %s/templates/default", path);
     snprintf(conf_file_path, 255, "%s/cpak.conf", path);
 
     int r = system(command);
@@ -124,21 +126,34 @@ int c_config(int overwrite) {
         throw_warning("Couldn't create cpak folder in config directory", -1);
     }
 
-    FILE *file = fopen(conf_file_path, "w");
+    FILE *config_FILE = fopen(conf_file_path, "w");
 
-    if (!file)
+    if (!config_FILE)
         throw_error("Couldn't open config directory", -1);
 
-    fprintf(file, "%s", CONFIG_FILE);
-    fclose(file);
+    fprintf(config_FILE, "%s", CONFIG_FILE);
+    fclose(config_FILE);
+
+    snprintf(template_file_path, 255, "%s/templates/default/.gitignore", path);
+    FILE *template_default_FILE = fopen(template_file_path, "w");
+
+    if (!template_default_FILE)
+        throw_error("Couldn't open template directory", -1);
+
+    fprintf(template_default_FILE, "%s", DEFAULT_TEMPLATE_GITIGNORE);
+    fclose(template_default_FILE);
 
     free(command);
     free(path);
     free(conf_file_path);
+    free(template_file_path);
     return (EXIT_SUCCESS);
 }
 
 int c_add(char *module){
+    // TODO: check if project config exists, otherwise call c_init
+    // TODO: write installed package to cpak config
+
     // extracting <repo> from input (<user>/<repo>)
     char *copy_module = malloc(sizeof(module));
     strcpy(copy_module, module);
@@ -164,7 +179,7 @@ int c_add(char *module){
         throw_error("Couldn't install module using git, please verify git is installed", -1);
         return EXIT_FAILURE;
     }
-    
+
     free(url);
 
     char *feedback = malloc(sizeof(char) * 1024);

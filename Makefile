@@ -6,7 +6,7 @@ FLAGS := -fdiagnostics-color=always  \
 									 -Werror \
 									 -Wshadow \
 									 -Wundef \
-									 -I./libs/libs/include\
+									 -I./cpak_modules/libgit2/include\
 									 -lgit2 \
 									 -fno-common
 
@@ -19,9 +19,9 @@ PROD_DIR := $(BUILD_DIR)/prod
 
 OUT_NAME := cpak
 
-FILES := $(shell find $(SRC_DIR) -name "*.c") 
-CORE_FILES := $(shell find $(SRC_DIR)/core -name "*.c") 
-COMPILE := $(FLAGS) $(FILES) -o 
+FILES := $(shell find $(SRC_DIR) -name "*.c")
+CORE_FILES := $(shell find $(SRC_DIR)/core -name "*.c")
+COMPILE := $(FLAGS) $(FILES) -o
 default: help
 
 help:
@@ -39,7 +39,7 @@ help:
 			{ lastLine = $$0 }' $(MAKEFILE_LIST) | sort -u
 			@printf "\n"
 
-## Build dev and run  
+## Build dev and run
 all: build
 	$(DEV_DIR)/$(OUT_NAME).dev $(cmd)
 
@@ -82,7 +82,7 @@ build/cli: pre/test
 	gcc -g3 $(FLAGS) ./tests/t_cli.c $(CORE_FILES) -o $(TEST_DIR)/t_cli.dev
 
 build/debug: pre/debug
-	gcc -g3 $(COMPILE) $(DEBUG_DIR)/$(OUT_NAME).debug 
+	gcc -g3 $(COMPILE) $(DEBUG_DIR)/$(OUT_NAME).debug
 
 build/prod: pre/prod
 	gcc -O3 $(COMPILE) $(PROD_DIR)/$(OUT_NAME)

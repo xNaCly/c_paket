@@ -51,6 +51,10 @@ colors=true\n\
 #specify if the installed modules should be stored globaly or locally\n\
 storeModulesGlobal=true\n"
 
+#define DEFAULT_TEMPLATE_GITIGNORE \
+"#cpak specific\n\
+cpak_modules"
+
 /*
  * @brief bootstraps a project in 'outdir' with the name 'template_name'
  * @param *template_name
