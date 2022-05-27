@@ -10,18 +10,24 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    - name: install libgit2
+      run: sudo apt install libgit2-dev
     - uses: actions/checkout@v3
     - name: test/build
       run: make build
   unit:
     runs-on: ubuntu-latest
     steps:
+    - name: install libgit2
+      run: sudo apt install libgit2-dev
     - uses: actions/checkout@v3
     - name: test/unit
       run: make test/unit
   cli:
     runs-on: ubuntu-latest
     steps:
+    - name: install libgit2
+      run: sudo apt install libgit2-dev
     - uses: actions/checkout@v3
     - name: test/cli
       run: make test/cli

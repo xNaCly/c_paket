@@ -6,8 +6,7 @@ FLAGS := -fdiagnostics-color=always  \
 									 -Werror \
 									 -Wshadow \
 									 -Wundef \
-									 -I./cpak_modules/libgit2/include\
-									 -lgit2 \
+									 -lgit2\
 									 -fno-common
 
 SRC_DIR := ./src
@@ -91,7 +90,6 @@ pre/debug:
 	mkdir -p $(DEBUG_DIR)
 
 pre/test:
-	./bin/cpak a libgit2/libgit2
 	mkdir -p ./tests/output
 	mkdir -p $(TEST_DIR)
 
