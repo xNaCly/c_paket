@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <git2.h>
+#include "../../libs/libgit2/include/git2.h"
 
 #include "cpak_cli.h"
 #include "cpak_config.h"
