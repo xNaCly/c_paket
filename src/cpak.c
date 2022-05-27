@@ -51,6 +51,7 @@ Cli_arguments *parse_arguments(int arguments_amount, char **arguments) { Cli_arg
 }
 
 int main(int argc, char *argv[]) {
+    int feedback = EXIT_FAILURE;
     int does_conf_exists = conf_exists();
     Cli_arguments *arg = parse_arguments(argc, argv);
     if (!does_conf_exists && arg->cmd != CONFIG)
@@ -61,11 +62,11 @@ int main(int argc, char *argv[]) {
 
     switch (arg->cmd) {
         case BOOTSTRAP:
-            c_bootstrap(arg->c_cmd, ".");
+            feedback = c_bootstrap(arg->c_cmd, ".");
             break;
         case INIT:
             if (!s_is_empty(arg->c_cmd)) {
-                c_init(arg->c_cmd);
+                feedback = c_init(arg->c_cmd);
             } else {
                 throw_warning("Not enough Arguments providen", NOT_ENOUGH_ARGUMENTS);
                 c_help("init");
@@ -76,12 +77,16 @@ int main(int argc, char *argv[]) {
             if (!s_is_empty(arg->c_cmd) && s_is_equal(arg->c_cmd, "override")) {
                 o = 1;
             }
-            c_config(o);
+            feedback = c_config(o);
             break;
         }
-        case ADD:
-            c_add(arg->c_cmd);
+        case ADD:{
+         if(s_is_empty(arg->c_cmd)){
+             throw_error("Please specify a module to install", -1);
+         }
+            feedback = c_add(arg->c_cmd);
             break;
+        }
         case REMOVE:
             cpak_log("REMOVE!", DEBUG);
             break;
@@ -101,6 +106,7 @@ int main(int argc, char *argv[]) {
             } else {
                 help_wrapper();
             }
+            feedback = EXIT_SUCCESS;
             break;
         case UNKNOWN:
             throw_warning("Unknown Argument", UNKNOWN_ARGUMENT);
@@ -111,9 +117,6 @@ int main(int argc, char *argv[]) {
             break;
     }
 
-    free(arg->c_cmd);
-    int cmd = arg->cmd;
     free(arg);
-    if(cmd == UNDEF || cmd == UNKNOWN ) return EXIT_FAILURE;
-    return EXIT_SUCCESS;
+    return feedback;
 }

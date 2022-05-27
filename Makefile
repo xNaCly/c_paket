@@ -6,7 +6,7 @@ FLAGS := -fdiagnostics-color=always  \
 									 -Werror \
 									 -Wshadow \
 									 -Wundef \
-									 -I./lib/libgit2-1.4.3/include\
+									 -I./libs/libs/include\
 									 -lgit2 \
 									 -fno-common
 

@@ -98,6 +98,11 @@ int s_is_empty(const char *str);
 int s_starts_with(const char *str, const char *start);
 
 /**
+ * splits the given string into an array, returns the string at index 0 if delimiter wasn't found
+ */
+char** s_split(char *str, char *delimiter);
+
+/**
  * logging utility
  * @param str
  * @param log_level

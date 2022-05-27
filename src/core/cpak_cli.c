@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <git2.h>
 
 #include "cpak_cli.h"
 #include "cpak_config.h"
@@ -138,24 +139,42 @@ int c_config(int overwrite) {
 }
 
 int c_add(char *module){
-// checks if git is installed via checking installation path and redirecting the output to dev null
-  int git_exists = system("which git > /dev/null 2>&1");
-  char *command = malloc(sizeof(char) * 1024);
+    // extracting <repo> from input (<user>/<repo>)
+    char *copy_module = malloc(sizeof(module));
+    strcpy(copy_module, module);
+    char *module_name = strtok(copy_module, "/");
+    module_name = strtok(NULL, "\0");
 
-  if(git_exists != EXIT_SUCCESS) {
-    free(command);
-    throw_error("Couldn't install module using git, please verify git is installed", -1);
-    return EXIT_FAILURE;
-  }
+    git_libgit2_init();
+    git_repository *repo = NULL;
+    char *cmd = "mkdir -p ./cpak_modules";
+    char *url = malloc(sizeof(char) * 1024);
+    char *path = malloc(sizeof(char) * 1024);
 
-  snprintf(command, 255, "git clone %s%s cpak_modules/%s > /dev/null 2>&1", VSC_PREFIX, module, module);
-  int feedback = system(command);
-  free(command);
+    int created = system(cmd);
+    if(created != EXIT_SUCCESS) throw_error("Couldn't create modules directory, please check your permissions config", -1);
 
-  if(feedback != EXIT_SUCCESS){
-      throw_error("Couldn't install module using git, check if the module can be found at the given url", -1);
-  }
+    snprintf(url, 1024, "%s%s", VSC_PREFIX, module);
+    snprintf(path, 1024, "./cpak_modules/%s", module_name);
+    free(copy_module);
 
-  cpak_log("Installed module", SUCCESS);
-  return EXIT_SUCCESS;
+    int error = git_clone(&repo, url, path, NULL);
+
+    if(error != EXIT_SUCCESS) {
+        throw_error("Couldn't install module using git, please verify git is installed", -1);
+        return EXIT_FAILURE;
+    }
+    
+    free(url);
+
+    char *feedback = malloc(sizeof(char) * 1024);
+    snprintf(feedback, 1024, "Installed module '%s' in %s", module, path);
+    free(path);
+
+    cpak_log(feedback, SUCCESS);
+
+    free(feedback);
+
+    git_libgit2_shutdown();
+    return EXIT_SUCCESS;
 }
