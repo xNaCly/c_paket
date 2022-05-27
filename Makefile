@@ -51,9 +51,6 @@ install: build/prod
 uninstall:
 	sudo rm /usr/local/bin/$(OUT_NAME)
 
-test/lint:
-	cppcheck --enable=all --error-exitcode=1 src/** --suppress=unusedFunction
-
 ## Build and run unit tests
 test/unit: build/unit
 	export CPAK_TESTING=true && export CPAK_CONFIG_HOME="$(PWD)/tests/example_config" && \
@@ -94,6 +91,7 @@ pre/debug:
 	mkdir -p $(DEBUG_DIR)
 
 pre/test:
+	./bin/cpak a libgit2/libgit2
 	mkdir -p ./tests/output
 	mkdir -p $(TEST_DIR)
 

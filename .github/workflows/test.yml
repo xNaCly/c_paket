@@ -7,14 +7,6 @@ on:
     branches: [ master ]
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: install cppcheck
-      run: sudo apt install cppcheck
-    - name: run lint
-      run: make test/lint
   build:
     runs-on: ubuntu-latest
     steps:
