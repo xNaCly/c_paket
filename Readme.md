@@ -22,7 +22,6 @@ Fast and efficient package manager for the c programming language
         -   [Add](#add)
         -   [Remove](#remove)
         -   [Upgrade](#upgrade)
-    -   [Project config](#project-config)
     -   [Global Configuration](#global-configuration)
         -   [Keys](#keys)
             -   [Colors](#colors)
@@ -87,14 +86,14 @@ This should print the following:
 1. Add a dependency to your project:
 
 ```sh
-cpak add xnacly/saltyutils
+cpak add xnacly/xutils
 ```
 
 2. Create a C file:
 ```c
 #include <stdio.h>
 #include <stdlib.h>
-#include "../cpak_modules/salty_utils/xutils.h"
+#include "../cpak_modules/xutils/xutil.h"
 
 int main(void){
     char *str1 = "Hello World";
@@ -196,12 +195,6 @@ cpak u <module>
 
 Upgrades the specified module to the newest version
 
-### Project Config:
-
-The project config is a file found in a directory after `cpak init` was ran in it. The following shows a simple example
-what a `cpak_project.conf` file could look like:
-
-![image](https://user-images.githubusercontent.com/47723417/170292569-e48f2c75-0798-40b1-88b8-f32932e7d7ff.png)
 
 ### Global configuration
 
