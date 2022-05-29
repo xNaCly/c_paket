@@ -17,7 +17,6 @@ Fast and efficient package manager for the c programming language
         -   [Version](#version)
         -   [Help](#help)
         -   [Config](#config)
-        -   [Init](#init)
         -   [Boostrap](#bootstrap)
         -   [Add](#add)
         -   [Remove](#remove)
@@ -113,7 +112,7 @@ gcc cpak_modules/**.c ./main.c -o ./main.out
 ```
 A better alternative is to specify only the included headers and sources by just passing it to the compiler:
 ```bash
-gcc cpak_modules/salty_utils/xutils.c ./main.c -o ./main.out
+gcc cpak_modules/xutils/xutil.c ./main.c -o ./main.out
 ```
 
 > A better way of handling this is currently in development!
@@ -150,14 +149,6 @@ cpak c
 
 Generates the default config as well as the default template in `$CPAK_CONFIG_HOME` or `$XDG_CONFIG_HOME`.
 
-#### Init
-
-```bash
-cpak init
-cpak i
-```
-
-This command initialises a new cpak project, creates a `cpak_project.conf` file
 
 #### Bootstrap
 
