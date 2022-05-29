@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <git2.h>
 
 #include "cpak_cli.h"
 #include "cpak_config.h"
@@ -151,8 +150,15 @@ int c_config(int overwrite) {
 }
 
 int c_add(char *module){
+    // TODO: create custom error codes
     // TODO: check if project config exists, otherwise call c_init
     // TODO: write installed package to cpak config
+
+    // check if git is installed:
+    int is_git_installed = system("which git > /dev/null");
+    if(is_git_installed != EXIT_SUCCESS){
+        throw_error("Git can't be found on your system, please install it", -1);
+    }
 
     // extracting <repo> from input (<user>/<repo>)
     char *copy_module = malloc(sizeof(module));
@@ -160,36 +166,61 @@ int c_add(char *module){
     char *module_name = strtok(copy_module, "/");
     module_name = strtok(NULL, "\0");
 
-    git_libgit2_init();
-    git_repository *repo = NULL;
     char *cmd = "mkdir -p ./cpak_modules";
     char *url = malloc(sizeof(char) * 1024);
-    char *path = malloc(sizeof(char) * 1024);
+    char *command = malloc(sizeof(char)*1024);
+
 
     int created = system(cmd);
     if(created != EXIT_SUCCESS) throw_error("Couldn't create modules directory, please check your permissions config", -1);
 
     snprintf(url, 1024, "%s%s", VSC_PREFIX, module);
-    snprintf(path, 1024, "./cpak_modules/%s", module_name);
-    free(copy_module);
+    snprintf(command, 1024, "git clone %s ./cpak_modules/%s", url, module_name);
 
-    int error = git_clone(&repo, url, path, NULL);
+    int error = system(command);
 
     if(error != EXIT_SUCCESS) {
+        char *path = malloc(sizeof(char)*255);
+        snprintf(path, 255, "./cpak_modules/%s", module_name);
+        if(f_exists(path)){
+            free(path);
+            throw_error("Module already installed", -1);
+        }
+        free(path);
         throw_error("Couldn't install module using git, please verify git is installed", -1);
         return EXIT_FAILURE;
     }
 
-    free(url);
-
     char *feedback = malloc(sizeof(char) * 1024);
-    snprintf(feedback, 1024, "Installed module '%s' in %s", module, path);
-    free(path);
-
+    snprintf(feedback, 1024, "Installed module '%s'", module);
     cpak_log(feedback, SUCCESS);
 
+    free(copy_module);
+    free(url);
+    free(command);
     free(feedback);
 
-    git_libgit2_shutdown();
+    return EXIT_SUCCESS;
+}
+
+int c_remove(char *module){
+    char *path = malloc(sizeof(char) * 255);
+
+    snprintf(path, 255, "./cpak_modules/%s", module);
+    if(!f_exists(path)){
+        free(path);
+        throw_error("Can't remove module - Module doesn't exist", -1);
+    }
+
+    char *cmd = malloc(sizeof(char) * 1024);
+    snprintf(cmd, 1024, "rm -rf %s", path);
+
+    int error = system(cmd);
+    if(error != EXIT_SUCCESS){
+        throw_error("Can't remove module", -1);
+    }
+
+    free(path);
+    free(cmd); 
     return EXIT_SUCCESS;
 }

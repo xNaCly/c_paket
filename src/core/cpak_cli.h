@@ -90,4 +90,10 @@ int c_config();
  */
 int c_add(char *module);
 
+/*
+ * @brief removes a dependency from the project
+ * @returns EXIT_SUCCESS or EXIT_FAILURE
+ */
+int c_remove(char *module);
+
 #endif

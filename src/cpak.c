@@ -81,15 +81,19 @@ int main(int argc, char *argv[]) {
             break;
         }
         case ADD:{
-         if(s_is_empty(arg->c_cmd)){
-             throw_error("Please specify a module to install", -1);
-         }
+             if(s_is_empty(arg->c_cmd)){
+                 throw_error("Please specify a module to install", -1);
+             }
             feedback = c_add(arg->c_cmd);
             break;
         }
-        case REMOVE:
-            cpak_log("REMOVE!", DEBUG);
+        case REMOVE:{
+             if(s_is_empty(arg->c_cmd)){
+                 throw_error("Please specify a module to install", -1);
+             }
+            feedback = c_remove(arg->c_cmd);
             break;
+        }
         case UPGRADE:
             cpak_log("UPGRADE!", DEBUG);
             break;
