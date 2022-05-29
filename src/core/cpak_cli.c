@@ -108,7 +108,7 @@ int c_config(int overwrite) {
     if (!overwrite) {
         int config_exists = conf_exists();
         if (config_exists)
-            throw_error("Cpak config exists, consider using the 'override' keyword to override the existing config",
+            throw_error("Cpak config exists, consider using the '-f' flag to override the existing config",
                         CONF_EXISTS);
     }
 

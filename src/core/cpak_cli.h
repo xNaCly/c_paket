@@ -22,7 +22,7 @@ List of commands:\n\
 
 #define U_CONFIG                                                               \
   "Generates the default config in '$XDG_CONFIG_HOME'.\n\n\
-\tconfig\n\tc\n\nExample:\n\tcpak c \n"
+\tconfig\n\tc\n\nExample:\n\tcpak c \n\nIf the config already exists, use the '-f' flag to override the current config, like so:\n\tcpak c -f\n"
 
 #define U_ADD                                                                  \
   "Add adds a new package to the project.\n\n\

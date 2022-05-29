@@ -76,7 +76,7 @@ int main(int argc, char *argv[]) {
             break;
         case CONFIG: {
             int o = 0;
-            if (!s_is_empty(arg->c_cmd) && s_is_equal(arg->c_cmd, "override")) {
+            if (!s_is_empty(arg->c_cmd) && s_is_equal(arg->c_cmd, "-f")) {
                 o = 1;
             }
             feedback = c_config(o);

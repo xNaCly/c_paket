@@ -1,0 +1,183 @@
+.TH CPAK 1 cpak-__VERSION__
+.SH NAME
+cpak - the fast and efficient package manager for the c programming language 
+.SH SYNOPSIS
+.B cpak
+.RI [ COMMAND ]
+.RI [ SUBCOMMAND | FLAG ]
+.P
+.SH DESCRIPTION
+Cpak makes it easy for the developer to manage packages for c projects,
+by allowing devs to store project dependencies globally or inside a project. 
+It also enables a templating and bootstraping toolkit. 
+Cpak features a extensive documentation and a very verbose logging system 
+to warn the users of malformatted config files and several other nuances.
+
+.TP
+.B version
+
+Show the program version.
+
+.TP
+.B help
+
+Verbose help for every command and subcommand available. 
+If no subcommand is given, the cpak usage is displayed.
+This command does not accept short version of commands, use full names.
+
+.TP
+.B config
+
+Generates the default cpak config and the default template in
+.B CPAK_CONFIG_HOME/cpak 
+or 
+.B XDG_CONFIG_HOME/cpak.
+If there is already a configuration present at one of these locations the config will not be overridden this config unless the
+.B -f 
+force flag is specifed as a subcommand.
+
+.TP
+.B bootstrap
+
+Copies the files specified in a subdirectory in 
+.B CPAK_CONFIG_HOME/cpak/templates/<template_name>
+or 
+.B XDG_CONFIG_HOME/cpak/templates/<template_name>.
+Also executes the 
+.B cpak_template.sh
+file found in the template directory in the newly bootstraped directory.
+
+.TP
+.B add
+
+Adds a new module to the module registry in 
+.B CPAK_MODULE_HOME
+or
+.B XDG_DATA_HOME/cpak.
+This command also creates a soft link in the current directory to the installed module in the
+.B cpak_modules
+directory. This command requires the module to be formatted in the following way:
+
+<repo_owner>/<repo_name>
+
+.TP
+.B remove
+
+Removes the specified module from the module registry in 
+.B CPAK_MODULE_HOME
+or
+.B XDG_DATA_HOME/cpak.
+This command also unlinks the module soft link in the current directory to the installed module in the
+.B cpak_modules
+directory. In contrary to the 
+.B add 
+command, this command only needs the module name.
+
+.TP
+.B upgrade
+
+Syncs the specified installed module to the newest upstream commit.
+This command also only needs the module name as a subcommand.
+
+.SH EXAMPLES:
+The following examples make use of the short version commands, all of them can be called by the full name of the command. 
+
+.TP
+.B version
+
+Get the installed cpak version.
+.P
+.nf                                                       
+.RS                                                       
+cpak v
+.RE                                                       
+.fi    
+
+.TP
+.B help
+
+Get information about the help command.
+.P
+.nf                                                       
+.RS                                                       
+cpak h help
+.RE                                                       
+.fi    
+
+.TP
+.B config
+
+Generate the default cpak config and the default template.
+.P
+.nf                                                       
+.RS                                                       
+cpak c
+.RE                                                       
+.fi    
+.P
+.nf                                                       
+.RS                                                       
+cpak c -f
+.RE                                                       
+.fi    
+
+.TP
+.B bootstrap
+
+Copies the content of the template 
+.B default 
+into the current directory and executes the 
+.B cpak_template.sh
+file in the current directory.
+.P
+.nf                                                       
+.RS                                                       
+cpak b default
+.RE                                                       
+.fi    
+
+.TP
+.B add
+
+Install the module
+.B xutils
+from the Github user 
+.B xnacly.
+.P
+.nf                                                       
+.RS                                                       
+cpak a xnacly/xutils
+.RE                                                       
+.fi    
+
+.TP
+.B remove
+
+Remove the module
+.B xutils.
+.P
+.nf                                                       
+.RS                                                       
+cpak r xutils
+.RE                                                       
+.fi    
+
+.TP
+.B upgrade
+
+Upgrade the module
+.B xutils.
+.P
+.nf                                                       
+.RS                                                       
+cpak u xutils
+.RE                                                       
+.fi    
+.SH AUTHORS
+Written by xnacly
+
+.SH REPORTING BUGS
+Cpak online documentation: <https://github.com/xnacly/c_paket>
+
+Report bugs to: <https://github.com/xnacly/c_paket/issues/new>
+
