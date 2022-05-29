@@ -19,20 +19,20 @@ char *get_cpak_config_path() {
 
     if (!s_is_empty(cpak_dir)) {
         char *buf = malloc(sizeof(char) * 255);
-        snprintf(buf, 255, "%s", cpak_dir);
+        snprintf(buf, 254, "%s", cpak_dir);
         return buf;
     }
 
     if (!s_is_empty(xdg_dir)) {
         char *buf = malloc(sizeof(char) * 255);
-        snprintf(buf, 255, "%s/cpak", xdg_dir);
+        snprintf(buf, 254, "%s/cpak", xdg_dir);
         return buf;
     }
 
     char *p = NULL;
     p = malloc(sizeof(char) * 255);
     char *home = getenv("HOME");
-    snprintf(p, 255, "%s/.config/cpak", home);
+    snprintf(p, 254, "%s/.config/cpak", home);
 
     return p;
 }
@@ -90,15 +90,15 @@ void cpak_log(const char *str, Log_level log_level) {
 }
 
 void throw_error(const char *text, Errors error) {
-    char error_text[sizeof(text) * 50];
-    sprintf(error_text, "%s, err: %d", text, error);
+    char error_text[2048];
+    snprintf(error_text, 2047, "%s, err: %d", text, error);
     cpak_log(error_text, ERROR);
     exit(EXIT_FAILURE);
 }
 
 void throw_warning(const char *text, Errors error) {
-    char error_text[sizeof(text) * 50];
-    sprintf(error_text, "%s, err: %d", text, error);
+    char error_text[2048];
+    snprintf(error_text, 2047, "%s, err: %d", text, error);
     cpak_log(error_text, WARN);
 }
 

@@ -9,10 +9,10 @@ int flag_colors = 1;
 int flag_storeModulesGlobal = 1;
 
 void get_config() {
-  char *path = malloc(sizeof(char) * 256);
+  char *path = malloc(sizeof(char) * 255);
   char *config_path = get_cpak_config_path();
 
-  snprintf(path, 256, "%s/cpak.conf", config_path);
+  snprintf(path, 254, "%s/cpak.conf", config_path);
   free(config_path);
 
   FILE *file = fopen(path, "r");
@@ -23,7 +23,7 @@ void get_config() {
 
   char cur_line[1024];
 
-  while (fgets(cur_line, 1024, file)) {
+  while (fgets(cur_line, 1023, file)) {
     if (s_is_empty(cur_line))
       continue;
     else if (s_starts_with(cur_line, "#"))

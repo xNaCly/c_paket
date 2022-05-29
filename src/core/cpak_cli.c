@@ -10,7 +10,7 @@ int c_bootstrap(char *template_name, char *outdir) {
     char *template_path = malloc(sizeof(char) * 255);
     char *path = get_cpak_config_path();
 
-    snprintf(template_path, 255, "%s/templates/%s", path, template_name);
+    snprintf(template_path, 254, "%s/templates/%s", path, template_name);
 
     if (!f_exists(template_path)) {
         printf("%s - ", template_path);
@@ -18,7 +18,7 @@ int c_bootstrap(char *template_name, char *outdir) {
     }
 
     char *command = malloc(sizeof(char) * 510);
-    sprintf(command, "cp -r %s/. %s", template_path, outdir);
+    snprintf(command, 509, "cp -r %s/. %s", template_path, outdir);
     printf("test: %s", command);
 
     int r = system(command);
@@ -42,9 +42,11 @@ int c_help(char *command) {
         printf("%s", t_flag ? "" : USAGE "\n");
     } else if (s_is_equal(command, "help")) {
         printf("%s", U_HELP);
-    } else if (s_is_equal(command, "init")) {
-        printf("%s", U_INIT);
-    } else if (s_is_equal(command, "config")) {
+    } 
+    /* else if (s_is_equal(command, "init")) { */
+    /*     printf("%s", U_INIT); */
+    /* } */ 
+    else if (s_is_equal(command, "config")) {
         printf("%s", U_CONFIG);
     } else if (s_is_equal(command, "add")) {
         printf("%s", U_ADD);
@@ -118,7 +120,7 @@ int c_config(int overwrite) {
 
 
     sprintf(command, "mkdir -p %s/templates/default", path);
-    snprintf(conf_file_path, 255, "%s/cpak.conf", path);
+    snprintf(conf_file_path, 254, "%s/cpak.conf", path);
 
     int r = system(command);
     if(r != EXIT_SUCCESS){
@@ -133,7 +135,7 @@ int c_config(int overwrite) {
     fprintf(config_FILE, "%s", CONFIG_FILE);
     fclose(config_FILE);
 
-    snprintf(template_file_path, 255, "%s/templates/default/.gitignore", path);
+    snprintf(template_file_path, 254, "%s/templates/default/.gitignore", path);
     FILE *template_default_FILE = fopen(template_file_path, "w");
 
     if (!template_default_FILE)
@@ -151,8 +153,6 @@ int c_config(int overwrite) {
 
 int c_add(char *module){
     // TODO: create custom error codes
-    // todo: check if project config exists, otherwise call c_init
-    // TODO: write installed package to cpak config
 
     // check if git is installed:
     int is_git_installed = system("which git > /dev/null");
@@ -161,7 +161,7 @@ int c_add(char *module){
     }
 
     // extracting <repo> from input (<user>/<repo>)
-    char *copy_module = malloc(sizeof(module));
+    char *copy_module = malloc(sizeof(char)*1024);
     strcpy(copy_module, module);
     char *module_name = strtok(copy_module, "/");
     module_name = strtok(NULL, "\0");
@@ -174,15 +174,14 @@ int c_add(char *module){
     int created = system(cmd);
     if(created != EXIT_SUCCESS) throw_error("Couldn't create modules directory, please check your permissions config", -1);
 
-    snprintf(url, 1024, "%s%s", VSC_PREFIX, module);
-    snprintf(command, 1024, "git clone %s ./cpak_modules/%s > /dev/null", url, module_name);
+    snprintf(url, 1023, "%s%s", VSC_PREFIX, module);
+    snprintf(command, 1023, "git clone %s ./cpak_modules/%s > /dev/null", url, module_name);
 
-    printf("module_name: %s, module: %s, command: %s\n", module_name, module, command);
     int error = system(command);
 
     if(error != EXIT_SUCCESS) {
-        char *path = malloc(sizeof(char)*510);
-        snprintf(path, 510, "./cpak_modules/%s", module_name);
+        char *path = malloc(sizeof(char)*255);
+        snprintf(path, 254, "./cpak_modules/%s", module_name);
         if(f_exists(path)){
             free(path);
             throw_error("Module already installed", -1);
@@ -193,7 +192,7 @@ int c_add(char *module){
     }
 
     char *feedback = malloc(sizeof(char) * 1024);
-    snprintf(feedback, 1024, "Installed module '%s'", module);
+    snprintf(feedback, 1023, "Installed module '%s'", module);
     cpak_log(feedback, SUCCESS);
 
     free(copy_module);
@@ -207,20 +206,53 @@ int c_add(char *module){
 int c_remove(char *module){
     char *path = malloc(sizeof(char) * 255);
 
-    snprintf(path, 255, "./cpak_modules/%s", module);
+    snprintf(path, 254, "./cpak_modules/%s", module);
     if(!f_exists(path)){
         free(path);
         throw_error("Can't remove module - Module doesn't exist", -1);
     }
 
     char *cmd = malloc(sizeof(char) * 1024);
-    snprintf(cmd, 1024, "rm -rf %s", path);
+    snprintf(cmd, 1023, "rm -rf %s", path);
 
     int error = system(cmd);
     if(error != EXIT_SUCCESS){
         throw_error("Can't remove module", -1);
     }
 
+    char *feedback = malloc(sizeof(char)*1024);
+    snprintf(feedback, 1023, "Removed module '%s' from project", module);
+    cpak_log(feedback, SUCCESS);
+
+    free(feedback);
+    free(path);
+    free(cmd); 
+
+    return EXIT_SUCCESS;
+}
+
+int c_upgrade(char *module){
+    char *path = malloc(sizeof(char) * 255);
+
+    snprintf(path, 254, "./cpak_modules/%s", module);
+    if(!f_exists(path)){
+        free(path);
+        throw_error("Can't update module - Module doesn't exist, consider installing it", -1);
+    }
+
+    char *cmd = malloc(sizeof(char) * 1024);
+    snprintf(cmd, 1023, "cd %s && git pull", path);
+
+    int error = system(cmd);
+    if(error != EXIT_SUCCESS){
+        throw_error("Can't update module", -1);
+    }
+
+    char *feedback = malloc(sizeof(char)*1024);
+    snprintf(feedback, 1023, "Upgraded module: '%s'", module);
+    cpak_log(feedback, SUCCESS);
+
+    free(feedback);
     free(path);
     free(cmd); 
     return EXIT_SUCCESS;

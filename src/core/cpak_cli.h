@@ -9,7 +9,6 @@ cpak is the fast and efficient package manager for the c programming language\n\
 \n\n\
 List of commands:\n\
     help        - show this screen\n\
-    init        - initialise a new project\n\
     config      - generate config\n\
     add         - add a dependency\n\
     remove      - remove a dependency\n\
@@ -20,9 +19,6 @@ List of commands:\n\
   "Help displays basic info and a reference about each available command.\n\n\
 \thelp [command]\n\th [command]\n\nExample:\n\tcpak h help\n\tcpak h\n"
 
-#define U_INIT                                                                 \
-  "Init initialises a new cpak project and creates a 'cpak_project.conf'.\n\n\
-\tinit <dir>\n\ti <dir>\n\nExample:\n\tcpak i .\n"
 
 #define U_CONFIG                                                               \
   "Generates the default config in '$XDG_CONFIG_HOME'.\n\n\
@@ -76,7 +72,7 @@ int c_help(char *command);
  * @param *outdir
  * @returns EXIT_SUCCESS or EXIT_FAILURE
  */
-int c_init(char *outdir);
+/* int c_init(char *outdir); */
 
 /*
  * @brief generates the default config in '$XDG_CONFIG_HOME'
@@ -96,4 +92,9 @@ int c_add(char *module);
  */
 int c_remove(char *module);
 
+/*
+ * @brief removes a dependency from the project
+ * @returns EXIT_SUCCESS or EXIT_FAILURE
+ */
+int c_upgrade(char *module);
 #endif

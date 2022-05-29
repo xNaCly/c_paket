@@ -11,6 +11,7 @@ void help_wrapper() {
     printf("cpak-%s\n", CPAK_VERSION);
     c_help("all");
 }
+
 Cli_arguments *parse_arguments(int arguments_amount, char **arguments) { Cli_arguments *ca;
     ca = malloc(sizeof(*ca));
     ca->c_cmd = malloc(sizeof(arguments[2]));
@@ -90,14 +91,18 @@ int main(int argc, char *argv[]) {
         }
         case REMOVE:{
              if(s_is_empty(arg->c_cmd)){
-                 throw_error("Please specify a module to install", -1);
+                 throw_error("Please specify a module to remove", -1);
              }
             feedback = c_remove(arg->c_cmd);
             break;
         }
-        case UPGRADE:
-            cpak_log("UPGRADE!", DEBUG);
+        case UPGRADE: {
+             if(s_is_empty(arg->c_cmd)){
+                 throw_error("Please specify a module to upgrade", -1);
+             }
+            feedback = c_upgrade(arg->c_cmd);
             break;
+        }
         case VERSION:
             cpak_log("cpak_" CPAK_VERSION, INFO);
             break;
