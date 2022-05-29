@@ -19,7 +19,6 @@ int c_bootstrap(char *template_name, char *outdir) {
 
     char *command = malloc(sizeof(char) * 510);
     snprintf(command, 509, "cp -r %s/. %s", template_path, outdir);
-    printf("test: %s", command);
 
     int r = system(command);
 
