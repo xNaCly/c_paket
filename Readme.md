@@ -50,7 +50,7 @@ nuances.
 
 ### How do you handle modules?
 
-Cpak installs modules globally, therefore all modules are stored in `$XDG_CONTENT_HOME/cpak` and are soft linked to the
+Cpak installs modules globally, therefore all modules are stored in `$XDG_DATA_HOME/cpak` and are soft linked to the
 `cpak_modules` folder in the current cpak project. This has several positive effects on the developer experience:
 
 -   decreases load on the file system by not storing multiple versions of code in multiple places
