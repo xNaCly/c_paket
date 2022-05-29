@@ -13,13 +13,13 @@ void t_config() {
   cpak_log("ran t_config", INFO);
 }
 
-void t_init() {
-  cpak_log("running t_init", INFO);
-  int r_value = c_init("./tests/output");
-  assert(r_value == EXIT_SUCCESS && "init command failed");
-  cpak_log("init cmd worked!", SUCCESS);
-  cpak_log("ran t_help", INFO);
-}
+/* void t_init() { */
+/*   cpak_log("running t_init", INFO); */
+/*   int r_value = c_init("./tests/output"); */
+/*   assert(r_value == EXIT_SUCCESS && "init command failed"); */
+/*   cpak_log("init cmd worked!", SUCCESS); */
+/*   cpak_log("ran t_help", INFO); */
+/* } */
 
 void t_help() {
   cpak_log("running t_help", INFO);
@@ -41,7 +41,7 @@ void t_template() {
 }
 
 int main() {
-  t_init();
+  /* t_init(); */
   t_config();
   t_template();
   t_help();

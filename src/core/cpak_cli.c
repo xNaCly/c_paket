@@ -61,47 +61,47 @@ int c_help(char *command) {
     return EXIT_SUCCESS;
 }
 
-int c_init(char *outdir) {
-    char *T_CPAK = getenv("CPAK_TESTING");
-    int t_flag = T_CPAK != NULL && s_is_equal(T_CPAK, "true") ? 1 : 0;
-    if (!t_flag)
-        cpak_log("Initialising new Project", INFO);
-    char *file_name = "cpak_project.conf";
-    char *file_path = malloc(sizeof(char) * 255);
-    char *description = "";
-    char *version = "v0.0.1";
-    char *author = s_is_empty(getenv("USER")) ? "anon" : getenv("USER");
-    char *pwd = s_is_empty(getenv("PWD")) ? "anon" : getenv("PWD");
+/* int c_init(char *outdir) { */
+/*     char *T_CPAK = getenv("CPAK_TESTING"); */
+/*     int t_flag = T_CPAK != NULL && s_is_equal(T_CPAK, "true") ? 1 : 0; */
+/*     if (!t_flag) */
+/*         cpak_log("Initialising new Project", INFO); */
+/*     char *file_name = "cpak_project.conf"; */
+/*     char *file_path = malloc(sizeof(char) * 255); */
+/*     char *description = ""; */
+/*     char *version = "v0.0.1"; */
+/*     char *author = s_is_empty(getenv("USER")) ? "anon" : getenv("USER"); */
+/*     char *pwd = s_is_empty(getenv("PWD")) ? "anon" : getenv("PWD"); */
 
-    snprintf(file_path, 255, "%s/%s", outdir, file_name);
-    FILE *file = fopen(file_path, "w");
-    free(file_path);
+/*     snprintf(file_path, 255, "%s/%s", outdir, file_name); */
+/*     FILE *file = fopen(file_path, "w"); */
+/*     free(file_path); */
 
-    if (file == NULL)
-        throw_error("Permission denied.", 404);
+/*     if (file == NULL) */
+/*         throw_error("Permission denied.", 404); */
 
-    fprintf(file, "# cpak config file\n\n\
-# name of the project\n\
-name=%s\n\
-description=%s\n\
-version=%s\n\
-author=%s\n\
-deps=\n",
-            pwd, description, version, author);
+/*     fprintf(file, "# cpak config file\n\n\ */
+/* # name of the project\n\ */
+/* name=%s\n\ */
+/* description=%s\n\ */
+/* version=%s\n\ */
+/* author=%s\n\ */
+/* deps=\n", */
+/*             pwd, description, version, author); */
 
-    fclose(file);
+/*     fclose(file); */
 
-    if (!t_flag) {
-        cpak_log("Created 'cpak_project.conf'", INFO);
-        int len = sizeof(char) * 1024;
-        char *buf = malloc(len);
-        snprintf(buf, len, "Initialised new Project in: %s", pwd);
-        cpak_log(buf, SUCCESS);
-        free(buf);
-    }
+/*     if (!t_flag) { */
+/*         cpak_log("Created 'cpak_project.conf'", INFO); */
+/*         int len = sizeof(char) * 1024; */
+/*         char *buf = malloc(len); */
+/*         snprintf(buf, len, "Initialised new Project in: %s", pwd); */
+/*         cpak_log(buf, SUCCESS); */
+/*         free(buf); */
+/*     } */
 
-    return EXIT_SUCCESS;
-}
+/*     return EXIT_SUCCESS; */
+/* } */
 
 int c_config(int overwrite) {
     if (!overwrite) {
@@ -151,7 +151,7 @@ int c_config(int overwrite) {
 
 int c_add(char *module){
     // TODO: create custom error codes
-    // TODO: check if project config exists, otherwise call c_init
+    // todo: check if project config exists, otherwise call c_init
     // TODO: write installed package to cpak config
 
     // check if git is installed:
@@ -175,13 +175,14 @@ int c_add(char *module){
     if(created != EXIT_SUCCESS) throw_error("Couldn't create modules directory, please check your permissions config", -1);
 
     snprintf(url, 1024, "%s%s", VSC_PREFIX, module);
-    snprintf(command, 1024, "git clone %s ./cpak_modules/%s", url, module_name);
+    snprintf(command, 1024, "git clone %s ./cpak_modules/%s > /dev/null", url, module_name);
 
+    printf("module_name: %s, module: %s, command: %s\n", module_name, module, command);
     int error = system(command);
 
     if(error != EXIT_SUCCESS) {
-        char *path = malloc(sizeof(char)*255);
-        snprintf(path, 255, "./cpak_modules/%s", module_name);
+        char *path = malloc(sizeof(char)*510);
+        snprintf(path, 510, "./cpak_modules/%s", module_name);
         if(f_exists(path)){
             free(path);
             throw_error("Module already installed", -1);

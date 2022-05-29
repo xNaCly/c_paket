@@ -65,12 +65,13 @@ int main(int argc, char *argv[]) {
             feedback = c_bootstrap(arg->c_cmd, ".");
             break;
         case INIT:
-            if (!s_is_empty(arg->c_cmd)) {
-                feedback = c_init(arg->c_cmd);
-            } else {
-                throw_warning("Not enough Arguments providen", NOT_ENOUGH_ARGUMENTS);
-                c_help("init");
-            }
+            throw_warning("this command is not available", -1);
+            /* if (!s_is_empty(arg->c_cmd)) { */
+            /*     feedback = c_init(arg->c_cmd); */
+            /* } else { */
+            /*     throw_warning("Not enough Arguments providen", NOT_ENOUGH_ARGUMENTS); */
+            /*     c_help("init"); */
+            /* } */
             break;
         case CONFIG: {
             int o = 0;
