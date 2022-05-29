@@ -6,7 +6,6 @@ FLAGS := -fdiagnostics-color=always  \
 									 -Werror \
 									 -Wshadow \
 									 -Wundef \
-									 -lgit2\
 									 -fno-common
 
 SRC_DIR := ./src
