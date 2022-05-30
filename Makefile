@@ -14,12 +14,11 @@ DEBUG_DIR := $(BUILD_DIR)/debug
 DEV_DIR := $(BUILD_DIR)/dev
 TEST_DIR := $(BUILD_DIR)/test
 PROD_DIR := $(BUILD_DIR)/prod
-
 OUT_NAME := cpak
-
 FILES := $(shell find $(SRC_DIR) -name "*.c")
 CORE_FILES := $(shell find $(SRC_DIR)/core -name "*.c")
 COMPILE := $(FLAGS) $(FILES) -o
+V := "v0.0.1"
 
 all: build
 	$(DEV_DIR)/$(OUT_NAME).dev $(cmd)
@@ -32,6 +31,8 @@ uninstall:
 
 release: 
 	# TODO: replace VERSION placeholder in src/cpak.h and in cpak.1 with the current release
+	sed -i -e 's/__VERSION__/$(V)/g' ./cpak.1
+	sed -i -e 's/__VERSION__/\"$(V)\"/g' ./src/cpak.h
 	# TODO: build
 	# TODO: zip executable and man page
 
