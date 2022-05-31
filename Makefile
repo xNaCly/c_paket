@@ -18,7 +18,7 @@ OUT_NAME := cpak
 FILES := $(shell find $(SRC_DIR) -name "*.c")
 CORE_FILES := $(shell find $(SRC_DIR)/core -name "*.c")
 COMPILE := $(FLAGS) $(FILES) -o
-V := "v0.0.1"
+V := v0.0.1
 
 all: build
 	$(DEV_DIR)/$(OUT_NAME).dev $(cmd)
@@ -31,8 +31,6 @@ uninstall:
 
 release: 
 	# TODO: replace VERSION placeholder in src/cpak.h and in cpak.1 with the current release
-	sed -i -e 's/__VERSION__/$(V)/g' ./cpak.1
-	sed -i -e 's/__VERSION__/\"$(V)\"/g' ./src/cpak.h
 	# TODO: build
 	# TODO: zip executable and man page
 
@@ -56,7 +54,7 @@ build: pre
 build/unit: pre
 	gcc -g3 $(FLAGS) ./tests/t_unit.c $(CORE_FILES) -o $(TEST_DIR)/t_unit.dev
 
-build/cli: pre/test
+build/cli: pre pre/test
 	gcc -g3 $(FLAGS) ./tests/t_cli.c $(CORE_FILES) -o $(TEST_DIR)/t_cli.dev
 
 build/debug: pre
@@ -66,6 +64,8 @@ build/prod: pre
 	gcc -O3 $(COMPILE) $(PROD_DIR)/$(OUT_NAME)
 
 pre:
+	sed -i -e 's/__VERSION__/$(V)/g' ./cpak.1
+	sed -i -e 's/__VERSION__/\"$(V)\"/g' ./src/cpak.h
 	mkdir -p $(DEV_DIR)
 	mkdir -p $(DEBUG_DIR)
 	mkdir -p $(TEST_DIR)
@@ -73,7 +73,6 @@ pre:
 
 pre/test:
 	mkdir -p ./tests/output
-	mkdir -p $(TEST_DIR)
 
 clean:
 	rm -r $(BUILD_DIR)
