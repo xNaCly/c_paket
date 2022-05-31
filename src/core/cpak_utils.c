@@ -45,7 +45,7 @@ int conf_exists() {
 }
 
 void cpak_log(const char *str, Log_level log_level) {
-    if (flag_colors) {
+    if (g_flag_colors) {
         switch (log_level) {
             case SUCCESS:
                 printf("%s%ssuccess:%s %s\n", ANSI_COLOR_BLACK_FG, ANSI_COLOR_GREEN,

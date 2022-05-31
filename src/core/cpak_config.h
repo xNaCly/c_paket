@@ -3,7 +3,7 @@
 
 #define VSC_PREFIX "https://github.com/"
 
-extern int flag_colors;
+extern int g_flag_colors;
 extern int flag_storeModulesGlobal;
 
 

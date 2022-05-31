@@ -9,7 +9,7 @@ void t_config() {
   cpak_log("running t_config", INFO);
   get_config();
 
-  assert(flag_colors == 1 && "reading config key colors failed");
+  assert(g_flag_colors == 1 && "reading config key colors failed");
   cpak_log("colors value correct!", SUCCESS);
 
   assert(flag_storeModulesGlobal == 1 &&

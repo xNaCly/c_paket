@@ -5,7 +5,7 @@
 #include "cpak_config.h"
 #include "cpak_utils.h"
 
-int flag_colors = 1;
+int g_flag_colors = 1;
 int flag_storeModulesGlobal = 1;
 
 void get_config() {
@@ -32,9 +32,9 @@ void get_config() {
       char temp[1024 * 4];
       sscanf(cur_line, "colors=%1024s\n", temp);
       if (s_is_equal(temp, "true")) {
-        flag_colors = 1;
+        g_flag_colors = 1;
       } else if (s_is_equal(temp, "false")) {
-        flag_colors = 0;
+        g_flag_colors = 0;
       } else {
         cur_line[strlen(cur_line) - 1] = '\0';
         sprintf(temp, "'%s' is not a known value for key: 'color'", cur_line);
