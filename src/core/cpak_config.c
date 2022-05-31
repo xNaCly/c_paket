@@ -6,7 +6,7 @@
 #include "cpak_utils.h"
 
 int g_flag_colors = 1;
-int flag_storeModulesGlobal = 1;
+int g_flag_storeModulesGlobal = 1;
 
 void get_config() {
   char *path = malloc(sizeof(char) * 255);
@@ -45,9 +45,9 @@ void get_config() {
       char temp[1024 * 4];
       sscanf(cur_line, "storeModulesGlobal=%255s\n", temp);
       if (s_is_equal(temp, "true")) {
-        flag_storeModulesGlobal = 1;
+        g_flag_storeModulesGlobal = 1;
       } else if (s_is_equal(temp, "false")) {
-        flag_storeModulesGlobal = 0;
+        g_flag_storeModulesGlobal = 0;
       } else {
         sprintf(temp, "'%s' is not a known value for key: 'color'", cur_line);
         throw_warning(temp, CONF_UNKNOWN_VALUE);

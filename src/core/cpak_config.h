@@ -4,7 +4,7 @@
 #define VSC_PREFIX "https://github.com/"
 
 extern int g_flag_colors;
-extern int flag_storeModulesGlobal;
+extern int g_flag_storeModulesGlobal;
 
 
 /* typedef struct { */
