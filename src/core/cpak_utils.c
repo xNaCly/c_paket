@@ -13,6 +13,23 @@ int f_exists(char *path) {
     return stat(path, &st) == 0;
 }
 
+char *get_module_path(){
+    char* p = malloc(sizeof(char)*256);
+    char* c_m_home = getenv("CPAK_MODULE_HOME");
+    char* x_d_home = getenv("XDG_DATA_HOME");
+    char* h = getenv("HOME");
+
+    if(!s_is_empty(c_m_home)){
+        strcpy(p, c_m_home);
+    } else if(!s_is_empty(x_d_home)){
+        snprintf(p, 255, "%s/.cpak", x_d_home);
+    } else {
+        snprintf(p, 255, "%s/.cpak", h);
+    }
+
+    return p;
+}
+
 char *get_config_path() {
     char *cpak_dir = getenv("CPAK_CONFIG_HOME");
     char *xdg_dir = getenv("XDG_CONFIG_HOME");

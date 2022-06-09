@@ -43,14 +43,23 @@ typedef enum {
 int f_exists(char *path);
 
 /*
- * @brief returns the path to the cpak config directory
- * @description scanning priority:
- *                1. 'CPAK_CONFIG_HOME' env variable
- *                2. 'XDG_CONFIG_HOME' env variable + '/cpak/'
- *                3. 'HOME' env variable + '/.config/cpak/'
+ * @brief returns the absolute path to the cpak config directory
+ * @description priority:
+ *                1. '$CPAK_CONFIG_HOME' env variable
+ *                2. '$XDG_CONFIG_HOME'/cpak/
+ *                3. '$HOME'/.config/cpak/
  * @returns path to cpaks config
  */
 char *get_config_path();
+
+/*
+ * @brief returns the absolute path to the module directory
+ * @description priority:
+ *                  1. '$CPAK_MODULE_HOME' env variable
+ *                  2. '$XDG_DATA_HOME'/.cpak
+ *                  3. '$HOME'/.cpak
+ */
+char *get_module_path();
 
 /*
  * @brief checks if cpaks config exists
