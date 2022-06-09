@@ -213,7 +213,7 @@ int c_add(char *module){
         snprintf(c, 1023, "ln -s %s ./cpak_modules/%s", abs_m_path, module_name);
         if(system(c) != EXIT_SUCCESS){
             free(c);
-            throw_error("Couldn't link to globaly installed module, consider adding a soft link yourself", -1);
+            throw_error("Couldn't link to globally installed module, consider adding a soft link yourself", -1);
         } 
         free(c);
     }
@@ -230,7 +230,14 @@ int c_add(char *module){
 int c_remove(char *module){
     char *path = malloc(sizeof(char) * 255);
 
-    snprintf(path, 254, "./cpak_modules/%s", module);
+    if(g_flag_storeModulesGlobal){
+        char *m = get_module_path();
+        strcpy(path, m);
+        free(m);
+    } else {
+        strcpy(path, "./cpak_modules");
+    }
+
     if(!f_exists(path)){
         free(path);
         throw_error("Can't remove module - Module doesn't exist", -1);
@@ -244,8 +251,18 @@ int c_remove(char *module){
         throw_error("Can't remove module", -1);
     }
 
+    if(g_flag_storeModulesGlobal){
+        char *c = malloc(sizeof(char) * 1024);
+        snprintf(c, 1023, "unlink ./cpak_modules/%s", module);
+        if(system(c) != EXIT_SUCCESS){
+            free(c);
+            throw_error("Couldn't unlink globally installed module, consider removing the soft link yourself", -1);
+        } 
+        free(c);
+    }
+
     char *feedback = malloc(sizeof(char)*1024);
-    snprintf(feedback, 1023, "Removed module '%s' from project", module);
+    snprintf(feedback, 1023, "Removed module '%s' from '%s'", module, path);
     cpak_log(feedback, SUCCESS);
 
     free(feedback);
