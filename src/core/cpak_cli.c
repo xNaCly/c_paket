@@ -151,60 +151,68 @@ int c_config(int overwrite) {
 }
 
 int c_add(char *module){
-    if(!g_flag_storeModulesGlobal){
-        // TODO: create custom error codes
-
-        // check if git is installed:
-        int is_git_installed = system("which git > /dev/null");
-        if(is_git_installed != EXIT_SUCCESS){
-            throw_error("Git can't be found on your system, please install it", -1);
-        }
-
-        // extracting <repo> from input (<user>/<repo>)
-        char *copy_module = malloc(sizeof(char)*1024);
-        strcpy(copy_module, module);
-        char *module_name = strtok(copy_module, "/");
-        module_name = strtok(NULL, "\0");
-
-        char *cmd = "mkdir -p ./cpak_modules";
-        char *url = malloc(sizeof(char) * 1024);
-        char *command = malloc(sizeof(char)*1024);
-
-
-        int created = system(cmd);
-        if(created != EXIT_SUCCESS) throw_error("Couldn't create modules directory, please check your permissions config", -1);
-
-        snprintf(url, 1023, "%s%s", VSC_PREFIX, module);
-        snprintf(command, 1023, "git clone %s ./cpak_modules/%s > /dev/null", url, module_name);
-
-        int error = system(command);
-
-        if(error != EXIT_SUCCESS) {
-            char *path = malloc(sizeof(char)*255);
-            snprintf(path, 254, "./cpak_modules/%s", module_name);
-            if(f_exists(path)){
-                free(path);
-                throw_error("Module already installed", -1);
-            }
-            free(path);
-            throw_error("Couldn't install module using git, please verify git is installed", -1);
-            return EXIT_FAILURE;
-        }
-
-        char *feedback = malloc(sizeof(char) * 1024);
-        snprintf(feedback, 1023, "Installed module '%s'", module);
-        cpak_log(feedback, SUCCESS);
-
-        free(copy_module);
-        free(url);
-        free(command);
-        free(feedback);
-
-        return EXIT_SUCCESS;
-    } else {
-        // TODO: implement the above on a global level
-        return EXIT_SUCCESS;
+    // check if git is installed:
+    int is_git_installed = system("which git > /dev/null");
+    if(is_git_installed != EXIT_SUCCESS){
+        throw_error("Git can't be found on your system, please install it", -1);
     }
+
+    // extracting <repo> from input (<user>/<repo>)
+    char *copy_module = malloc(sizeof(char)*1024);
+    char *url = malloc(sizeof(char) * 1024);
+    char *command = malloc(sizeof(char)*1024);
+
+    strcpy(copy_module, module);
+    char *module_name = strtok(copy_module, "/");
+    module_name = strtok(NULL, "\0");
+
+    char *modules_path = malloc(sizeof(char)*256);
+    if(g_flag_storeModulesGlobal){
+        char *m = get_module_path();
+        strcpy(modules_path, m);
+        free(m);
+    } else {
+        strcpy(modules_path, "./cpak_modules");
+    }
+
+    char *cmd = malloc(sizeof(char)*510);
+    snprintf(cmd, 510, "mkdir -p %s", modules_path);
+
+    char *abs_m_path = malloc(sizeof(char)*256);
+    snprintf(abs_m_path, 255, "%s/%s", modules_path, module_name);
+
+    // TODO: create custom error codes
+    int created = system(cmd);
+    if(created != EXIT_SUCCESS) throw_error("Couldn't create modules directory, please check your permissions config", -1);
+
+    snprintf(url, 1023, "%s%s", VSC_PREFIX, module);
+    snprintf(command, 1023, "git clone %s %s > /dev/null", url, abs_m_path);
+
+    int error = system(command);
+
+    if(error != EXIT_SUCCESS) {
+        char *path = malloc(sizeof(char)*256);
+        snprintf(path, 255, "%s", abs_m_path);
+        if(f_exists(path)){
+            free(path);
+            throw_error("Module already installed", -1);
+        }
+        free(path);
+        throw_error("Couldn't install module using git, please verify git is installed", -1);
+        return EXIT_FAILURE;
+    }
+
+    char *feedback = malloc(sizeof(char) * 1024);
+    snprintf(feedback, 1023, "Installed module '%s' in %s", module, abs_m_path);
+    cpak_log(feedback, SUCCESS);
+
+    free(url);
+    free(command);
+    free(feedback);
+    free(cmd);
+    free(copy_module);
+    free(abs_m_path);
+    return EXIT_SUCCESS;
 }
 
 int c_remove(char *module){
