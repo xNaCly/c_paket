@@ -11,21 +11,26 @@
 
 typedef enum {
     // Argument is unknown to cpak
-    UNKNOWN_ARGUMENT = 1437,
+    ERR_UNKNOWN_ARGUMENT = 1437,
     // not enough arguments passed to cpak
-    NOT_ENOUGH_ARGUMENTS = 1438,
+    ERR_NOT_ENOUGH_ARGUMENTS = 1438,
     // cpak can't find your specifed template
-    TEMPLATE_MISSING = 1439,
+    ERR_TEMPLATE_MISSING = 1439,
     // cpak can't find its config file
-    CONF_MISSING_CONFIG = 1440,
+    ERR_CONF_MISSING_CONFIG = 1440,
     // cpak's config already exists
-    CONF_EXISTS = 1441,
+    ERR_CONF_EXISTS = 1441,
     // cpak found an unknown key in its config file
-    CONF_UNKNOWN_KEY = 1442,
+    ERR_CONF_UNKNOWN_KEY = 1442,
     // cpak found an unknown value for a key in its config file
-    CONF_UNKNOWN_VALUE = 1443,
-    // cpak can't find a project config in the current directory
-    P_MISSING_CONFIG = 1444,
+    ERR_CONF_UNKNOWN_VALUE = 1443,
+    // cpak found an empty string
+    ERR_EMPTY_STR = 1444,
+    ERR_NOT_IMPLEMENTED = 1445,
+    ERR_CANT_ACCESS = 1446,
+    ERR_GIT_MISSING = 1447,
+    ERR_MODULE_EXISTS = 1448,
+    ERR_MODULE_DOESNT_EXIST = 1449,
 } Errors;
 
 typedef enum {
@@ -105,11 +110,6 @@ int s_is_empty(const char *str);
  * @return boolean as integer
  */
 int s_starts_with(const char *str, const char *start);
-
-/**
- * splits the given string into an array, returns the string at index 0 if delimiter wasn't found
- */
-char** s_split(char *str, char *delimiter);
 
 /**
  * logging utility

@@ -120,7 +120,7 @@ void throw_warning(const char *text, Errors error) {
 }
 
 int s_is_equal(const char *str, const char *str1) {
-    if (s_is_empty(str) || s_is_empty(str1)) throw_error("string is empty", -1);
+    if (s_is_empty(str) || s_is_empty(str1)) throw_error("string is empty", ERR_EMPTY_STR);
     return strcmp(str, str1) == 0;
 }
 

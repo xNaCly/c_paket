@@ -14,7 +14,7 @@ int c_bootstrap(char *template_name, char *outdir) {
 
     if (!f_exists(template_path)) {
         printf("%s - ", template_path);
-        throw_error("Can't read template", TEMPLATE_MISSING);
+        throw_error("Can't read template", ERR_TEMPLATE_MISSING);
     }
 
     char *command = malloc(sizeof(char) * 510);
@@ -109,7 +109,7 @@ int c_config(int overwrite) {
         int config_exists = conf_exists();
         if (config_exists)
             throw_error("Cpak config exists, consider using the '-f' flag to override the existing config",
-                        CONF_EXISTS);
+                        ERR_CONF_EXISTS);
     }
 
     char *path = get_config_path();
@@ -138,7 +138,7 @@ int c_config(int overwrite) {
     FILE *template_default_FILE = fopen(template_file_path, "w");
 
     if (!template_default_FILE)
-        throw_error("Couldn't open template directory", -1);
+        throw_error("Couldn't open template directory", ERR_CANT_ACCESS);
 
     fprintf(template_default_FILE, "%s", DEFAULT_TEMPLATE_GITIGNORE);
     fclose(template_default_FILE);
@@ -154,7 +154,7 @@ int c_add(char *module){
     // check if git is installed:
     int is_git_installed = system("which git > /dev/null");
     if(is_git_installed != EXIT_SUCCESS){
-        throw_error("Git can't be found on your system, please install it", -1);
+        throw_error("Git can't be found on your system, please install it", ERR_GIT_MISSING);
     }
 
     // extracting <repo> from input (<user>/<repo>)
@@ -185,7 +185,7 @@ int c_add(char *module){
     // TODO: create custom error codes
     int created = system(cmd);
     int created_m = system("mkdir -p ./cpak_modules");
-    if(created != EXIT_SUCCESS || created_m != EXIT_SUCCESS) throw_error("Couldn't create modules directory, please check your permissions config", -1);
+    if(created != EXIT_SUCCESS || created_m != EXIT_SUCCESS) throw_error("Couldn't create modules directory, please check your permissions config", ERR_CANT_ACCESS);
 
     snprintf(url, 1023, "%s%s", VSC_PREFIX, module);
     snprintf(command, 1023, "git clone %s %s > /dev/null", url, abs_m_path);
@@ -197,10 +197,10 @@ int c_add(char *module){
         snprintf(path, 255, "%s", abs_m_path);
         if(f_exists(path)){
             free(path);
-            throw_error("Module already installed", -1);
+            throw_error("Module already installed", ERR_MODULE_EXISTS);
         }
         free(path);
-        throw_error("Couldn't install module using git, please verify git is installed", -1);
+        throw_error("Couldn't install module using git, please verify git is installed", ERR_GIT_MISSING);
         return EXIT_FAILURE;
     }
 
@@ -213,7 +213,7 @@ int c_add(char *module){
         snprintf(c, 1023, "ln -s %s ./cpak_modules/%s", abs_m_path, module_name);
         if(system(c) != EXIT_SUCCESS){
             free(c);
-            throw_error("Couldn't link to globally installed module, consider adding a soft link yourself", -1);
+            throw_error("Couldn't link to globally installed module, consider adding a soft link yourself", ERR_CANT_ACCESS);
         } 
         free(c);
     }
@@ -240,7 +240,7 @@ int c_remove(char *module){
 
     if(!f_exists(path)){
         free(path);
-        throw_error("Can't remove module - Module doesn't exist", -1);
+        throw_error("Can't remove module - Module doesn't exist", ERR_MODULE_DOESNT_EXIST);
     }
 
     char *cmd = malloc(sizeof(char) * 1024);
@@ -248,7 +248,7 @@ int c_remove(char *module){
 
     int error = system(cmd);
     if(error != EXIT_SUCCESS){
-        throw_error("Can't remove module", -1);
+        throw_error("Can't remove module", ERR_MODULE_DOESNT_EXIST);
     }
 
     if(g_flag_storeModulesGlobal){
@@ -256,7 +256,7 @@ int c_remove(char *module){
         snprintf(c, 1023, "unlink ./cpak_modules/%s", module);
         if(system(c) != EXIT_SUCCESS){
             free(c);
-            throw_error("Couldn't unlink globally installed module, consider removing the soft link yourself", -1);
+            throw_error("Couldn't unlink globally installed module, consider removing the soft link yourself", ERR_CANT_ACCESS);
         } 
         free(c);
     }
@@ -288,7 +288,7 @@ int c_upgrade(char *module){
 
     if(!f_exists(path)){
         free(path);
-        throw_error("Can't update module - Module doesn't exist, consider installing it", -1);
+        throw_error("Can't update module - Module doesn't exist, consider installing it", ERR_MODULE_DOESNT_EXIST);
     }
 
     char *cmd = malloc(sizeof(char) * 1024);

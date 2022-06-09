@@ -58,7 +58,7 @@ int main(int argc, char *argv[]) {
     if (!does_conf_exists && arg->cmd != CONFIG)
         throw_warning("can't find cpak's config file, consider generating the "
                       "default config using: 'cpak config'",
-                      CONF_MISSING_CONFIG);
+                      ERR_CONF_MISSING_CONFIG);
     get_config();
 
     switch (arg->cmd) {
@@ -66,7 +66,7 @@ int main(int argc, char *argv[]) {
             feedback = c_bootstrap(arg->c_cmd, ".");
             break;
         case INIT:
-            throw_warning("this command is not available", -1);
+            throw_warning("this command is not available", ERR_NOT_IMPLEMENTED);
             /* if (!s_is_empty(arg->c_cmd)) { */
             /*     feedback = c_init(arg->c_cmd); */
             /* } else { */
@@ -84,21 +84,21 @@ int main(int argc, char *argv[]) {
         }
         case ADD:{
              if(s_is_empty(arg->c_cmd)){
-                 throw_error("Please specify a module to install", -1);
+                 throw_error("Please specify a module to install", ERR_NOT_ENOUGH_ARGUMENTS);
              }
             feedback = c_add(arg->c_cmd);
             break;
         }
         case REMOVE:{
              if(s_is_empty(arg->c_cmd)){
-                 throw_error("Please specify a module to remove", -1);
+                 throw_error("Please specify a module to remove", ERR_NOT_ENOUGH_ARGUMENTS);
              }
             feedback = c_remove(arg->c_cmd);
             break;
         }
         case UPGRADE: {
              if(s_is_empty(arg->c_cmd)){
-                 throw_error("Please specify a module to upgrade", -1);
+                 throw_error("Please specify a module to upgrade", ERR_NOT_ENOUGH_ARGUMENTS);
              }
             feedback = c_upgrade(arg->c_cmd);
             break;
@@ -107,7 +107,7 @@ int main(int argc, char *argv[]) {
             cpak_log("cpak_" CPAK_VERSION, INFO);
             break;
         case UNDEF:
-            throw_warning("Not enough Arguments providen", NOT_ENOUGH_ARGUMENTS);
+            throw_warning("Not enough Arguments providen", ERR_NOT_ENOUGH_ARGUMENTS);
             help_wrapper();
             break;
         case HELP:
@@ -119,7 +119,7 @@ int main(int argc, char *argv[]) {
             feedback = EXIT_SUCCESS;
             break;
         case UNKNOWN:
-            throw_warning("Unknown Argument", UNKNOWN_ARGUMENT);
+            throw_warning("Unknown Argument", ERR_UNKNOWN_ARGUMENT);
             help_wrapper();
             break;
         default:
