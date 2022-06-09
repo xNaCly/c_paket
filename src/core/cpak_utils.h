@@ -50,7 +50,7 @@ int f_exists(char *path);
  *                3. 'HOME' env variable + '/.config/cpak/'
  * @returns path to cpaks config
  */
-char *get_cpak_config_path();
+char *get_config_path();
 
 /*
  * @brief checks if cpaks config exists

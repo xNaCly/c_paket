@@ -13,7 +13,7 @@ int f_exists(char *path) {
     return stat(path, &st) == 0;
 }
 
-char *get_cpak_config_path() {
+char *get_config_path() {
     char *cpak_dir = getenv("CPAK_CONFIG_HOME");
     char *xdg_dir = getenv("XDG_CONFIG_HOME");
 
@@ -38,7 +38,7 @@ char *get_cpak_config_path() {
 }
 
 int conf_exists() {
-    char *path = get_cpak_config_path();
+    char *path = get_config_path();
     int exists = f_exists(path);
     free(path);
     return exists;

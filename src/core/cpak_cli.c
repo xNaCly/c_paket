@@ -8,7 +8,7 @@
 
 int c_bootstrap(char *template_name, char *outdir) {
     char *template_path = malloc(sizeof(char) * 255);
-    char *path = get_cpak_config_path();
+    char *path = get_config_path();
 
     snprintf(template_path, 254, "%s/templates/%s", path, template_name);
 
@@ -112,7 +112,7 @@ int c_config(int overwrite) {
                         CONF_EXISTS);
     }
 
-    char *path = get_cpak_config_path();
+    char *path = get_config_path();
     char *conf_file_path = malloc(sizeof(char) * 255);
     char *template_file_path = malloc(sizeof(char) * 255);
     char *command = malloc(sizeof(char) * 1042);

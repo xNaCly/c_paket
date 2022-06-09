@@ -10,7 +10,7 @@ int g_flag_storeModulesGlobal = 1;
 
 void get_config() {
   char *path = malloc(sizeof(char) * 255);
-  char *config_path = get_cpak_config_path();
+  char *config_path = get_config_path();
 
   snprintf(path, 254, "%s/cpak.conf", config_path);
   free(config_path);
