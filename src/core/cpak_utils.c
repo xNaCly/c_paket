@@ -6,6 +6,22 @@
 #include "cpak_config.h"
 #include "cpak_utils.h"
 
+const char * const ERRORS[] = {
+    [ERR_UNKNOWN_ARGUMENT] = "ERR_UNKNOWN_ARGUMENT",
+    [ERR_NOT_ENOUGH_ARGUMENTS] = "ERR_NOT_ENOUGH_ARGUMENTS",
+    [ERR_TEMPLATE_MISSING] = "ERR_TEMPLATE_MISSING",
+    [ERR_CONF_MISSING_CONFIG] = "ERR_CONF_MISSING_CONFIG",
+    [ERR_CONF_EXISTS] = "ERR_CONF_EXISTS",
+    [ERR_CONF_UNKNOWN_KEY] = "ERR_CONF_UNKNOWN_KEY",
+    [ERR_CONF_UNKNOWN_VALUE] = "ERR_CONF_UNKNOWN_VALUE",
+    [ERR_EMPTY_STR] = "ERR_EMPTY_STR",
+    [ERR_NOT_IMPLEMENTED] = "ERR_NOT_IMPLEMENTED",
+    [ERR_CANT_ACCESS] = "ERR_CANT_ACCESS",
+    [ERR_GIT_MISSING] = "ERR_GIT_MISSING",
+    [ERR_MODULE_EXISTS] = "ERR_MODULE_EXISTS",
+    [ERR_MODULE_DOESNT_EXIST] = "ERR_MODULE_DOESNT_EXIST",
+};
+
 int f_exists(char *path) {
     struct stat st;
     if (path == NULL || s_is_empty(path))
@@ -108,14 +124,14 @@ void cpak_log(const char *str, Log_level log_level) {
 
 void throw_error(const char *text, Errors error) {
     char error_text[2048];
-    snprintf(error_text, 2047, "%s, err: %d", text, error);
+    snprintf(error_text, 2047, "%s, err: %s (%d)", text, ERRORS[error], error);
     cpak_log(error_text, ERROR);
     exit(EXIT_FAILURE);
 }
 
 void throw_warning(const char *text, Errors error) {
     char error_text[2048];
-    snprintf(error_text, 2047, "%s, err: %d", text, error);
+    snprintf(error_text, 2047, "%s, warn: %s (%d)", text, ERRORS[error], error);
     cpak_log(error_text, WARN);
 }
 
