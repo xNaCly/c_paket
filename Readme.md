@@ -32,7 +32,8 @@ Fast and efficient package manager for the c programming language
 
 -   managing modules
 -   bootstraping projects with templates
--   global/linked dependencies
+-   global and linked or local dependencies
+-   installing modules using their source from github using your already existing git configuration
 
 ## FAQ:
 
