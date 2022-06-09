@@ -76,3 +76,6 @@ pre/test:
 
 clean:
 	rm -r $(BUILD_DIR)
+	unlink ./cpak_modules/*
+	rm -r ./cpak_modules
+	git restore cpak.1 src/cpak.h
