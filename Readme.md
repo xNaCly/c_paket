@@ -13,6 +13,7 @@ Fast and efficient package manager for the c programming language
     -   [How do i contribute?](#how-do-i-contribute)
 -   [Documentation](#documentation)
     -   [Getting Started](#getting-started)
+    -   [Building a Project with a Dependency](#building-a-project-with-a-dependency)
     -   [Commandline reference](#commandline-reference)
         -   [Version](#version)
         -   [Help](#help)
@@ -24,9 +25,8 @@ Fast and efficient package manager for the c programming language
     -   [Global Configuration](#global-configuration)
         -   [Keys](#keys)
             -   [Colors](#colors)
+            -   [StoreModulesGlobal](#storemodulesglobal)
         -   [Templates](#templates)
-    -   [Error codes](#error-codes)
-        -   [Specific Errorcodes and their meaning](#specific-errorcodes-and-their-meaning)
 
 ## Features:
 
@@ -44,22 +44,24 @@ as much as C package.
 ### Why should I use 'cpak'?
 
 Cpak makes it easy for the developer to manage packages for c projects, by allowing devs to store project dependencies
-globally or inside a project. It also enables a templating and bootstraping toolkit. Cpak features a extensive
+globally or inside a project. It also enables a templating/bootstraping toolkit. Cpak features a extensive
 documentation and a very verbose logging system to warn the users of malformatted config files and several other
 nuances.
 
 ### How do you handle modules?
 
-Cpak installs modules globally, therefore all modules are stored in `$XDG_DATA_HOME/cpak` and are soft linked to the
+Cpak installs modules globally, therefore all modules are either stored in `$CPAK_MODULE_HOME`, `$XDG_DATA_HOME/.cpak` or `$HOME/.cpak` and are soft linked to the
 `cpak_modules` folder in the current cpak project. This has several positive effects on the developer experience:
 
 -   decreases load on the file system by not storing multiple versions of code in multiple places
 -   keeps dependencies up to date regardless of the project they are used in
 -   makes dependency management easier for the developer
 
+Cpak also allows the User to install packages in each project in the `cpak_modules` folder by changing [StoreModulesGlobally](#StoreModulesGlobally) to false in the config.
+
 ### How do I do 'x'?
 
-Please take a look at the documentation featuring possible error codes you could encounter, global configuration as well
+Please take a look at the documentation laying out all features, arguments and possible error codes you would encounter on your daily use, global configuration as well
 as project config files and how the templating toolkit works. If you can't find what your looking for, feel free to
 create a new [Issue](https://github.com/xNaCly/c_paket/issues).
 
@@ -82,17 +84,24 @@ This should print the following:
 ![image](https://user-images.githubusercontent.com/47723417/170288034-02689782-a955-427c-b697-8abf3f4e8cbb.png)
 
 ### Building a project with a dependency
-1. Add a dependency to your project:
+1. Create a new project 
+
+```sh
+mkdir project
+cd project
+```
+
+2. Add a dependency to your project:
 
 ```sh
 cpak add xnacly/xutils
 ```
 
-2. Create a C file:
+3. Create a C file:
 ```c
 #include <stdio.h>
 #include <stdlib.h>
-#include "../cpak_modules/xutils/xutil.h"
+#include "cpak_modules/xutils/xutil.h"
 
 int main(void){
     char *str1 = "Hello World";
@@ -106,17 +115,18 @@ int main(void){
 }
 ```
 
-3. Add the installed dependency to your build tool chain by passing all c source files in the module folder to the compiler like so:
-```bash
-gcc cpak_modules/**.c ./main.c -o ./main.out
-```
-A better alternative is to specify only the included headers and sources by just passing it to the compiler:
+4. Add the installed dependency to your build tool chain by passing the to the imported header file corresponding c source files in the module folder to the compiler like so:
+
 ```bash
 gcc cpak_modules/xutils/xutil.c ./main.c -o ./main.out
 ```
 
-> A better way of handling this is currently in development!
+5. Run the Binary:
+```bash
+./main.out
+```
 
+`$: String 'str1' and 'str2' are equal!`
 
 ### Command line reference:
 
@@ -197,11 +207,14 @@ following content:
 #### Keys
 
 ##### Colors
+This key specifies if cpaks logging and output should be colored.
+
 `color=true / false`
 
-![image](https://user-images.githubusercontent.com/47723417/170291260-4af97de4-a9c8-4c5f-a593-2fa44bdb2522.png)
+##### StoreModulesGlobal
+This key specifies if cpak should install modules globally or in the current directory.
 
-
+`storeModulesGlobal=true / false`
 
 
 #### Templates
@@ -211,8 +224,7 @@ To use templates and boostrap new project use the `cpak bootstrap <template_name
 
 ```
 .
-├── main.c
-└── Makefile
+└── .gitignore
 ```
 
 The contents of the bootstraped project is specified in `$XDG_CONFIG_HOME/cpak/templates/<template_name>`. To use custom
@@ -224,35 +236,4 @@ the `default` template in the above mentioned directory.
 ```
 warning: <error_description>, err: <error_code>
 error: <warning_description>, err: <error_code>
-```
-
-#### Specific Error codes and their meaning:
-
-Do not expect this section to be up to date with the source code, if you want to view the current error codes take a look
-at [core/cpak_utils.h]()
-
-```c
-// Argument is unknown to cpak
-UNKNOWN_ARGUMENT = 1437,
-
-// not enough arguments passed to cpak
-NOT_ENOUGH_ARGUMENTS = 1438,
-
-// cpak can't find your specifed template
-TEMPLATE_MISSING = 1439,
-
-// cpak can't find its config file
-CONF_MISSING_CONFIG = 1440,
-
-// cpak's config already exists
-CONF_EXISTS = 1441,
-
-// cpak found an unknown key in its config file
-CONF_UNKNOWN_KEY = 1442,
-
-// cpak found an unknown value for a key in its config file
-CONF_UNKNOWN_VALUE = 1443,
-
-// cpak can't find a project config in the current directory
-P_MISSING_CONFIG = 1444,
 ```
