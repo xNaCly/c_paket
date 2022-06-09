@@ -183,7 +183,8 @@ int c_add(char *module){
 
     // TODO: create custom error codes
     int created = system(cmd);
-    if(created != EXIT_SUCCESS) throw_error("Couldn't create modules directory, please check your permissions config", -1);
+    int created_m = system("mkdir -p ./cpak_modules");
+    if(created != EXIT_SUCCESS || created_m != EXIT_SUCCESS) throw_error("Couldn't create modules directory, please check your permissions config", -1);
 
     snprintf(url, 1023, "%s%s", VSC_PREFIX, module);
     snprintf(command, 1023, "git clone %s %s > /dev/null", url, abs_m_path);
@@ -205,6 +206,16 @@ int c_add(char *module){
     char *feedback = malloc(sizeof(char) * 1024);
     snprintf(feedback, 1023, "Installed module '%s' in %s", module, abs_m_path);
     cpak_log(feedback, SUCCESS);
+
+    if(g_flag_storeModulesGlobal){
+        char *c = malloc(sizeof(char) * 1024);
+        snprintf(c, 1023, "ln -s %s ./cpak_modules/%s", abs_m_path, module_name);
+        if(system(c) != EXIT_SUCCESS){
+            free(c);
+            throw_error("Couldn't link to globaly installed module, consider adding a soft link yourself", -1);
+        } 
+        free(c);
+    }
 
     free(url);
     free(command);
