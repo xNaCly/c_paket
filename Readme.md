@@ -12,6 +12,7 @@ Fast and efficient package manager for the c programming language
     -   [How do i do x?](#how-do-i-do-x)
     -   [How do i contribute?](#how-do-i-contribute)
 -   [Documentation](#documentation)
+    -   [Prerequisites](#prerequisites)
     -   [Getting Started](#getting-started)
     -   [Building a Project with a Dependency](#building-a-project-with-a-dependency)
     -   [Commandline reference](#commandline-reference)
@@ -71,6 +72,15 @@ create a new [Issue](https://github.com/xNaCly/c_paket/issues).
 Take a look at [Contributing](/CONTRIBUTING.md).
 
 ## Documentation:
+
+### Prerequisites:
+Cpak uses git to download and sync modules/repos/code, therefore a git executable is required for cpak to work.
+Cpak assumes being using on a *nix like system with core utils installed, the following are required:
+- mkdir
+- ln
+- unlink
+- cp
+
 
 ### Getting started:
 
