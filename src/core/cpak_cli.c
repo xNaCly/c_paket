@@ -151,108 +151,122 @@ int c_config(int overwrite) {
 }
 
 int c_add(char *module){
-    // TODO: create custom error codes
+    if(!g_flag_storeModulesGlobal){
+        // TODO: create custom error codes
 
-    // check if git is installed:
-    int is_git_installed = system("which git > /dev/null");
-    if(is_git_installed != EXIT_SUCCESS){
-        throw_error("Git can't be found on your system, please install it", -1);
-    }
-
-    // extracting <repo> from input (<user>/<repo>)
-    char *copy_module = malloc(sizeof(char)*1024);
-    strcpy(copy_module, module);
-    char *module_name = strtok(copy_module, "/");
-    module_name = strtok(NULL, "\0");
-
-    char *cmd = "mkdir -p ./cpak_modules";
-    char *url = malloc(sizeof(char) * 1024);
-    char *command = malloc(sizeof(char)*1024);
-
-
-    int created = system(cmd);
-    if(created != EXIT_SUCCESS) throw_error("Couldn't create modules directory, please check your permissions config", -1);
-
-    snprintf(url, 1023, "%s%s", VSC_PREFIX, module);
-    snprintf(command, 1023, "git clone %s ./cpak_modules/%s > /dev/null", url, module_name);
-
-    int error = system(command);
-
-    if(error != EXIT_SUCCESS) {
-        char *path = malloc(sizeof(char)*255);
-        snprintf(path, 254, "./cpak_modules/%s", module_name);
-        if(f_exists(path)){
-            free(path);
-            throw_error("Module already installed", -1);
+        // check if git is installed:
+        int is_git_installed = system("which git > /dev/null");
+        if(is_git_installed != EXIT_SUCCESS){
+            throw_error("Git can't be found on your system, please install it", -1);
         }
-        free(path);
-        throw_error("Couldn't install module using git, please verify git is installed", -1);
-        return EXIT_FAILURE;
+
+        // extracting <repo> from input (<user>/<repo>)
+        char *copy_module = malloc(sizeof(char)*1024);
+        strcpy(copy_module, module);
+        char *module_name = strtok(copy_module, "/");
+        module_name = strtok(NULL, "\0");
+
+        char *cmd = "mkdir -p ./cpak_modules";
+        char *url = malloc(sizeof(char) * 1024);
+        char *command = malloc(sizeof(char)*1024);
+
+
+        int created = system(cmd);
+        if(created != EXIT_SUCCESS) throw_error("Couldn't create modules directory, please check your permissions config", -1);
+
+        snprintf(url, 1023, "%s%s", VSC_PREFIX, module);
+        snprintf(command, 1023, "git clone %s ./cpak_modules/%s > /dev/null", url, module_name);
+
+        int error = system(command);
+
+        if(error != EXIT_SUCCESS) {
+            char *path = malloc(sizeof(char)*255);
+            snprintf(path, 254, "./cpak_modules/%s", module_name);
+            if(f_exists(path)){
+                free(path);
+                throw_error("Module already installed", -1);
+            }
+            free(path);
+            throw_error("Couldn't install module using git, please verify git is installed", -1);
+            return EXIT_FAILURE;
+        }
+
+        char *feedback = malloc(sizeof(char) * 1024);
+        snprintf(feedback, 1023, "Installed module '%s'", module);
+        cpak_log(feedback, SUCCESS);
+
+        free(copy_module);
+        free(url);
+        free(command);
+        free(feedback);
+
+        return EXIT_SUCCESS;
+    } else {
+        // TODO: implement the above on a global level
+        return EXIT_SUCCESS;
     }
-
-    char *feedback = malloc(sizeof(char) * 1024);
-    snprintf(feedback, 1023, "Installed module '%s'", module);
-    cpak_log(feedback, SUCCESS);
-
-    free(copy_module);
-    free(url);
-    free(command);
-    free(feedback);
-
-    return EXIT_SUCCESS;
 }
 
 int c_remove(char *module){
-    char *path = malloc(sizeof(char) * 255);
+    if(!g_flag_storeModulesGlobal){
+        char *path = malloc(sizeof(char) * 255);
 
-    snprintf(path, 254, "./cpak_modules/%s", module);
-    if(!f_exists(path)){
+        snprintf(path, 254, "./cpak_modules/%s", module);
+        if(!f_exists(path)){
+            free(path);
+            throw_error("Can't remove module - Module doesn't exist", -1);
+        }
+
+        char *cmd = malloc(sizeof(char) * 1024);
+        snprintf(cmd, 1023, "rm -rf %s", path);
+
+        int error = system(cmd);
+        if(error != EXIT_SUCCESS){
+            throw_error("Can't remove module", -1);
+        }
+
+        char *feedback = malloc(sizeof(char)*1024);
+        snprintf(feedback, 1023, "Removed module '%s' from project", module);
+        cpak_log(feedback, SUCCESS);
+
+        free(feedback);
         free(path);
-        throw_error("Can't remove module - Module doesn't exist", -1);
+        free(cmd); 
+
+        return EXIT_SUCCESS;
+    } else {
+        // TODO: implement the above on a global level
+        return EXIT_SUCCESS;
     }
-
-    char *cmd = malloc(sizeof(char) * 1024);
-    snprintf(cmd, 1023, "rm -rf %s", path);
-
-    int error = system(cmd);
-    if(error != EXIT_SUCCESS){
-        throw_error("Can't remove module", -1);
-    }
-
-    char *feedback = malloc(sizeof(char)*1024);
-    snprintf(feedback, 1023, "Removed module '%s' from project", module);
-    cpak_log(feedback, SUCCESS);
-
-    free(feedback);
-    free(path);
-    free(cmd); 
-
-    return EXIT_SUCCESS;
 }
 
 int c_upgrade(char *module){
-    char *path = malloc(sizeof(char) * 255);
+    if(!g_flag_storeModulesGlobal){
+        char *path = malloc(sizeof(char) * 255);
 
-    snprintf(path, 254, "./cpak_modules/%s", module);
-    if(!f_exists(path)){
+        snprintf(path, 254, "./cpak_modules/%s", module);
+        if(!f_exists(path)){
+            free(path);
+            throw_error("Can't update module - Module doesn't exist, consider installing it", -1);
+        }
+
+        char *cmd = malloc(sizeof(char) * 1024);
+        snprintf(cmd, 1023, "cd %s && git pull", path);
+
+        int error = system(cmd);
+        if(error != EXIT_SUCCESS){
+            throw_error("Can't update module", -1);
+        }
+
+        char *feedback = malloc(sizeof(char)*1024);
+        snprintf(feedback, 1023, "Upgraded module: '%s'", module);
+        cpak_log(feedback, SUCCESS);
+
+        free(feedback);
         free(path);
-        throw_error("Can't update module - Module doesn't exist, consider installing it", -1);
+        free(cmd); 
+        return EXIT_SUCCESS;
+    } else {
+        return EXIT_SUCCESS;
     }
-
-    char *cmd = malloc(sizeof(char) * 1024);
-    snprintf(cmd, 1023, "cd %s && git pull", path);
-
-    int error = system(cmd);
-    if(error != EXIT_SUCCESS){
-        throw_error("Can't update module", -1);
-    }
-
-    char *feedback = malloc(sizeof(char)*1024);
-    snprintf(feedback, 1023, "Upgraded module: '%s'", module);
-    cpak_log(feedback, SUCCESS);
-
-    free(feedback);
-    free(path);
-    free(cmd); 
-    return EXIT_SUCCESS;
 }
