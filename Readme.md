@@ -57,7 +57,7 @@ Cpak installs modules globally, therefore all modules are either stored in `$CPA
 -   keeps dependencies up to date regardless of the project they are used in
 -   makes dependency management easier for the developer
 
-Cpak also allows the User to install packages in each project in the `cpak_modules` folder by changing [StoreModulesGlobally](#StoreModulesGlobally) to false in the config.
+Cpak also allows the User to install packages in each project in the `cpak_modules` folder by changing [StoreModulesGlobal](#StoreModulesGlobal) to false in the config.
 
 ### How do I do 'x'?
 
@@ -126,7 +126,9 @@ gcc cpak_modules/xutils/xutil.c ./main.c -o ./main.out
 ./main.out
 ```
 
-`$: String 'str1' and 'str2' are equal!`
+```
+$: String 'str1' and 'str2' are equal!
+```
 
 ### Command line reference:
 
