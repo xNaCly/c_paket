@@ -41,10 +41,10 @@ int c_help(char *command) {
         printf("%s", t_flag ? "" : USAGE "\n");
     } else if (s_is_equal(command, "help")) {
         printf("%s", U_HELP);
-    } 
+    }
     /* else if (s_is_equal(command, "init")) { */
     /*     printf("%s", U_INIT); */
-    /* } */ 
+    /* } */
     else if (s_is_equal(command, "config")) {
         printf("%s", U_CONFIG);
     } else if (s_is_equal(command, "add")) {
@@ -214,7 +214,7 @@ int c_add(char *module){
         if(system(c) != EXIT_SUCCESS){
             free(c);
             throw_error("Couldn't link to globally installed module, consider adding a soft link yourself", ERR_CANT_ACCESS);
-        } 
+        }
         free(c);
     }
 
@@ -249,6 +249,8 @@ int c_remove(char *module){
     int error = system(cmd);
     if(error != EXIT_SUCCESS){
         throw_error("Can't remove module", ERR_MODULE_DOESNT_EXIST);
+    } else {
+      cpak_log("Uninstalled module", SUCCESS);
     }
 
     if(g_flag_storeModulesGlobal){
@@ -257,7 +259,7 @@ int c_remove(char *module){
         if(system(c) != EXIT_SUCCESS){
             free(c);
             throw_error("Couldn't unlink globally installed module, consider removing the soft link yourself", ERR_CANT_ACCESS);
-        } 
+        }
         free(c);
     }
 
@@ -267,7 +269,7 @@ int c_remove(char *module){
 
     free(feedback);
     free(path);
-    free(cmd); 
+    free(cmd);
 
     return EXIT_SUCCESS;
 }
@@ -305,6 +307,6 @@ int c_upgrade(char *module){
 
     free(feedback);
     free(path);
-    free(cmd); 
+    free(cmd);
     return EXIT_SUCCESS;
 }
