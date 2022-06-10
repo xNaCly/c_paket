@@ -92,7 +92,8 @@ cpak
 ```
 
 This should print the following:
-![image](https://user-images.githubusercontent.com/47723417/170288034-02689782-a955-427c-b697-8abf3f4e8cbb.png)
+
+![image](https://user-images.githubusercontent.com/47723417/173002456-898113dd-3046-41c6-be02-15705de81e51.png)
 
 ### Building a project with a dependency
 1. Create a new project 
@@ -107,6 +108,10 @@ cd project
 ```sh
 cpak add xnacly/xutils
 ```
+
+![image](https://user-images.githubusercontent.com/47723417/173005466-3d82a6fd-155e-47ea-94d7-8a24765a181c.png)
+
+
 
 3. Create a C file:
 ```c
@@ -215,7 +220,7 @@ Upgrades the specified module to the newest version
 The default config file can be found after first run in `$XDG_CONFIG_HOME/cpak`. This config currently includes the
 following content:
 
-![image](https://user-images.githubusercontent.com/47723417/170292308-f04c81ee-459d-4d30-bde2-38016c98e8eb.png)
+![image](https://user-images.githubusercontent.com/47723417/173001784-246d2763-88b2-4dfa-8d3d-75aab5b90604.png)
 
 #### Keys
 
