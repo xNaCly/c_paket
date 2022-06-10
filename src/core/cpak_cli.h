@@ -44,7 +44,7 @@ List of commands:\n\
 "#cpak global config\n\
 #specify if the output of cpak should be colored\n\
 colors=true\n\
-#specify if the installed modules should be stored globaly or locally\n\
+#specify if the installed modules should be stored globally or locally\n\
 storeModulesGlobal=true\n"
 
 #define DEFAULT_TEMPLATE_GITIGNORE \
