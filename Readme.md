@@ -106,7 +106,7 @@ cd project
 2. Add a dependency to your project:
 
 ```sh
-cpak add xnacly/xutils
+cpak add xnacly/libxutil
 ```
 
 ![image](https://user-images.githubusercontent.com/47723417/173005466-3d82a6fd-155e-47ea-94d7-8a24765a181c.png)
@@ -134,7 +134,7 @@ int main(void){
 4. Add the installed dependency to your build tool chain by passing the to the imported header file corresponding c source files in the module folder to the compiler like so:
 
 ```bash
-gcc cpak_modules/xutils/xutil.c ./main.c -o ./main.out
+gcc cpak_modules/libxutil/libxutil.c ./main.c -o ./main.out
 ```
 
 5. Run the Binary:
