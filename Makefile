@@ -23,16 +23,18 @@ V := 0.0.1-alpha
 all: build
 	$(DEV_DIR)/$(OUT_NAME).dev $(cmd)
 
-install: release build/prod
+install: release
 	sudo mv $(PROD_DIR)/$(OUT_NAME) /usr/local/bin/$(OUT_NAME)
 
 uninstall:
 	sudo rm /usr/local/bin/$(OUT_NAME)
 
 release: build/prod
-	# TODO: replace VERSION placeholder in src/cpak.h and in cpak.1 with the current release
-	# TODO: build
-	# TODO: zip executable and man page
+	cp ./cpak.1 ./cpak.1_copy
+	gzip ./cpak.1_copy
+	mv ./cpak.1_copy.gz ./cpak.1.gz
+	sudo mkdir -p /usr/local/share/man/man1               
+	sudo mv cpak.1.gz /usr/local/share/man/man1/cpak.1.gz
 
 test/unit: build/unit
 	export CPAK_TESTING=true && export CPAK_CONFIG_HOME="$(PWD)/tests/example_config" && \

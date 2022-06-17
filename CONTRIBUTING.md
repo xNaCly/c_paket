@@ -16,8 +16,8 @@
    each new issue you work on, although not compulsory.
 4. To run the test suite:
    - `make build` to check if cpak still compiles
-   - `make run/t_unit` for unit tests
-   - `make run/t_cli` for testing cli commands.
+   - `make test/unit` for unit tests
+   - `make test/cli` for testing cli commands.
 5. If the tests pass, you can commit your changes to your fork and then create
    a pull request from there. Make sure to reference your issue from the pull
    request comments by including the issue number e.g. `#123`.
