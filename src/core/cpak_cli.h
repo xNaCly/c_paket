@@ -5,7 +5,7 @@
   "\
 Usage: cpak <command> [arg]\n\
 \
-cpak is the fast and efficient package manager for the c programming language\n\
+cpak is the fast and efficient source based package manager for the c programming language\n\
 \n\n\
 List of commands:\n\
     help        - show this screen\n\

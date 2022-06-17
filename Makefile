@@ -18,7 +18,7 @@ OUT_NAME := cpak
 FILES := $(shell find $(SRC_DIR) -name "*.c")
 CORE_FILES := $(shell find $(SRC_DIR)/core -name "*.c")
 COMPILE := $(FLAGS) $(FILES) -o
-V := v0.0.1
+V := alpha-0.0.1
 
 all: build
 	$(DEV_DIR)/$(OUT_NAME).dev $(cmd)
@@ -29,7 +29,7 @@ install: release build/prod
 uninstall:
 	sudo rm /usr/local/bin/$(OUT_NAME)
 
-release: 
+release: build/prod
 	# TODO: replace VERSION placeholder in src/cpak.h and in cpak.1 with the current release
 	# TODO: build
 	# TODO: zip executable and man page

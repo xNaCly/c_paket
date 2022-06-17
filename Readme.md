@@ -2,7 +2,7 @@
 
 [![tests](https://github.com/xNaCly/c_paket/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/xNaCly/c_paket/actions/workflows/test.yml)
 
-Fast and efficient package manager for the c programming language
+Fast and efficient source based package manager for the c programming language
 
 -   [Features](#features)
 -   [FAQ](#faq)
