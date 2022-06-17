@@ -45,7 +45,7 @@ as much as C package.
 
 ### Why should I use 'cpak'?
 
-Cpak makes it easy for the developer to manage packages for c projects, by allowing devs to store project dependencies
+Cpak is a source based package manager, therfore making it easy for the developer to manage packages for c projects, by allowing devs to store project dependencies
 globally or inside a project. It also enables a templating/bootstraping toolkit. Cpak features a extensive
 documentation and a very verbose logging system to warn the users of malformatted config files and several other
 nuances.
@@ -117,7 +117,7 @@ cpak add xnacly/libxutil
 ```c
 #include <stdio.h>
 #include <stdlib.h>
-#include "cpak_modules/xutils/xutil.h"
+#include "cpak_modules/libxutil/xstring.h"
 
 int main(void){
     char *str1 = "Hello World";
@@ -134,7 +134,7 @@ int main(void){
 4. Add the installed dependency to your build tool chain by passing the to the imported header file corresponding c source files in the module folder to the compiler like so:
 
 ```bash
-gcc cpak_modules/libxutil/libxutil.c ./main.c -o ./main.out
+gcc cpak_modules/libxutil/xstring.c ./main.c -o ./main.out
 ```
 
 5. Run the Binary:
