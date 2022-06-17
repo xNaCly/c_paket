@@ -18,7 +18,7 @@ OUT_NAME := cpak
 FILES := $(shell find $(SRC_DIR) -name "*.c")
 CORE_FILES := $(shell find $(SRC_DIR)/core -name "*.c")
 COMPILE := $(FLAGS) $(FILES) -o
-V := alpha-0.0.1
+V := 0.0.1-alpha
 
 all: build
 	$(DEV_DIR)/$(OUT_NAME).dev $(cmd)
